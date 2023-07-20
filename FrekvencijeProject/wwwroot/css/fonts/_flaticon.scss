@@ -1,0 +1,188 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 11/02/2021 09:44
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-sunny-day-or-sun-weather:before { content: "\f100"; }
+.flaticon-phone-with-wire:before { content: "\f101"; }
+.flaticon-fast:before { content: "\f102"; }
+.flaticon-down-arrow:before { content: "\f103"; }
+.flaticon-world:before { content: "\f104"; }
+.flaticon-right-arrow:before { content: "\f105"; }
+.flaticon-garbage-truck:before { content: "\f106"; }
+.flaticon-search:before { content: "\f107"; }
+.flaticon-star:before { content: "\f108"; }
+.flaticon-parking:before { content: "\f109"; }
+.flaticon-school:before { content: "\f10a"; }
+.flaticon-taxes:before { content: "\f10b"; }
+.flaticon-government:before { content: "\f10c"; }
+.flaticon-alert:before { content: "\f10d"; }
+.flaticon-quote:before { content: "\f10e"; }
+.flaticon-scroll:before { content: "\f10f"; }
+.flaticon-goverment:before { content: "\f110"; }
+.flaticon-budget:before { content: "\f111"; }
+.flaticon-mail-inbox-app:before { content: "\f112"; }
+.flaticon-police:before { content: "\f113"; }
+.flaticon-traffic-sign:before { content: "\f114"; }
+.flaticon-chinese-house:before { content: "\f115"; }
+.flaticon-letter:before { content: "\f116"; }
+.flaticon-justice:before { content: "\f117"; }
+.flaticon-hospital:before { content: "\f118"; }
+.flaticon-statue:before { content: "\f119"; }
+.flaticon-gps:before { content: "\f11a"; }
+.flaticon-click:before { content: "\f11b"; }
+.flaticon-clock-circular-outline:before { content: "\f11c"; }
+.flaticon-click-1:before { content: "\f11d"; }
+.flaticon-edit:before { content: "\f11e"; }
+.flaticon-emergency-call:before { content: "\f11f"; }
+.flaticon-share:before { content: "\f120"; }
+.flaticon-idea:before { content: "\f121"; }
+.flaticon-up-arrow-angle:before { content: "\f122"; }
+.flaticon-garbage-truck-1:before { content: "\f123"; }
+.flaticon-newspaper:before { content: "\f124"; }
+.flaticon-eco-energy:before { content: "\f125"; }
+.flaticon-dog:before { content: "\f126"; }
+.flaticon-bird:before { content: "\f127"; }
+.flaticon-booking:before { content: "\f128"; }
+.flaticon-diamond:before { content: "\f129"; }
+.flaticon-play-arrow:before { content: "\f12a"; }
+.flaticon-architecture-and-city:before { content: "\f12b"; }
+.flaticon-download-1:before { content: "\f12c"; }
+.flaticon-download:before { content: "\f12d"; }
+.flaticon-romantic-date:before { content: "\f12e"; }
+.flaticon-calendar:before { content: "\f12f"; }
+.flaticon-teamwork:before { content: "\f130"; }
+.flaticon-speech-bubble:before { content: "\f131"; }
+.flaticon-job:before { content: "\f132"; }
+.flaticon-building:before { content: "\f133"; }
+.flaticon-calendar-1:before { content: "\f134"; }
+.flaticon-diagram:before { content: "\f135"; }
+.flaticon-location:before { content: "\f136"; }
+.flaticon-building-1:before { content: "\f137"; }
+.flaticon-double-tick-indicator:before { content: "\f138"; }
+.flaticon-group:before { content: "\f139"; }
+.flaticon-analytics:before { content: "\f13a"; }
+.flaticon-award:before { content: "\f13b"; }
+.flaticon-calendar-2:before { content: "\f13c"; }
+.flaticon-tourist:before { content: "\f13d"; }
+.flaticon-certificate:before { content: "\f13e"; }
+.flaticon-fountain:before { content: "\f13f"; }
+.flaticon-guide:before { content: "\f140"; }
+.flaticon-employee:before { content: "\f141"; }
+.flaticon-cocktail:before { content: "\f142"; }
+.flaticon-global-warming:before { content: "\f143"; }
+.flaticon-bridge:before { content: "\f144"; }
+.flaticon-businessman:before { content: "\f145"; }
+.flaticon-map:before { content: "\f146"; }
+.flaticon-map-1:before { content: "\f147"; }
+.flaticon-emergency-call-1:before { content: "\f148"; }
+.flaticon-clock:before { content: "\f149"; }
+    
+    $font-Flaticon-sunny-day-or-sun-weather: "\f100";
+    $font-Flaticon-phone-with-wire: "\f101";
+    $font-Flaticon-fast: "\f102";
+    $font-Flaticon-down-arrow: "\f103";
+    $font-Flaticon-world: "\f104";
+    $font-Flaticon-right-arrow: "\f105";
+    $font-Flaticon-garbage-truck: "\f106";
+    $font-Flaticon-search: "\f107";
+    $font-Flaticon-star: "\f108";
+    $font-Flaticon-parking: "\f109";
+    $font-Flaticon-school: "\f10a";
+    $font-Flaticon-taxes: "\f10b";
+    $font-Flaticon-government: "\f10c";
+    $font-Flaticon-alert: "\f10d";
+    $font-Flaticon-quote: "\f10e";
+    $font-Flaticon-scroll: "\f10f";
+    $font-Flaticon-goverment: "\f110";
+    $font-Flaticon-budget: "\f111";
+    $font-Flaticon-mail-inbox-app: "\f112";
+    $font-Flaticon-police: "\f113";
+    $font-Flaticon-traffic-sign: "\f114";
+    $font-Flaticon-chinese-house: "\f115";
+    $font-Flaticon-letter: "\f116";
+    $font-Flaticon-justice: "\f117";
+    $font-Flaticon-hospital: "\f118";
+    $font-Flaticon-statue: "\f119";
+    $font-Flaticon-gps: "\f11a";
+    $font-Flaticon-click: "\f11b";
+    $font-Flaticon-clock-circular-outline: "\f11c";
+    $font-Flaticon-click-1: "\f11d";
+    $font-Flaticon-edit: "\f11e";
+    $font-Flaticon-emergency-call: "\f11f";
+    $font-Flaticon-share: "\f120";
+    $font-Flaticon-idea: "\f121";
+    $font-Flaticon-up-arrow-angle: "\f122";
+    $font-Flaticon-garbage-truck-1: "\f123";
+    $font-Flaticon-newspaper: "\f124";
+    $font-Flaticon-eco-energy: "\f125";
+    $font-Flaticon-dog: "\f126";
+    $font-Flaticon-bird: "\f127";
+    $font-Flaticon-booking: "\f128";
+    $font-Flaticon-diamond: "\f129";
+    $font-Flaticon-play-arrow: "\f12a";
+    $font-Flaticon-architecture-and-city: "\f12b";
+    $font-Flaticon-download-1: "\f12c";
+    $font-Flaticon-download: "\f12d";
+    $font-Flaticon-romantic-date: "\f12e";
+    $font-Flaticon-calendar: "\f12f";
+    $font-Flaticon-teamwork: "\f130";
+    $font-Flaticon-speech-bubble: "\f131";
+    $font-Flaticon-job: "\f132";
+    $font-Flaticon-building: "\f133";
+    $font-Flaticon-calendar-1: "\f134";
+    $font-Flaticon-diagram: "\f135";
+    $font-Flaticon-location: "\f136";
+    $font-Flaticon-building-1: "\f137";
+    $font-Flaticon-double-tick-indicator: "\f138";
+    $font-Flaticon-group: "\f139";
+    $font-Flaticon-analytics: "\f13a";
+    $font-Flaticon-award: "\f13b";
+    $font-Flaticon-calendar-2: "\f13c";
+    $font-Flaticon-tourist: "\f13d";
+    $font-Flaticon-certificate: "\f13e";
+    $font-Flaticon-fountain: "\f13f";
+    $font-Flaticon-guide: "\f140";
+    $font-Flaticon-employee: "\f141";
+    $font-Flaticon-cocktail: "\f142";
+    $font-Flaticon-global-warming: "\f143";
+    $font-Flaticon-bridge: "\f144";
+    $font-Flaticon-businessman: "\f145";
+    $font-Flaticon-map: "\f146";
+    $font-Flaticon-map-1: "\f147";
+    $font-Flaticon-emergency-call-1: "\f148";
+    $font-Flaticon-clock: "\f149";

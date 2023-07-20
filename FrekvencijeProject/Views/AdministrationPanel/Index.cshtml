@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<head>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body id="content_container_body">
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        @using (Html.BeginForm("UploadFiles", "AdministrationPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            
+            <input type="submit" value="Upload files from excel" style="width=600px; height=650px;" class="btn btn-primary" />
+        }
+
+       
+    </div>
+</body>

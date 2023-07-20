@@ -1,0 +1,443 @@
+
+
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+.rtl .pull-left{
+  float: right !important;
+}
+
+.rtl .pull-right{
+  float: left !important;
+}
+
+.rtl .main-menu .navigation > li{
+  float: right;
+}
+
+.rtl .main-menu{
+  float: right;
+}
+
+.rtl .cta-section{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation > li:first-child{
+  margin-left: 15px !important;
+  margin-right: 0px;
+}
+
+.rtl .main-menu .navigation > li:last-child{
+  margin-right: 15px !important;
+  margin-left: 0px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > a,
+.rtl .main-menu .navigation > li > .megamenu li > a{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation li.dropdown .megamenu li h4{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation > li > ul > li > ul > li > a{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation > li > ul > li.dropdown > a:after{
+  right: inherit;
+  left: 20px;
+  content: "\f104";
+}
+
+.rtl .mobile-menu{
+  text-align: right;
+}
+
+.rtl .mobile-menu .nav-logo{
+  text-align: right;
+}
+
+.rtl .mobile-menu .navigation li > a:before{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .mobile-menu .navigation li.dropdown .dropdown-btn{
+  right: inherit;
+  left: 6px;
+}
+
+.rtl .mobile-menu .navigation li.dropdown .dropdown-btn.open{
+  transform: rotate(-90deg);
+}
+
+.rtl .banner-carousel{
+  direction: ltr;
+}
+
+.rtl .header-top .weathre-box{
+  margin-right: 0px;
+  margin-left: 30px;
+}
+
+.rtl .header-top .weathre-box:before{
+  right: inherit;
+  left: -15px;
+}
+
+.rtl .header-top .weathre-box:after{
+  right: inherit;
+  left: -15px;
+}
+
+.rtl .header-top .links-box li{
+  margin-right: 0px;
+  margin-left: 18px;
+}
+
+.rtl .header-top .social-links li{
+  margin-right: 0px;
+  margin-left: 14px;
+}
+
+.rtl .header-top .info-list li{
+  margin-right: 0px;
+  margin-left: 11px;
+}
+
+.rtl .header-top .info-list li:before{
+  right: inherit;
+  left: -12px;
+}
+
+.rtl .header-top .info-list li:after{
+  right: inherit;
+  left: -12px;
+}
+
+.rtl .header-top .social-links{
+  margin-right: 24px;
+}
+
+.rtl .main-header .menu-right-content .language-box,
+.rtl .main-header .menu-right-content .other-option{
+  float: right;
+}
+
+.rtl .main-header .menu-right-content{
+  padding-left: 0px;
+  padding-right: 30px;
+  margin-left: 0px;
+  margin-right: 25px;
+}
+
+.rtl .main-header .menu-right-content:before{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .main-header .menu-right-content .language-box{
+  margin-right: 0px;
+  margin-left: 30px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > a:hover{
+  padding-left: 0px;
+  padding-right: 23px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > a:before{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > ul > li > a:hover{
+  padding-left: 0px;
+  padding-right: 23px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > ul > li > a:before{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .main-header .menu-right-content .language-box .language-list li{
+  text-align: right;
+}
+
+.rtl .xs-sidebar-widget{
+  text-align: right;
+}
+
+.rtl .banner-carousel .content-box{
+  text-align: right;
+}
+
+.rtl .activities-section .single-item:before{
+  right: inherit;
+  left: -15px;
+}
+
+.rtl .content_block_1 .content-box{
+  text-align: right;
+}
+
+.rtl .content_block_1 .content-box .inner-box .signature{
+  margin-right: 0px;
+  margin-left: 40px;
+}
+
+.rtl .content_block_1 .content-box .inner-box .signature:before{
+  right: inherit;
+  left: -20px;
+}
+
+.rtl .social-style-one li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 10px;
+}
+
+.rtl .content_block_1 .content-box .lower-box .single-item{
+  padding-left: 15px;
+  padding-right: 83px;
+}
+
+.rtl .content_block_1 .content-box .lower-box .single-item .icon-box{
+  left: inherit;
+  right: 20px;
+}
+
+.rtl .image_block_1 .image-box .text{
+  right: inherit;
+  left: 0px;
+  text-align: right;
+}
+
+.rtl .explore-banner .single-item{
+  text-align: right;
+}
+
+.rtl .explore-banner .single-item .inner-box{
+  padding-left: 20px;
+  padding-right: 110px;
+}
+
+.rtl .explore-banner .single-item .inner-box .icon-box{
+  left: inherit;
+  right: 30px;
+}
+
+.rtl .service-block-one .inner-box{
+  text-align: right;
+}
+
+.rtl .service-block-one .inner-box .icon-box{
+  right: inherit;
+  left: 30px;
+}
+
+.rtl .two-column-carousel{
+  direction: ltr;
+}
+
+.rtl .schedules-section .sec-title{
+  text-align: right;
+}
+
+.rtl .schedules-section .title-inner .text{
+  text-align: right;
+}
+
+.rtl .schedules-section .schedule-tab-btns li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 30px;
+}
+
+.rtl .schedules-section .owl-nav{
+  right: inherit;
+  left: 0px;
+}
+
+.rtl .schedule-block-one .inner-box .image-box .content-box .text{
+  text-align: right;
+}
+
+.rtl .schedule-block-one .inner-box .lower-content .post-info li{
+  text-align: right;
+  padding-right: 25px;
+  padding-left: 0px;
+}
+
+.rtl .schedule-block-one .inner-box .lower-content .post-info li i{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .solution-block-one .inner-box{
+  padding-left: 20px;
+  padding-right: 80px;
+  text-align: right;
+}
+
+.rtl .solution-block-one .inner-box .icon-box{
+  left: inherit;
+  right: 30px;
+}
+
+.rtl .solutions-section .lower-box .text{
+  padding-left: 0px;
+  padding-right: 78px;
+  text-align: right;
+}
+
+.rtl .solutions-section .lower-box .text .icon-box{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .three-item-carousel{
+  direction: ltr;
+}
+
+.rtl .team-section .sec-title{
+  text-align: right;
+}
+
+.rtl .team-section .sec-title .theme-btn{
+  right: inherit;
+  left: 0px;
+}
+
+.rtl .news-block-one .inner-box .image-box .post-date{
+  right: inherit;
+  left: 10px;
+}
+
+.rtl .news-block-one .inner-box{
+  text-align: right;
+}
+
+.rtl .news-block-one .inner-box .lower-content .category{
+  left: inherit;
+  right: 30px;
+}
+
+.rtl .news-block-one .inner-box .lower-content .post-info li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 25px;
+  padding-left: 0px;
+  padding-right: 22px;
+}
+
+.rtl .news-block-one .inner-box .lower-content .post-info li i{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .news-block-one .inner-box .lower-content .post-info li:before{
+  right: inherit;
+  left: -13px;
+}
+
+.rtl .funfact-section .funfact-content .sec-title{
+  text-align: right;
+}
+
+.rtl .funfact-section .funfact-content .sec-title:before{
+  right: inherit;
+  left: 0px;
+}
+
+.rtl .twitter-feed .inner-content .single-item .inner-box{
+  text-align: right;
+}
+
+.rtl .twitter-feed .inner-content .single-item .inner-box .post-info li i{
+  margin-right: 0px;
+  margin-left: 8px;
+}
+
+.rtl .twitter-feed .inner-content .single-item .inner-box .share a i{
+  margin-right: 0px;
+  margin-left: 8px;
+}
+
+.rtl .twitter-feed .inner-content .single-item .inner-box h5 i{
+  margin-right: 0px;
+  margin-left: 8px;
+}
+
+.rtl .footer-top .footer-logo{
+  text-align: right;
+}
+
+.rtl .footer-top .footer-logo:before{
+  right: inherit;
+  left: 0px;
+}
+
+.rtl .footer-top .text{
+  text-align: right;
+}
+
+.rtl .main-footer .widget-section{
+  text-align: right;
+}
+
+.rtl .main-footer .widget-section .register-widget .inner-box .upper{
+  padding-left: 0px;
+  padding-right: 65px;
+}
+
+.rtl .main-footer .widget-section .register-widget .inner-box .upper .icon-box{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .main-footer .widget-section .links-widget .links-list li a{
+  padding-left: 0px;
+  padding-right: 26px;
+}
+
+.rtl .main-footer .widget-section .links-widget .links-list li a:before{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .footer-bottom .footer-nav li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 30px;
+}
+
+.rtl .banner-carousel .content-box h6{
+  padding-left: 0px;
+  padding-right: 22px;
+}
+
+.rtl .banner-carousel .content-box h6 i{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .twitter-feed .inner-content .single-item .inner-box .post-info li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 25px;
+}
+
+.rtl .twitter-feed .inner-content .single-item .inner-box .post-info li:before{
+  right: inherit;
+  left: -13px;
+}

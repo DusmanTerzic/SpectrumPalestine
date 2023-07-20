@@ -1,0 +1,238 @@
+
+.graphs-container {
+    padding: 19px;
+}
+
+.cell-content-horizontal {
+    width: 100%;
+    position: relative;
+}
+
+.cell-content-vertical {
+    height: 100%;
+    float: left;
+}
+
+.cell-content:active {
+    background-color: #fdfdfd !important;
+}
+
+.cell-content:hover {
+    background-color: #e3e3e3 !important;
+}
+
+.cell_container {
+    font-size: 0;
+    white-space: nowrap;
+    background-color: #fff;
+    margin-bottom: 35px;
+    height: 350px;
+}
+
+.cell_container_content_wrap {
+    display: inline-block;
+    height: 100%;
+    position:relative;
+    margin-bottom: 7px;
+}
+
+.cell_header {
+    margin-left: 1px;
+    margin-right: 1px;
+    font-size: small;
+    max-height: 30px;
+    display: block !important;
+    min-height: 0 !important;
+    overflow: hidden;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+    .cell_header p {
+        color: #31708f;
+        margin: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 4px;
+    }
+
+
+.cell_content {
+    padding-right: 1px;
+    width: 100%;
+    white-space: nowrap;
+    border-left: 1px solid #fff;
+ /*   height:100%;*/
+    word-break: break-all;
+}
+ 
+
+.allocationTitle:active {
+    background-color: #e3e3e3;
+}
+
+.rotater {
+    writing-mode: tb-rl;
+    transform: rotate(-90deg);
+    transform-origin: 0% 0%;
+    -ms-transform: rotate(-90deg);
+    -ms-transform-origin: 0% 0%;
+    -webkit-transform: rotate(-90deg);
+    -webkit-transform-origin: 0% 0%;
+}
+
+.allocationTitle {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: table-cell;
+    font-size: small;
+    overflow: hidden;
+    white-space: pre-wrap;
+    padding: 10px;
+/*    border:1px solid #000;*/
+}
+
+
+/*Cell-content Tooltip*/
+.cell-content-horizontal .tooltip:before {
+    bottom: -20px;
+    content: " ";
+    display: block;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.cell-content-horizontal .tooltip:after {
+    border-left: solid transparent 10px;
+    border-right: solid transparent 10px;
+    border-bottom: solid #1496bb 10px;
+    top: -10px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -13px;
+    position: absolute;
+    width: 0;
+}
+
+.cell-content-horizontal:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    transform: translateY(0px);
+}
+.popover-content {
+    padding: 9px 14px;
+    background: #fff;
+}
+.cell-content-horizontal .tooltip {
+    display: none;
+    max-width: 276px;
+    padding: 3px;
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+    white-space: normal;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 30px;
+}
+
+.cell-content-horizontal:hover .tooltip {
+    display: block;
+}
+.popover-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+}
+
+/*cell_header-tooltip*/
+.cell_header.tooltip:before {
+    bottom: -20px;
+    content: " ";
+    display: block;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.cell_header.tooltip:after {
+    border-left: solid transparent 10px;
+    border-right: solid transparent 10px;
+    border-bottom: solid #1496bb 10px;
+    top: -10px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -13px;
+    position: absolute;
+    width: 0;
+}
+
+.cell_header:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    transform: translateY(0px);
+}
+
+.popover-content {
+    padding: 9px 14px;
+    background: #fff;
+}
+.cell_header .tooltip {
+    display: none;
+    max-width: 150px;
+    padding: 3px;
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+    white-space: normal;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 0;
+}
+
+.cell_header:hover .tooltip {
+    display: block;
+}
+
+.popover-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+}
+
+/* */
+.flowhide{
+    overflow-x:scroll !important;
+    overflow-y:hidden !important;
+}

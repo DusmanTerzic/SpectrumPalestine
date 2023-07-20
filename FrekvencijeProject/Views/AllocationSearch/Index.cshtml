@@ -1,0 +1,1501 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject FrekvencijeProject.Controllers.AllocationSearchController allocationService
+@{
+}
+
+@{
+    bool showDiv = (Model != null); // Set this value based on your condition
+}
+
+@model IEnumerable<FrekvencijeProject.Models.Json.FreqBandSearchNew>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<head>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+@if (Model != null)
+{
+    @if (Model.Count() > 0)
+    {
+
+        <script type="text/javascript">
+     //alert('test');
+    
+    setTimeout(function () {
+        //your code here
+        //alert('ucitao sam');
+        var value = @Model.ElementAt(0).FrequencySizeValue;
+        $('#frequencySize').val(value).change();
+    }, 500);
+        </script>
+    }
+}
+<script type="text/javascript">
+
+
+    function InputAction(e) {
+        //alert("You pressed a key inside the input field");
+        var evt = (e) ? e : window.event;
+        var charCode = (evt.keyCode) ? evt.keyCode : evt.which;
+        if (charCode == 144 || charCode == 12 || charCode == 8) {
+            return true;
+        }
+        if ((charCode >= 96 && charCode <= 105) || (charCode >= 48 && charCode <= 57)) {
+            return true;
+        } else {
+            return false;
+            //alert("You pressed a key inside the input field");
+        }
+    }
+    function FirstChange() {
+        //alert("Works");
+        if ($('#allocation_first_value').val() != '1') {
+
+            //alert("Works" + SearchByValues);
+            $('#allocation_two_value').val('1').change();
+            $('#allocation_third_value').val('1').change();
+            $('#allocation_fourth_value').val('1').change();
+        }
+        if ($('#allocation_first_value').val() == '1') {
+
+
+        }
+    }
+    function SecondChange() {
+        //alert("Works");
+        if ($('#allocation_two_value').val() != '1') {
+
+            $('#allocation_first_value').val('1').change();
+            $('#allocation_third_value').val('1').change();
+            $('#allocation_fourth_value').val('1').change();
+        }
+
+    }
+
+    function ThirdChange() {
+        //alert("Works");
+        if ($('#allocation_third_value').val() != '1') {
+
+            $('#allocation_first_value').val('1').change();
+            $('#allocation_two_value').val('1').change();
+            $('#allocation_fourth_value').val('1').change();
+        }
+
+    }
+
+    function FourthChange() {
+        //alert("Works");
+        if ($('#allocation_fourth_value').val() != '1') {
+
+            $('#allocation_first_value').val('1').change();
+            $('#allocation_two_value').val('1').change();
+            $('#allocation_third_value').val('1').change();
+        }
+
+    }
+    function LinkClick(title, e) {
+        //alert('Does this work?'+e);
+
+        //$('#btnfoot').trigger('click');
+        showModal("Footnote:" + title, "<p>" + e + "</p>", [
+
+        ]);
+    }
+
+    function showModal(titleHtml, contentHtml, buttons) {
+        const modal = document.createElement("div");
+
+        modal.classList.add("modal_u");
+        modal.innerHTML = `
+        <div class="modal__inner">
+            <div class="modal__top">
+                <div class="modal__title">${titleHtml}</div>
+                <button class="modal__close" type="button">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal__content">${contentHtml}</div>
+            <div class="modal__bottom"></div>
+        </div>
+    `;
+
+        //for (const button of buttons) {
+        //    const element = document.createElement("button");
+
+        //    element.setAttribute("type", "button");
+        //    element.classList.add("modal__button");
+        //    element.textContent = button.label;
+        //    element.addEventListener("click", () => {
+        //        if (button.triggerClose) {
+        //            document.body.removeChild(modal);
+        //        }
+
+        //        button.onClick(modal);
+        //    });
+
+        //    modal.querySelector(".modal__bottom").appendChild(element);
+        //}
+
+        modal.querySelector(".modal__close").addEventListener("click", () => {
+            document.body.removeChild(modal);
+        });
+
+        document.body.appendChild(modal);
+    }
+
+
+    function SearchNow() {
+
+        var SearchByValues = false;
+        var div = document.getElementById("print_div");
+        div.style.display = "block";
+
+        if ($('#allocation_first_value').val() != '1') {
+
+            SearchByValues = true;
+            if (SearchByValues == true) {
+                var number1 = parseInt($('#from').val());
+                var number2 = parseInt($('#to').val());
+                if (number1 > number2) {
+                    $('#error_input').html('Error! In From field, it is bigger than To field');
+                } else {
+                    //var length = $('#frequency_table > option').length;
+                   
+                    var selected = $("#frequency_table :selected").map((_, e) => e.value).get();
+                    //alert(selected);
+                   
+                    //alert("Works:" + $("#frequency_table option:selected").text());
+                    if ($("#frequency_table option:selected").text() != '') {
+                        $('#rData').empty();
+
+                        $('#error_input').html('');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchFirstLevel")",
+
+                            data: {
+                                AllVal: $('#allocation_first_value').val(),
+                                FromVal: $('#from').val(),
+                                ToVal: $('#to').val(),
+                                FrequencySizeVal: $('#frequencySize').val(),
+                                FreqTable: $("#frequency_table option:selected").text(),
+                                FreqTableVal: selected
+                            },
+                            success: function (response) {
+
+                                if (Object.keys(response).length == 0) {
+                                    //alert('poruka' + Object.keys(response).length);
+                                    //$('#rData').load('Index.cshtml');
+                                    $('#rData').empty();
+                                    var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                    itemsO += "</table>";
+
+                                    $('#rData').append(itemsO).hide().fadeIn(2000);
+                                }
+                                if (Object.keys(response).length > 1) {
+                                    $('#rData').empty();
+                                    var items = "<div style='margin-left:-5px; margin-right:-5px;'>";
+                                    
+                                    $.each(response, function (i, generalTemp) {
+                                        items += "<div style='float: left; width: 40%;padding: 5px;'>";
+                                        
+                                        items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                        $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
+                                            
+                                                var values = ListOfFreqBand.Footnote.sort(function (x, y) {
+                                                    return y.isPrimary - x.isPrimary;
+                                                });
+                                                items += "<tr><td style=\"width: 220px; align-content:center\">" + ListOfFreqBand.LowView + "-" + ListOfFreqBand.HighView + "</td><td> ";
+                                                var isFirst = false;
+                                                var isSecond = false;
+                                                $.each(values, function (i, member) {
+                                                    /*alert(member);*/
+                                                    //<strong><a href="#" id="foot">' + member + '</a></strong>
+
+                                                    if (member.Footnote == '') {
+                                                        //alert(member.isBand);
+                                                        if (isFirst) {
+                                                            items += "<br/>";
+                                                            isFirst = false;
+                                                        }
+                                                        if (isSecond) {
+                                                            //items += "<br/>";
+                                                            isSecond = false;
+                                                        }
+                                                        items += member.Allocation;
+                                                        isFirst = true;
+                                                    } else {
+                                                        //alert('suprotno'+member.isBand);
+                                                        items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                                                        isSecond = true;
+                                                    }
+
+                                                });
+                                                $.each(ListOfFreqBand.BandFootnote, function (i, member) {
+                                                    /*alert(member);*/
+                                                    //<strong><a href="#" id="foot">' + member + '</a></strong>
+                                                    var isLastElement = i == ListOfFreqBand.BandFootnote.length - 1;
+                                                    if (member.Footnote == '') {
+                                                        items += "<br/>";
+                                                    }
+                                                    if (member.Footnote != '') {
+                                                        if (isLastElement) {
+                                                            items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                                                        } else {
+                                                            items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                                                        }
+                                                    }
+                                                });
+                                                
+                                                items +=
+                                                    "</td>" +
+
+                                                "<td>" + ListOfFreqBand.regionName + "</td><td>" + ListOfFreqBand.regionCode + "</td></tr>";
+                                            });
+                                        items += "</table>";
+                                        items += "</div>";
+                                       
+                                    });
+                                    items += "</div>";
+                                    $('#rData').append(items).hide().fadeIn(2000);
+                                }
+                                if (Object.keys(response).length == 1) {
+                                    var items = "";
+                                    $('#rData').empty();
+                                    items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                    $.each(response, function (i, generalTemp) {
+                                       
+                                        $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
+
+                                            var values = ListOfFreqBand.Footnote.sort(function (x, y) {
+                                                return y.isPrimary - x.isPrimary;
+                                            });
+                                            items += "<tr><td style=\"width: 220px; align-content:center\">" + ListOfFreqBand.LowView + "-" + ListOfFreqBand.HighView + "</td><td> ";
+                                            var isFirst = false;
+                                            var isSecond = false;
+                                            $.each(values, function (i, member) {
+                                                /*alert(member);*/
+                                                //<strong><a href="#" id="foot">' + member + '</a></strong>
+
+                                                if (member.Footnote == '') {
+                                                    //alert(member.isBand);
+                                                    if (isFirst) {
+                                                        items += "<br/>";
+                                                        isFirst = false;
+                                                    }
+                                                    if (isSecond) {
+                                                        //items += "<br/>";
+                                                        isSecond = false;
+                                                    }
+                                                    items += member.Allocation;
+                                                    isFirst = true;
+                                                } else {
+                                                    //alert('suprotno'+member.isBand);
+                                                    items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                                                    isSecond = true;
+                                                }
+
+                                            });
+                                            $.each(ListOfFreqBand.BandFootnote, function (i, member) {
+                                                /*alert(member);*/
+                                                //<strong><a href="#" id="foot">' + member + '</a></strong>
+                                                var isLastElement = i == ListOfFreqBand.BandFootnote.length - 1;
+                                                if (member.Footnote == '') {
+                                                    items += "<br/>";
+                                                }
+                                                if (member.Footnote != '') {
+                                                    if (isLastElement) {
+                                                        items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                                                    } else {
+                                                        items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                                                    }
+                                                }
+                                            });
+                                            //Object.keys(generalTemp.Footnote).length
+                                            items +=
+                                                "</td>" +
+
+                                                "<td>" + ListOfFreqBand.regionName + "</td><td>" + ListOfFreqBand.regionCode + "</td></tr>";
+                                        });
+                                        items += "</table>";
+                                        items += "</div>";
+
+                                    });
+                                    items += "</div>";
+                                    $('#rData').append(items).hide().fadeIn(2000);
+                                }
+                            }
+
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (response) {
+                                alert("error");
+                            }
+                        });
+                    } else {
+                        $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                    }
+
+                }
+            }
+        }
+
+        if ($('#allocation_two_value').val() != '1') {
+
+            SearchByValues = true;
+            if (SearchByValues == true) {
+                var number1 = parseInt($('#from').val());
+                var number2 = parseInt($('#to').val());
+                if (number1 > number2) {
+                    $('#error_input').html('Error! In From field, it is bigger than To field');
+                } else {
+                    if ($("#frequency_table option:selected").text() != '') {
+                        //alert("Works");
+                        $('#error_input').html('');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchSecondLevel")",
+
+                            data: {
+                                AllVal: $('#allocation_two_value').val(),
+                                FromVal: $('#from').val(),
+                                ToVal: $('#to').val(),
+                                FrequencySizeVal: $('#frequencySize').val(),
+                                FreqTable: $("#frequency_table option:selected").text()
+
+                            },
+                            success: function (response) {
+
+                                if (Object.keys(response).length == 0) {
+                                    //alert('poruka' + Object.keys(response).length);
+                                    //$('#rData').load('Index.cshtml');
+                                    $('#rData').empty();
+                                    var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                    itemsO += "</table>";
+
+                                    $('#rData').append(itemsO).hide().fadeIn(2000);
+                                }
+                                if (Object.keys(response).length > 0) {
+                                    $('#rData').empty();
+                                    var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+
+                                    $.each(response, function (i, generalTemp) {
+                                        var values = generalTemp.Footnote.sort(function (x, y) {
+
+                                            return y.isPrimary - x.isPrimary;
+
+                                        });
+                                        items += "<tr><td style=\"width: 220px; align-content:center\">" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                                        var isFirst = false;
+                                        var isSecond = false;
+                                        $.each(values, function (i, member) {
+
+
+                                            if (member.Footnote == '') {
+                                                //alert(member.isBand);
+                                                if (isFirst) {
+                                                    items += "<br/>";
+                                                    isFirst = false;
+                                                }
+                                                if (isSecond) {
+                                                    //items += "<br/>";
+                                                    isSecond = false;
+                                                }
+                                                items += member.Allocation;
+                                                isFirst = true;
+                                            } else {
+                                                //alert('suprotno'+member.isBand);
+
+                                                items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                                                isSecond = true;
+
+
+                                            }
+
+                                        });
+                                        $.each(generalTemp.BandFootnote, function (i, member) {
+
+                                            var isLastElement = i == generalTemp.BandFootnote.length - 1;
+                                            if (member.Footnote == '') {
+                                                items += "<br/>";
+                                            }
+                                            if (member.Footnote != '') {
+                                                if (isLastElement) {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                                                } else {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                                                }
+
+                                            }
+                                        });
+
+                                        items +=
+                                            "</td>" +
+
+                                            "<td>" + generalTemp.regionName + "</td><td>" + generalTemp.regionCode + "</td></tr>";
+
+                                    });
+                                    items += "</table>";
+
+                                    $('#rData').append(items).hide().fadeIn(2000);
+                                }
+
+                            }
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (response) {
+                                alert("error");
+                            }
+                        });
+                    } else {
+                        $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                    }
+                }
+
+            }
+        }
+
+        if ($('#allocation_third_value').val() != '1') {
+            SearchByValues = true;
+            if (SearchByValues == true) {
+                var number1 = parseInt($('#from').val());
+                var number2 = parseInt($('#to').val());
+                if (number1 > number2) {
+                    $('#error_input').html('Error! In From field, it is bigger than To field');
+                } else {
+                    if ($("#frequency_table option:selected").text() != '') {
+                        $('#error_input').html('');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchThirdLevel")",
+
+                            data: {
+                                AllVal: $('#allocation_third_value').val(),
+                                FromVal: $('#from').val(),
+                                ToVal: $('#to').val(),
+                                FrequencySizeVal: $('#frequencySize').val(),
+                                FreqTable: $("#frequency_table option:selected").text()
+
+                            },
+                            success: function (response) {
+
+                                if (Object.keys(response).length == 0) {
+                                    //alert('poruka' + Object.keys(response).length);
+                                    //$('#rData').load('Index.cshtml');
+                                    $('#rData').empty();
+                                    var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                    itemsO += "</table>";
+
+                                    $('#rData').append(itemsO).hide().fadeIn(2000);
+                                }
+                                if (Object.keys(response).length > 0) {
+                                    $('#rData').empty();
+                                    var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+
+                                    $.each(response, function (i, generalTemp) {
+                                        var values = generalTemp.Footnote.sort(function (x, y) {
+
+                                            return y.isPrimary - x.isPrimary;
+
+                                        });
+                                        items += "<tr><td style=\"width:220px; align-content:center\">" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                                        var isFirst = false;
+                                        var isSecond = false;
+                                        $.each(values, function (i, member) {
+
+
+                                            if (member.Footnote == '') {
+                                                //alert(member.isBand);
+                                                if (isFirst) {
+                                                    items += "<br/>";
+                                                    isFirst = false;
+                                                }
+                                                if (isSecond) {
+                                                    //items += "<br/>";
+                                                    isSecond = false;
+                                                }
+                                                items += member.Allocation;
+                                                isFirst = true;
+                                            } else {
+                                                //alert('suprotno'+member.isBand);
+
+                                                items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                                                isSecond = true;
+
+
+                                            }
+
+                                        });
+                                        $.each(generalTemp.BandFootnote, function (i, member) {
+
+                                            var isLastElement = i == generalTemp.BandFootnote.length - 1;
+                                            if (member.Footnote == '') {
+                                                items += "<br/>";
+                                            }
+                                            if (member.Footnote != '') {
+                                                if (isLastElement) {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                                                } else {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                                                }
+
+                                            }
+                                        });
+
+                                        items +=
+                                            "</td>" +
+
+                                            "<td>" + generalTemp.regionName + "</td><td>" + generalTemp.regionCode + "</td></tr>";
+
+                                    });
+                                    items += "</table>";
+                                    $('#rData').append(items).hide().fadeIn(2000);
+                                }
+
+                            }
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (response) {
+                                alert("error");
+                            }
+                        });
+                    } else {
+                        $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                    }
+                }
+            }
+        }
+
+
+        if ($('#allocation_fourth_value').val() != '1') {
+            SearchByValues = true;
+            if (SearchByValues == true) {
+                var number1 = parseInt($('#from').val());
+                var number2 = parseInt($('#to').val());
+                if (number1 > number2) {
+                    $('#error_input').html('Error! In From field, it is bigger than To field');
+                } else {
+                    if ($("#frequency_table option:selected").text() != '') {
+                        $('#error_input').html('');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchFourthLevel")",
+
+                            data: {
+                                AllVal: $("#allocation_fourth_value option:selected").text(),
+                                FromVal: $('#from').val(),
+                                ToVal: $('#to').val(),
+                                FrequencySizeVal: $('#frequencySize').val(),
+                                FreqTable: $("#frequency_table option:selected").text()
+
+                            },
+                            success: function (response) {
+
+                                if (Object.keys(response).length == 0) {
+                                    //alert('poruka' + Object.keys(response).length);
+                                    //$('#rData').load('Index.cshtml');
+                                    $('#rData').empty();
+                                    var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                    itemsO += "</table>";
+
+                                    $('#rData').append(itemsO).hide().fadeIn(2000);
+                                }
+                                if (Object.keys(response).length > 0) {
+                                    $('#rData').empty();
+                                    var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+
+                                    $.each(response, function (i, generalTemp) {
+                                        var values = generalTemp.Footnote.sort(function (x, y) {
+
+                                            return y.isPrimary - x.isPrimary;
+
+                                        });
+                                        items += "<tr><td style=\"width:220px; align-content:center\">" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                                        var isFirst = false;
+                                        var isSecond = false;
+                                        $.each(values, function (i, member) {
+
+
+                                            if (member.Footnote == '') {
+                                                //alert(member.isBand);
+                                                if (isFirst) {
+                                                    items += "<br/>";
+                                                    isFirst = false;
+                                                }
+                                                if (isSecond) {
+                                                    //items += "<br/>";
+                                                    isSecond = false;
+                                                }
+                                                items += member.Allocation;
+                                                isFirst = true;
+                                            } else {
+                                                //alert('suprotno'+member.isBand);
+
+                                                items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                                                isSecond = true;
+
+
+                                            }
+
+                                        });
+                                        $.each(generalTemp.BandFootnote, function (i, member) {
+
+                                            var isLastElement = i == generalTemp.BandFootnote.length - 1;
+                                            if (member.Footnote == '') {
+                                                items += "<br/>";
+                                            }
+                                            if (member.Footnote != '') {
+                                                if (isLastElement) {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                                                } else {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                                                }
+
+                                            }
+                                        });
+
+                                        items +=
+                                            "</td>" +
+
+                                            "<td>" + generalTemp.regionName + "</td><td>" + generalTemp.regionCode + "</td></tr>";
+
+                                    });
+                                    items += "</table>";
+                                    //$('#rData').html(items)
+                                    $('#rData').append(items).hide().fadeIn(2000);
+                                }
+
+                            }
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (response) {
+                                alert("error");
+                            }
+                        });
+                    } else {
+                        $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                    }
+                }
+            }
+        }
+
+        if (SearchByValues == false) {
+            //alert("Work vvvv" + SearchByValues);
+            var number1 = parseInt($('#from').val());
+            var number2 = parseInt($('#to').val());
+            if (number1 > number2) {
+                $('#error_input').html('Error! In From field, it is bigger than To field');
+            } else {
+                if ($("#frequency_table option:selected").text() != '') {
+                    $('#error_input').html('');
+
+                    var selected = $("#frequency_table :selected").map((_, e) => e.value).get();
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("SearchOnlyValues")",
+
+                        data: {
+                            FromVal: $('#from').val(),
+                            ToVal: $('#to').val(),
+                            FrequencySizeVal: $('#frequencySize').val(),
+                            FreqTable: $("#frequency_table option:selected").text(),
+                            FreqTableVal: selected
+                        },
+                        success: function (response) {
+
+                            //if (Object.keys(response).length == 0) {
+                            //    //alert('poruka' + Object.keys(response).length);
+                            //    //$('#rData').load('Index.cshtml');
+                            //    $('#rData').empty();
+                            //    var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                            //    itemsO += "</table>";
+
+                            //    $('#rData').append(itemsO).hide().fadeIn(2000);
+                            //}
+                            //if (Object.keys(response).length > 0) {
+                            //    $('#rData').empty();
+
+
+                            //    var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                            //    var incResponse = 0;
+                            //    $.each(response, function (i, generalTemp) {
+                            //        if (incResponse == 0) {
+                            //            incResponse++;
+
+                            //            if (generalTemp.isAllValues) {
+
+                            //                setTimeout(function () {
+                            //                    //alert();
+                            //                    $('#frequencySize').val(generalTemp.sizeFrequency).change();
+                            //                    $('#from').val(generalTemp.lowJson);
+                            //                    $('#to').val(generalTemp.highJson);
+
+                            //                }, 200);
+
+                            //            }
+
+                            //        } else if (incResponse > 0) {
+
+                            //        }
+                            //        var values = generalTemp.Footnote.sort(function (x, y) {
+
+                            //            return y.isPrimary - x.isPrimary;
+
+                            //        });
+                            //        items += "<tr><td style=\"width: 220px; align-content:center\">" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                            //        var isFirst = false;
+                            //        var isSecond = false;
+                            //        $.each(values, function (i, member) {
+
+
+                            //            if (member.Footnote == '') {
+                            //                //alert(member.isBand);
+                            //                if (isFirst) {
+                            //                    items += "<br/>";
+                            //                    isFirst = false;
+                            //                }
+                            //                if (isSecond) {
+                            //                    //items += "<br/>";
+                            //                    isSecond = false;
+                            //                }
+                            //                items += member.Allocation;
+                            //                isFirst = true;
+                            //            } else {
+                            //                //alert('suprotno'+member.isBand);
+
+                            //                items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                            //                isSecond = true;
+
+
+                            //            }
+
+                            //        });
+                            //        $.each(generalTemp.BandFootnote, function (i, member) {
+                            //            var isLastElement = i == generalTemp.BandFootnote.length - 1;
+                            //            if (member.Footnote == '') {
+                            //                items += "<br/>";
+                            //            }
+                            //            if (member.Footnote != '') {
+                            //                if (isLastElement) {
+                            //                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                            //                } else {
+                            //                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                            //                }
+
+                            //            }
+                            //        });
+
+                            //        items +=
+                            //            "</td>" +
+
+                            //            "<td>" + generalTemp.regionName + "</td><td>" + generalTemp.regionCode + "</td></tr>";
+
+                            //    });
+                            //    items += "</table>";
+                            //    //$('#rData').html(items)
+                            //    $('#rData').append(items).hide().fadeIn(2000);
+                            //}
+
+
+                            if (Object.keys(response).length == 0) {
+                               
+                                $('#rData').empty();
+                                var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                itemsO += "</table>";
+
+                                $('#rData').append(itemsO).hide().fadeIn(2000);
+                            }
+                            if (Object.keys(response).length > 1) {
+                                $('#rData').empty();
+                                var items = "<div style='margin-left:-5px; margin-right:-5px;'>";
+                                var incResponse = 0;
+                                
+                                //alert('var:' + response[0].sizeFrequency);
+
+                                if (incResponse == 0) {
+                                    incResponse++;
+
+                                    if (response[0].isAllValues) {
+
+                                        setTimeout(function () {
+
+                                            $('#frequencySize').val(response[0].sizeFrequency).change();
+                                            $('#from').val(response[0].lowJson);
+                                            $('#to').val(response[0].highJson);
+
+                                        }, 200);
+
+                                    }
+
+                                } else if (incResponse > 0) {
+
+                                }
+
+
+                                $.each(response, function (i, generalTemp) {
+                                    
+                                    items += "<div style='float: left; width: 40%;padding: 5px;'>";
+
+                                    items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                    $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
+
+                                        var values = ListOfFreqBand.Footnote.sort(function (x, y) {
+                                            return y.isPrimary - x.isPrimary;
+                                        });
+                                        items += "<tr><td style=\"width: 220px; align-content:center\">" + ListOfFreqBand.LowView + "-" + ListOfFreqBand.HighView + "</td><td> ";
+                                        var isFirst = false;
+                                        var isSecond = false;
+                                        $.each(values, function (i, member) {
+                                            /*alert(member);*/
+                                            //<strong><a href="#" id="foot">' + member + '</a></strong>
+
+                                            if (member.Footnote == '') {
+                                                //alert(member.isBand);
+                                                if (isFirst) {
+                                                    items += "<br/>";
+                                                    isFirst = false;
+                                                }
+                                                if (isSecond) {
+                                                    //items += "<br/>";
+                                                    isSecond = false;
+                                                }
+                                                items += member.Allocation;
+                                                isFirst = true;
+                                            } else {
+                                                //alert('suprotno'+member.isBand);
+                                                items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                                                isSecond = true;
+                                            }
+
+                                        });
+                                        $.each(ListOfFreqBand.BandFootnote, function (i, member) {
+                                            /*alert(member);*/
+                                            //<strong><a href="#" id="foot">' + member + '</a></strong>
+                                            var isLastElement = i == ListOfFreqBand.BandFootnote.length - 1;
+                                            if (member.Footnote == '') {
+                                                items += "<br/>";
+                                            }
+                                            if (member.Footnote != '') {
+                                                if (isLastElement) {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                                                } else {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                                                }
+                                            }
+                                        });
+                                        //Object.keys(generalTemp.Footnote).length
+                                        items +=
+                                            "</td>" +
+
+                                            "<td>" + ListOfFreqBand.regionName + "</td><td>" + ListOfFreqBand.regionCode + "</td></tr>";
+                                    });
+                                    items += "</table>";
+                                    items += "</div>";
+
+                                });
+                                items += "</div>";
+                                $('#rData').append(items).hide().fadeIn(2000);
+                            }
+                            if (Object.keys(response).length == 1) {
+                                $('#rData').empty();
+                                var items = "";
+                                items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                                $.each(response, function (i, generalTemp) {
+                                    var incResponse = 0;
+
+                                    if (incResponse == 0) {
+                                        incResponse++;
+
+                                        if (response[0].isAllValues) {
+
+                                            setTimeout(function () {
+
+                                                $('#frequencySize').val(response[0].sizeFrequency).change();
+                                                $('#from').val(response[0].lowJson);
+                                                $('#to').val(response[0].highJson);
+
+                                            }, 200);
+
+                                        }
+
+                                    } else if (incResponse > 0) {
+
+                                    }
+                                    $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
+
+                                        var values = ListOfFreqBand.Footnote.sort(function (x, y) {
+                                            return y.isPrimary - x.isPrimary;
+                                        });
+                                        items += "<tr><td style=\"width: 220px; align-content:center\">" + ListOfFreqBand.LowView + "-" + ListOfFreqBand.HighView + "</td><td> ";
+                                        var isFirst = false;
+                                        var isSecond = false;
+                                        $.each(values, function (i, member) {
+                                            /*alert(member);*/
+                                            //<strong><a href="#" id="foot">' + member + '</a></strong>
+
+                                            if (member.Footnote == '') {
+                                                //alert(member.isBand);
+                                                if (isFirst) {
+                                                    items += "<br/>";
+                                                    isFirst = false;
+                                                }
+                                                if (isSecond) {
+                                                    //items += "<br/>";
+                                                    isSecond = false;
+                                                }
+                                                items += member.Allocation;
+                                                isFirst = true;
+                                            } else {
+                                                //alert('suprotno'+member.isBand);
+                                                items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                                                isSecond = true;
+                                            }
+
+                                        });
+                                        $.each(ListOfFreqBand.BandFootnote, function (i, member) {
+                                            /*alert(member);*/
+                                            //<strong><a href="#" id="foot">' + member + '</a></strong>
+                                            var isLastElement = i == ListOfFreqBand.BandFootnote.length - 1;
+                                            if (member.Footnote == '') {
+                                                items += "<br/>";
+                                            }
+                                            if (member.Footnote != '') {
+                                                if (isLastElement) {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                                                } else {
+                                                    items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                                                }
+                                            }
+                                        });
+                                        //Object.keys(generalTemp.Footnote).length
+                                        items +=
+                                            "</td>" +
+
+                                            "<td>" + ListOfFreqBand.regionName + "</td><td>" + ListOfFreqBand.regionCode + "</td></tr>";
+                                    });
+                                    items += "</table>";
+                                    items += "</div>";
+
+                                });
+                                items += "</div>";
+                                $('#rData').append(items).hide().fadeIn(2000);
+                            }
+
+                        }
+                        ,
+                        failure: function (response) {
+                            alert("faliure");
+                        },
+                        error: function (xhr, textStatus, exceptionThrown) {
+                            /*alert("greska");*/
+                            var errorData = $.parseJSON(xhr.responseText);
+                            var errorMessages = [];
+                            //this ugly loop is because List<> is serialized to an object instead of an array
+                            for (var key in errorData) {
+                                errorMessages.push(errorData[key]);
+                            }
+                            $('#error_input').html(errorMessages.join("<br />"));
+                        }
+                    });
+                } else {
+                    $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                }
+            }
+            
+        }
+        
+    }
+
+    $(function(){
+        
+
+        $('#download_pdf').click(function () {
+
+            var selected = $("#frequency_table :selected").map((_, e) => e.value).get();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DownloadPDF", "AllocationSearch")",
+                data: {
+                    AllVal1: $('#allocation_first_value').val(),
+                    AllVal2: $('#allocation_two_value').val(),
+                    AllVal3: $('#allocation_third_value').val(),
+                    AllVal4: $("#allocation_fourth_value option:selected").text(),
+                    FromVal: $('#from').val(),
+                    ToVal: $('#to').val(),
+                    FrequencySizeVal: $('#frequencySize').val(),
+                    FreqTable: $("#frequency_table option:selected").text(),
+                    FreqTableVal: selected
+                },
+                responseType: 'arraybuffer',
+                success: function (response) {
+
+                    var binaryString = atob(response);
+
+                    // Convert the binary string to an ArrayBuffer
+                    var arrayBuffer = new ArrayBuffer(binaryString.length);
+                    var uint8Array = new Uint8Array(arrayBuffer);
+                    for (var i = 0; i < binaryString.length; i++) {
+                        uint8Array[i] = binaryString.charCodeAt(i);
+                    }
+
+                    // Create a Blob from the ArrayBuffer
+                    var blob = new Blob([arrayBuffer], { type: 'pdf' });
+
+                    // Create a temporary link element
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+
+                    // Set the file name for the downloaded Excel file
+                    link.download = 'freq_band.pdf';
+
+                    // Programmatically trigger the download
+                    link.click();
+
+
+                },
+                failure: function (response) {
+                    alert("Failure: An error occurred while making the AJAX request.");
+                },
+                error: function (response) {
+                    alert("Error: An error occurred while making the AJAX request.");
+                }
+            });
+        });
+
+        $('#download_excel').click(function () {
+            var selected = $("#frequency_table :selected").map((_, e) => e.value).get();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DownloadExcel", "AllocationSearch")",
+                data: {
+                    AllVal1: $('#allocation_first_value').val(),
+                    AllVal2: $('#allocation_two_value').val(),
+                    AllVal3: $('#allocation_third_value').val(),
+                    AllVal4: $("#allocation_fourth_value option:selected").text(),
+                    FromVal: $('#from').val(),
+                    ToVal: $('#to').val(),
+                    FrequencySizeVal: $('#frequencySize').val(),
+                    FreqTable: $("#frequency_table option:selected").text(),
+                    FreqTableVal: selected
+                },
+                responseType: 'arraybuffer',
+                success: function (response) {
+                    // Create a Blob from the response data
+                    var binaryString = atob(response);
+
+                    // Convert the binary string to an ArrayBuffer
+                    var arrayBuffer = new ArrayBuffer(binaryString.length);
+                    var uint8Array = new Uint8Array(arrayBuffer);
+                    for (var i = 0; i < binaryString.length; i++) {
+                        uint8Array[i] = binaryString.charCodeAt(i);
+                    }
+
+                    // Create a Blob from the ArrayBuffer
+                    var blob = new Blob([arrayBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+                    // Create a temporary link element
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+
+                    // Set the file name for the downloaded Excel file
+                    link.download = 'freq_band.xlsx';
+
+                    // Programmatically trigger the download
+                    link.click();
+                },
+                failure: function (response) {
+                    alert("Failure: An error occurred while making the AJAX request.");
+                },
+                error: function (response) {
+                    alert("Error: An error occurred while making the AJAX request.");
+                }
+            });
+        });
+    });
+</script>
+<body id="content_container_body">
+    <div class="centerpanel">
+        <div class="left">Allocations</div>
+        <div class="right">
+            <img src="~/images/Palestina.png" width="80px" height="50px" />
+        </div>
+    </div>
+
+    <br />
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        <br />
+        <div class="form-group center_top_menu" style="width: 90%; height:100%">
+            <label id="search_by" style="width:150px; font-weight: bold; font-family: Roboto; font-size: 13px; height: 35px" asp-for="@allocationService.Frequency"></label>
+            <p> &nbsp &nbsp</p>
+            <input id="from" aria-label="From" class="form-control text-box single-line"
+                   data-val-maxlength-max="30" asp-for="@allocationService.From" value="@TempData["fromTempValue"]"
+                   style="width: 30%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border: solid;" placeholder="From" type="number" onkeydown="return  InputAction(event)" />
+            <p> &nbsp &nbsp</p>
+            <input id="to" aria-label="To" class="form-control text-box single-line"
+                   data-val-maxlength-max="30" value="@TempData["toTempValue"]"
+                   asp-for="@allocationService.To"
+                   style="width: 30%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border: solid;" placeholder="To" type="number" onkeydown="return  InputAction(event)" />
+            <p> &nbsp &nbsp</p>
+            @if (Model != null)
+            {
+                @if (Model.Count() > 0)
+                {
+
+                    <select id="frequencySize" style="width: 20%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;" asp-for="@allocationService.FrequencySizeValue" asp-items="@allocationService.FrequencySizesList" class="form-control">
+                    </select>
+
+                }
+            }
+            else
+            {
+
+                <select id="frequencySize" style="width: 30%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;" asp-for="@allocationService.FrequencySizeValue" asp-items="@allocationService.FrequencySizesList">
+                </select>
+            }
+
+
+        </div>
+
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px; height: 35px; width: 150px;" asp-for="@allocationService.AllocationTable"></label>
+            <p> &nbsp &nbsp</p>
+            <select id="allocation_first_value" onchange="FirstChange()" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid; "
+                    asp-for="@allocationService.AllocationFirstValue" asp-items="@allocationService.AllocationFirstList">
+            </select>
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p> &nbsp &nbsp</p>
+            <select id="allocation_two_value" onchange="SecondChange()" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;"
+                    asp-for="@allocationService.AllocationSecondValue" asp-items="@allocationService.AllocationSecondValueList">
+            </select>
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p> &nbsp &nbsp</p>
+            <select id="allocation_third_value" onchange="ThirdChange()" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;"
+                    asp-for="@allocationService.AllocationThirdValue" asp-items="@allocationService.AllocationThirdValueList">
+            </select>
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p> &nbsp &nbsp</p>
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px; width:80%; height: 35px; text-align: center;">-or-</label>
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p>&nbsp &nbsp</p>
+
+            <select id="allocation_fourth_value" onchange="FourthChange()" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid; ">
+                <option value="1">&lt;all allocation terms &gt;</option>
+                <option value="2">Amateur</option>
+
+                <optgroup label="Amateur-Satellite">
+                    <option value="3">Amateur-Satellite (Earth-to-space)</option>
+                    <option value="4">Amateur-Satellite (space-to-Earth)</option>
+                </optgroup>
+                <option value="5">Broadcasting</option>
+                <option value="6">Broadcasting-Satellite</option>
+                <optgroup label="Earth Exploration-Satellite">
+                    <option value="7">Earth Exploration-Satellite (active)</option>
+                    <option value="8">Earth Exploration-Satellite (Earth-to-space)</option>
+                    <option value="9">Earth Exploration-Satellite (Earth-to-space) (space-to-space)</option>
+                    <option value="10">Earth Exploration-Satellite (passive)</option>
+                    <option value="11">Earth Exploration-Satellite (space-to-Earth)</option>
+                    <option value="12">Earth Exploration-Satellite (space-to-Earth) (space-to-space)</option>
+                </optgroup>
+                <optgroup label="Meteorological-Satellite">
+                    <option value="13">Meteorological-Satellite (Earth-to-space)</option>
+                    <option value="14">Meteorological-Satellite (space-to-Earth)</option>
+                </optgroup>
+                <option value="15">Fixed</option>
+                <optgroup label="Fixed-Satellite">
+                    <option value="16">Fixed-Satellite (Earth-to-space)</option>
+                    <option value="17">Fixed-Satellite (space-to-Earth)</option>
+                    <option value="18">Fixed-Satellite (space-to-Earth) (Earth-to-space)</option>
+                    <option value="19">Fixed-Satellite (Earth-to-space) (space-to-Earth)</option>
+                </optgroup>
+                <option value="20">Inter-Satellite</option>
+                <option value="21">Meteorological Aids</option>
+                <optgroup label="Mobile">
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Aeronautical Mobile">
+                        <option value="22">Aeronautical Mobile (OR)</option>
+                        <option value="23">Aeronautical Mobile (R)</option>
+                    </optgroup>
+                    <option value="24">&nbsp;&nbsp;&nbsp;&nbsp;Land Mobile</option>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Maritime Mobile">
+                        <option value="25">Maritime Mobile (distress and calling)</option>
+                        <option value="26">Maritime Mobile (distress and safety)</option>
+                        <option value="27">Maritime Mobile (distress, safety and calling)</option>
+                        <option value="28">Maritime Mobile (distress and calling via DSC)</option>
+                    </optgroup>
+                    <option value="29">Mobile (distress and calling)</option>
+                    <option value="30">Mobile except aeronautical mobile</option>
+                    <option value="31">Mobile except aeronautical mobile (R)</option>
+                    <option value="32">Mobile (distress and safety)</option>
+                    <option value="33">Mobile (distress, safety and calling)</option>
+                </optgroup>
+                <optgroup label="Mobile-Satellite">
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Aeronautical Mobile">
+                        <option value="34">Aeronautical Mobile (OR)</option>
+                        <option value="35">Aeronautical Mobile (R)</option>
+                        <option value="36">Aeronautical Mobile (R) (space-to-Earth)</option>
+                        <option value="37">Aeronautical Mobile (R) (Earth-to-space)</option>
+                    </optgroup>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Land Mobile-Satellite">
+                        <option value="38">Land Mobile-Satellite (Earth-to-space)</option>
+                        <option value="39">Land Mobile-Satellite (space-to-Earth)</option>
+                    </optgroup>
+                    <option value="40">Land Mobile-Satellite</option>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Maritime Mobile-Satellite">
+                        <option value="41">Maritime Mobile-Satellite (Earth-to-space)</option>
+                        <option value="42">Maritime Mobile-Satellite (space-to-Earth)</option>
+                    </optgroup>
+                    <option value="43">&nbsp;&nbsp;&nbsp;&nbsp;Mobile-Satellite (Earth-to-space)</option>
+                    <option value="44">&nbsp;&nbsp;&nbsp;&nbsp;Mobile-Satellite except aeronautical mobile-satellite (Earth-to-space)</option>
+                    <option value="45">&nbsp;&nbsp;&nbsp;&nbsp;Mobile-Satellite (space-to-Earth)</option>
+                    <option value="46">&nbsp;&nbsp;&nbsp;&nbsp;Mobile-Satellite except aeronautical mobile-satellite (space-to-Earth)</option>
+                    <option value="47">&nbsp;&nbsp;&nbsp;&nbsp;Mobile-Satellite except aeronautical mobile-satellite</option>
+                    <option value="48">&nbsp;&nbsp;&nbsp;&nbsp;Mobile-Satellite except aeronautical mobile-satellite (R)</option>
+                    <option value="49">&nbsp;&nbsp;&nbsp;&nbsp;Mobile-Satellite maritime mobile-satellite (space-to-Earth)</option>
+
+                </optgroup>
+                <option value="50">Not allocated</option>
+                <option value="51">Radio Astronomy</option>
+                <optgroup label="Radiodetermination">
+                    <option value="52">Radiolocation</option>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Radionavigation">
+                        <option value="53">Aeronautical Radionavigation</option>
+                        <option value="54">Maritime Radionavigation</option>
+                        <option value="55">Maritime Radionavigation (radiobeacons)</option>
+                    </optgroup>
+                </optgroup>
+                <optgroup label="Radiodetermination-Satellite">
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Radionavigation-Satellite">
+                        <option value="56">Radionavigation-Satellite (space-to-Earth)</option>
+                        <option value="57">Radionavigation-Satellite (space-to-space)</option>
+                        <option value="58">Aeronautical Radionavigation-Satellite</option>
+                        <option value="59">Maritime Radionavigation-Satellite</option>
+                        <option value="60">Radionavigation-Satellite (Earth-to-space)</option>
+                        <option value="61">Radionavigation-Satellite (space-to-Earth) (space-to-space)</option>
+                        <option value="62">Radionavigation-Satellite (Earth-to-space) (space-to-space)</option>
+                    </optgroup>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Radiolocation-Satellite">
+                        <option value="63">Radiolocation-Satellite (Earth-to-space)</option>
+                        <option value="64">Radiolocation-Satellite (space-to-Earth)</option>
+                    </optgroup>
+                    <option value="65">&nbsp;&nbsp;&nbsp;&nbsp;Radiodetermination-Satellite (space-to-Earth)</option>
+                    <option value="66">&nbsp;&nbsp;&nbsp;&nbsp;Radiodetermination-Satellite (Earth-to-space)</option>
+                </optgroup>
+                <optgroup label="Space Operation">
+                    <option value="67">Space Operation (Earth-to-space)</option>
+                    <option value="68">Space Operation (Earth-to-space) (space-to-Earth)</option>
+                    <option value="69">Space Operation (satellite-identification)</option>
+                    <option value="70">Space Operation (space-to-Earth)</option>
+                    <option value="71">Space Operation (space-to-Earth) (space-to-space)</option>
+                </optgroup>
+                <optgroup label="Space Research">
+                    <option value="72">Space Research (active)</option>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;Space Research (deep space)">
+                        <option value="73">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (deep space) (Earth-to-space)</option>
+                        <option value="74">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (deep space) (space-to-Earth)</option>
+                    </optgroup>
+                    <option value="75">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (Earth-to-space)</option>
+                    <option value="76">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (Earth-to-space) (space-to-space)</option>
+                    <option value="77">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (passive)</option>
+                    <option value="78">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (space-to-Earth)</option>
+                    <option value="79">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (space-to-Earth) (space-to-space)</option>
+                    <option value="80">&nbsp;&nbsp;&nbsp;&nbsp;Space Research (space-to-space)</option>
+                </optgroup>
+                <optgroup label="Standard Frequency and Time Signal">
+                    <option value="81">Standard frequency and time signal (20 kHz)</option>
+                    <option value="82">Standard frequency and time signal (2 500 kHz)</option>
+                    <option value="83">Standard frequency and time signal (5 000 kHz)</option>
+                    <option value="84">Standard frequency and time signal (10 000 kHz)</option>
+                    <option value="85">Standard frequency and time signal (15 000 kHz)</option>
+                    <option value="86">Standard frequency and time signal (20 000 kHz)</option>
+                    <option value="87">Standard frequency and time signal (25 000 kHz)</option>
+                </optgroup>
+                <optgroup label="Standard Frequency and Time Signal-Satellite">
+                    <option value="88">Standard Frequency and Time Signal-Satellite (Earth-to-space)</option>
+                    <option value="89">Standard Frequency and Time Signal-Satellite (space-to-Earth)</option>
+                    <option value="90">Standard Frequency and Time Signal-Satellite (400.1 MHz)</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <br />
+        <p> &nbsp &nbsp</p>
+
+
+        <div class="center_top_menu" style="width: 50%; height:100%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px; width:150px" name="FrequencytableValue" asp-for="@allocationService.FrequencyTable"></label>
+            <p> &nbsp &nbsp</p>
+            @if (Model != null)
+            {
+                @if (Model.Count() > 0)
+                {
+        
+                    <select id="frequency_table" style="width: 80%; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 13px; border-style: solid; border-width: 3px;"
+                            asp-for="@Model.ElementAt(0).FrequencyTableValue" asp-items="@Model.ElementAt(0).FrequencyTablesList" class="form-control" multiple>
+                    </select>
+                }
+            }
+            else
+            {
+                <select id="frequency_table" style="width: 80%; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 13px; border-style: solid; border-width: 3px;"
+                        asp-for="@allocationService.FrequencytableValue" asp-items="@allocationService.FrequencyTablesList" class="form-control" multiple>
+                </select>
+            }
+            
+        </div>
+        <br />
+        <p> &nbsp &nbsp</p>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            
+            <button type="submit" id="searh_now" class="btn btn-primary" style="width: 40%; background-color: darkseagreen;" onclick="SearchNow()">Search</button>
+        </div>
+        <br />
+        <p> &nbsp &nbsp</p>
+    </div>
+
+    <br />
+    <div id="print_div" class="center" style="@(showDiv ? "display: block;" : "display: none;")">
+        <div class="center_top_menu center" style="width: 40%; height:100%">
+            <button type="submit" id="download_excel" class="btn btn-secondary center" style="width: 50%; background-color: limegreen; margin: 5px;">
+                <i class="fas fa-file-excel"></i>Download Excel
+            </button>
+            <button type="submit" id="download_pdf" class="btn btn-secondary center" style="width: 50%; background-color: red; margin: 5px;">
+                <i class="fas fa-file-pdf"></i> Download PDF
+            </button>
+        </div>
+    </div>
+    <br />
+
+    <div id="rData" class="center">
+        @if (Model != null)
+        {
+            @if (Model.Count() > 0)
+            {
+                <table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'>
+                    <tr><th width="200px" style="text-align:center">Frequency</th><th>Allocations</th><th>Region name</th><th>ITU</th></tr>
+                    @foreach (FrekvencijeProject.Models.Json.FreqBandSearchNew i in Model)
+                    {
+                        <tr>
+                            <td style="width: 220px; align-content: center">@i.LowView-@i.HighView</td>
+
+                            <td>
+                                @*@i.Allocation
+                                    <br />*@
+                                @{var list = @i.Footnote.OrderByDescending(e => e.isPrimary == true).ToList();
+                                    bool isFirst = false;
+                                    bool isSecond = false;
+
+                                }
+                                @foreach (var tt in list)
+                                {
+                                    @if (!@tt.isBand)
+                                    {
+                                        if (isFirst)
+                                        {
+                                            <br />
+                                        }
+                                        if (isSecond)
+                                        {
+                                            <br />
+                                            isSecond = false;
+                                        }
+                                        @tt.Allocation
+                                        isFirst = true;
+
+                                    }
+                                    else
+                                    {
+                                        isFirst = false;
+                                        @if (@tt.Footnote != "")
+                                        {
+                                            @:(  @Html.ActionLink(@tt.Footnote, null, null,
+       null, htmlAttributes: new { @id = "foot", @href = "#", onclick = "LinkClick('" + @tt.Footnote + "','" + @tt.FootnoteDesc + "'); return false;" })
+                                            @:)
+                                            isSecond = true;
+
+                                        }
+                                    }
+
+                                }
+
+                                <br />
+
+                                @{int interation = 0;
+                                    int tempCount = @i.BandFootnote.Count;
+                                }
+                                @foreach (var tt in @i.BandFootnote)
+                                {
+                                    interation++;
+                                    @if (interation < tempCount)
+                                    {
+
+                                        @if (@tt.Footnote != "")
+                                        {
+                                            @Html.ActionLink(@tt.Footnote, null, null,
+                                           null, htmlAttributes: new { @id = "foot", @href = "#", onclick = "LinkClick('" + @tt.Footnote + "','" + @tt.FootnoteDesc + "'); return false;" })@:,&nbsp;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @if (@tt.Footnote != "")
+                                        {
+                                            @Html.ActionLink(@tt.Footnote, null, null,
+                                           null, htmlAttributes: new { @id = "foot", @href = "#", onclick = "LinkClick('" + @tt.Footnote + "','" + @tt.FootnoteDesc + "'); return false;" })
+
+                                        }
+                                    }
+
+                                }
+
+                            </td>
+
+                            <td>@i.regionName</td>
+                            <td>@i.regionCode</td>
+                        </tr>
+                    }
+                </table>
+
+            }
+        }
+
+    </div>
+    <div>
+        <h4 id="error_input" style="color: red; text-align: center; font-weight: bold; font-family: Roboto; font-size: 33px; "></h4>
+    </div>
+</body>

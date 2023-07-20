@@ -1,0 +1,597 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject FrekvencijeProject.Controllers.HomeController homeService
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+<head>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<script type="text/javascript">
+
+    $(function () {
+        
+        
+        $("#nextClick").click(function () {
+            // alert("Works next");
+            if (scrollPosition < carouselWidth) {
+                if (scrollPosition < (carouselWidth - cardWidth * 4)) {
+
+                    scrollPosition += cardWidth;
+                    /*alert("Works :" + carouselWidth);*/
+                    $(".carousel-inner").animate({ scrollLeft: scrollPosition }, 600);
+
+
+                    $(".carousel-control-next").css({
+                        '-webkit-transform': 'translateX(' + scrollPosition + 'px) '
+                    });
+
+                    $(".carousel-control-prev").css({
+
+                        '-webkit-transform': 'translateX(' + scrollPosition + 'px)'
+                    });
+
+                }
+            }
+        });
+        var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+        var cardWidth = $(".testimonial-block-one").width();
+        var scrollPosition = 0;
+        var endOfScreen = false;
+        var multipleCardCarousel = document.querySelector(
+            "#carouselExampleControls"
+        );
+
+       /* document.querySelector("#paraExample").style.backgroundColor = "red";*/
+        /*alert("testiranje" + multipleCardCarousel);*/
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            //rest of the code
+            var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+                interval: false
+            });
+        } else {
+            $(multipleCardCarousel).addClass("slide");
+        }
+
+        $(".carousel-control-prev").on("click", function () {
+            /*alert("Works prev");*/
+            if (scrollPosition > 0) {
+                scrollPosition -= cardWidth;
+                $(".carousel-inner").animate(
+                    { scrollLeft: scrollPosition },
+                    600
+                );
+
+                $(".carousel-control-prev").css({   
+                    '-webkit-transform': 'translateX(' + scrollPosition + 'px)'
+                });
+
+                $(".carousel-control-next").css({
+                    '-webkit-transform': 'translateX(' + scrollPosition + 'px)'
+                });
+            }
+        });
+
+        setInterval(function () { Apply(); }, 5000);
+
+        function Apply() {
+            
+            if (!endOfScreen) {
+                if (scrollPosition < (carouselWidth - cardWidth * 4)) {
+                    //alert("valuable!");
+                    scrollPosition += cardWidth;
+                   // alert("Works :" + carouselWidth);
+                    $(".carousel-inner").animate({ scrollLeft: scrollPosition }, 600);
+
+
+                    $(".carousel-control-next").css({
+                        '-webkit-transform': 'translateX(' + scrollPosition + 'px)'
+                    });
+
+                    $(".carousel-control-prev").css({
+
+                        '-webkit-transform': 'translateX(' + scrollPosition + 'px)'
+                    });
+
+                } else {
+                    endOfScreen = true;
+                }
+            } else {
+                //alert("valuable!");
+                if (scrollPosition > 0) {
+                    scrollPosition -= cardWidth;
+                    $(".carousel-inner").animate(
+                        { scrollLeft: scrollPosition },
+                        600
+                    );
+
+                    $(".carousel-control-prev").css({
+                        '-webkit-transform': 'translateX(' + scrollPosition + 'px)'
+                    });
+
+                    $(".carousel-control-next").css({
+                        '-webkit-transform': 'translateX(' + scrollPosition + 'px)'
+                    });
+                } else {
+                    endOfScreen = false;
+                }
+            }
+           
+        }
+    });
+</script>
+
+<section class="about-section sec-pad bg-color-1">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                <div class="content_block_1">
+                    <div class="content-box">
+                        <div class="sec-title">
+                            <h6><i class="flaticon-star"></i><span>Welcome</span></h6>
+                            <h2>
+                                National Table Of Frequency Allocations (NTFA)
+
+                            </h2>
+                            <div class="title-shape"></div>
+                        </div>
+                        <div class="text">
+                            Example text nor real: Ministry of Telecom & IT Palestine and Korea International Cooperation Agency (KOICA) have successfully held an Impact Sharing Seminar of Palestine Startup Support (PASS Program) on 8 September 2020. The seminar took place online due to COVID-19 pandemic, gathering more than 40 people from KOICA, MTIT, Representative office of the Republic of Korea in Palestine, KPMG Korea, and partner organizations (Paltel Group Foundation, Leaders Organization, G.Gateway, Taawon)
+                            Example text nor real: Ministry of Telecom & IT Palestine and Korea International Cooperation Agency (KOICA) have successfully held an Impact Sharing Seminar of Palestine Startup Support (PASS Program) on 8 September 2020. The seminar took place online due to COVID-19 pandemic, gathering more than 40 people from KOICA, MTIT, Representative office of the Republic of Korea in Palestine, KPMG Korea, and partner organizations (Paltel Group Foundation, Leaders Organization, G.Gateway, Taawon)
+                            <h5><br><br>
+                            <h4>
+                                Dr. Ishaq Sider, Minister of Telecom & IT
+                                </h4></h5>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                <div class="image_block_1">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="GeneralSearchNew">
+                        <div>
+                            <div class="form-group center" style="width:50%">
+                                <label id="search_by" asp-for="@homeService.General" style="font-weight: bold; font-family: Roboto; font-size: 13px; "></label>
+                                <br />
+                                <select id="general_value" style="width: 30%; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;"  name="GeneralValue" asp-for="@homeService.GeneralValue" asp-items="@homeService.GeneralsList">
+                                </select>
+                            </div>
+
+                            <div class="form-group center" style="width:50%">
+                                <label id="search_by" style="width:50%; font-weight:bold; font-family: Roboto; font-size: 13px;" asp-for="@homeService.Frequency"></label>
+                            </div>
+
+                            <div class="form-group center_top_menu_home" style="width: 90%; height:100%">
+
+                                <input id="from" aria-label="From" class="form-control text-box single-line"
+                                       data-val-maxlength-max="30" asp-for="@homeService.From" name="From"
+                                       style="width: 25%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border: solid;" placeholder="From" type="number" onkeydown="return  InputAction(event)" />
+                                <p> &nbsp &nbsp</p>
+                                <input id="to" aria-label="To" class="form-control text-box single-line"
+                                       data-val-maxlength-max="30" asp-for="@homeService.To" name="To"
+                                       style="width: 25%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border: solid;" placeholder="To" type="number" onkeydown="return  InputAction(event)" />
+
+                                <p> &nbsp &nbsp</p>
+                                <select id="frequencySize" style="width: 25%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;" name="FrequencySizeValue" asp-for="@homeService.FrequencySizeValue" asp-items="@homeService.FrequencySizesList">
+                                </select>
+
+                            </div>
+
+                            <div class="form-group center" style="width:90%">
+                                <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px" name="FrequencytableValue" asp-for="@homeService.FrequencyTable"></label>
+                                <br />
+                                <select id="frequency_table" name="FrequencytableValue" style="width: 90%; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 13px; border-style: solid; border-width: 3px;" asp-for="@homeService.FrequencytableValue" asp-items="@homeService.FrequencyTablesList"
+                                        class="form-control" multiple>
+                                </select>
+                            </div>
+                            <div class="form-group center">
+                                <button type="submit" id="searh_now" class="btn btn-primary" style="width:60%">Search</button>
+                            </div>
+                            @*<div class="image-box">
+                    <figure class="image"><img src="~/images/home/welcome.jpg" alt=""></figure>
+                    <div class="text">
+                        <h4>
+                            @localizer["explain_text"]
+                        </h4>
+                    </div>
+                </div>*@
+                        </div>
+                     </form>
+                </div>
+        </div>
+    </div>
+</section>
+
+@*<section class="testimonial-section centred "style="background-image: url(assets/images/s4.jpg);"
+
+    <div class="div_picuture_test">-->
+        @*<div class="auto-container">*@
+<div id="carouselExampleControls" class="carousel  div_picuture_test" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="testimonial-block-one active">
+            <div class="inner-box">
+                <figure class="image-box"> <img src="~/images/home/z3.jpg" alt="" /></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="testimonial-block-one">
+
+            <div class="inner-box">
+                <figure class="image-box"><img src="~/images/home/z2.jpg" alt=""></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="testimonial-block-one">
+
+            <div class="inner-box">
+                <figure class="image-box"><img src="~/images/home/z1.jpg" alt=""></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonial-block-one">
+            <div class="inner-box">
+                <figure class="image-box"> <img src="~/images/home/z3.jpg" alt="" /></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="testimonial-block-one">
+            <div class="inner-box">
+                <figure class="image-box"> <img src="~/images/home/z3.jpg" alt="" /></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            @*<span class="carousel-control-prev-icon" aria-hidden="true"></span>*@
+            <span  aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button id="nextClick" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            @*<span class="carousel-control-next-icon" aria-hidden="true"></span>*@
+            <span  aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<section class="team-section sec-pad bg-color-1">
+    <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-5.png);"></div>
+
+    <div class="auto-container">
+        <div class="sec-title centred">
+
+            <h2>
+                Latest News
+            </h2>
+            <div class="title-shape"></div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-6 col-sm-12 news-block">
+                <div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <div class="image-box">
+                            <figure class="image">
+                                <a href="blog-details.html"><i class="fas fa-link"></i></a>
+                                <img src="~/images/home/z1.jpg" alt="">
+                            </figure>
+                            <div class="post-date"><h3>28<span>Jan’22</span></h3></div>
+                        </div>
+                        <div class="lower-content">
+                            <div class="category"><a href="index.html"><i class="flaticon-star"></i>Report</a></div>
+                            <h4>
+                                <a href="blog-details.html">
+                                    APT Web Dialogue Series on Spectrum Management
+                                </a>
+                            </h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 news-block">
+                <div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <div class="image-box">
+                            <figure class="image">
+                                <a href="blog-details.html"><i class="fas fa-link"></i></a>
+                                <img src="~/images/home/z2.jpg" alt="">
+                            </figure>
+                            <div class="post-date"><h3>28<span>Jan’22</span></h3></div>
+                        </div>
+                        <div class="lower-content">
+                            <div class="category"><a href="index.html"><i class="flaticon-star"></i>Report</a></div>
+                            <h4>
+                                <a href="blog-details.html">
+                                    APT Web Dialogue Series on Spectrum Management
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 news-block">
+                <div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <div class="image-box">
+                            <figure class="image">
+                                <a href="blog-details.html"><i class="fas fa-link"></i></a>
+                                <img src="~/images/home/z3.jpg" alt="">
+                            </figure>
+                            <div class="post-date"><h3>28<span>Jan’22</span></h3></div>
+                        </div>
+                        <div class="lower-content">
+                            <div class="category"><a href="index.html"><i class="flaticon-star"></i>Report</a></div>
+                            <h4>
+                                <a href="blog-details.html">
+                                    APT Web Dialogue Series on Spectrum Management
+                                </a>
+                            </h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    //$(function () {
+
+    //    $('#searh_now').click(function () {
+    //        alert("test");
+    //        $.get("/HomeController/GeneralSearchTest", { test: "proba" });
+    //    });
+    //});
+
+        function InputAction(e) {
+            //alert("You pressed a key inside the input field");
+            var evt = (e) ? e : window.event;
+            var charCode = (evt.keyCode) ? evt.keyCode : evt.which;
+            if (charCode == 144 || charCode == 12 || charCode == 8) {
+                return true;
+            }
+            if ((charCode >= 96 && charCode <= 105) || (charCode >= 48 && charCode <= 57)) {
+                return true;
+            } else {
+                return false;
+                //alert("You pressed a key inside the input field");
+            }
+        }
+</script>
+
+@*</div>*@
+
+@*</div>*@
+
+@*<div class="three-item-carousel owl-carousel owl-theme owl-dots-none owl-nav-none">
+
+        <p>The background image is displayed in its original size.</p>
+        <div class="div_picuture_test">
+
+        </div>
+        <div class="testimonial-block-one">
+
+            <div class="inner-box">
+
+                <figure class="image-box"></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-block-one">
+            <div class="inner-box">
+                <figure class="image-box"><img src="~/images/home/z2.jpg" alt=""></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-block-one">
+            <div class="inner-box">
+                <figure class="image-box"><img src="~/images/home/z1.jpg" alt=""></figure>
+                <div class="text">
+                </div>
+                <div class="author-box">
+                    <h4>Important Program</h4>
+                    <span class="designation">read more</span>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@*</section>*@
+
+
+@*<div class="center_top">
+        <div id="centered_text_top_of_topic">
+            <div id="ShowCase"><h2 id="ShowCaseMain">@localizer["main_text"]</h2></div>
+            <div id="ShowCase"><h3 id="national_table_of_frequency_allocations__ntfa_">@localizer["Test"]</h3></div>
+            <div class="text-center"><img src="~/images/Palestina.png" /> </div>
+            <div id="ShowCase"><h2 id="ShowCaseMain">@localizer["explain_text"]</h2></div>
+            <div id="text-center"><h2>&nbsp;</h2></div>
+        </div>
+
+    </div>
+    <br />
+
+    <div>
+        <div class="form-group center" style="width:50%">
+            <label id="search_by" asp-for="@homeService.General" style="font-weight: bold; font-family: Roboto; font-size: 13px; "></label>
+            <br />
+            <select id="general_value" style="width:30%; font-weight:bold; font-family: Roboto; font-size: 13px;" asp-for="@homeService.GeneralValue" asp-items="@homeService.GeneralsList">
+            </select>
+        </div>
+
+        <div class="form-group center" style="width:50%">
+            <label id="search_by" style="width:50%; font-weight:bold; font-family: Roboto; font-size: 13px;" asp-for="@homeService.Frequency"></label>
+        </div>
+
+
+        <div class="form-group center_top_menu_home" style="width: 90%; height:100%">
+
+            <input id="from" aria-label="From" class="form-control text-box single-line"
+                   data-val-maxlength-max="30" asp-for="@homeService.From"
+                   style="width: 25%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px" placeholder="From" type="number" onkeydown="return  InputAction(event)" />
+            <p> &nbsp &nbsp</p>
+            <input id="to" aria-label="To" class="form-control text-box single-line"
+                   data-val-maxlength-max="30" asp-for="@homeService.To"
+                   style="width: 25%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px" placeholder="To" type="number" onkeydown="return  InputAction(event)" />
+
+            <p> &nbsp &nbsp</p>
+            <select id="frequencySize" style="width: 25%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px " asp-for="@homeService.FrequencySizeValue" asp-items="@homeService.FrequencySizesList">
+            </select>
+
+        </div>
+         size="4"
+        <div class="form-group center" style="width:50%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px" asp-for="@homeService.FrequencyTable"></label>
+            <br />
+            <select id="frequency_table" style="width: 50%; font-weight:bold; font-family: Roboto; font-size: 13px" asp-for="@homeService.FrequencytableValue" asp-items="@homeService.FrequencyTablesList"
+                    class="form-control" multiple>
+            </select>
+        </div>
+        <div class="form-group center">
+            <button type="submit" id="searh_now" class="btn btn-primary" style="width:10%">Search</button>
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#searh_now').click(function () {
+                //alert("Works");
+                //alert(" If you just want value ==>" + $('#general_value').val());
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GeneralSearch")",
+
+                    data: {
+                        GeneralVal: $('#general_value').val(),
+                        FromVal: $('#from').val(),
+                        ToVal: $('#to').val(),
+                        FrequencySizeVal: $('#frequencySize').val(),
+                        FrequencyTableVal: $('#frequency_table').val()
+
+                    },
+                    success: function (response) {
+                        if ($('#general_value').val() == '1') {
+                            var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%'><tr><th>Low</th><th>High</th><th>Term</th><th>Footnote_or_comment</th><th>Region name</th><th>Region code</th></tr>";
+                            $.each(response, function (i, generalTemp) {
+
+                               items += "<tr><td>" + generalTemp.low + "</td><td>" + generalTemp.high + "</td><td>" + generalTemp.name + "</td> <td> " + generalTemp.Footnote_or_comment + "</td>" +
+                                    "<td>" + generalTemp.regionName + "</td> <td> " + generalTemp.regionCode + "</td></tr>";
+
+                            });
+                            items += "</table>";
+                            $('#rData').html(items)
+                        }
+                        if ($('#general_value').val() == '2') {
+
+                            var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%'><tr><th>Low</th><th>High</th><th>Term</th><th>Footnote</th><th>Region name</th><th>Region code</th></tr>";
+                            $.each(response, function (i, generalTemp) {
+                                //alert("Name : " + generalTemp.low + ", Designation : " + generalTemp.high);
+                                items += "<tr><td>" + generalTemp.LowView + "</td><td>" + generalTemp.HighView + "</td><td>" + generalTemp.Term + "</td> <td> " + generalTemp.Footnote + "</td>" +
+                                    "<td>" + generalTemp.regionName + "</td> <td> " + generalTemp.regionCode + "</td></tr>";
+                            });
+                            items += "</table>";
+                            $('#rData').html(items)
+                        }
+                        if ($('#general_value').val() == '3') {
+                            var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%'><tr><th>Low</th><th>High</th><th>Term</th><th>Comment</th><th>Region name</th><th>Region code</th></tr>";
+                            $.each(response, function (i, generalTemp) {
+                                //alert("Name : " + generalTemp.low + ", Designation : " + generalTemp.high);
+                                items += "<tr><td>" + generalTemp.low + "</td><td>" + generalTemp.high + "</td><td>" + generalTemp.Term + "</td> <td> " + generalTemp.comment + "</td>" +
+                                    "<td>" + generalTemp.regionName + "</td> <td> " + generalTemp.regionCode + "</td></tr>";
+                            });
+                            items += "</table>";
+                            $('#rData').html(items)
+                        }
+                    },
+                    failure: function (response) {
+                        alert("faliure");
+                    },
+                    error: function (response) {
+                        alert("error");
+                    }
+                });
+            });
+        });
+        function InputAction(e) {
+            //alert("You pressed a key inside the input field");
+            var evt = (e) ? e : window.event;
+            var charCode = (evt.keyCode) ? evt.keyCode : evt.which;
+            if (charCode == 144 || charCode == 12 || charCode == 8) {
+                return true;
+            }
+            if ((charCode >= 96 && charCode <= 105) || (charCode >= 48 && charCode <= 57)) {
+                return true;
+            } else {
+                return false;
+                //alert("You pressed a key inside the input field");
+            }
+        }
+    </script>
+
+
+
+    <br />
+    <div id="rData" class="center">
+
+    </div>*@

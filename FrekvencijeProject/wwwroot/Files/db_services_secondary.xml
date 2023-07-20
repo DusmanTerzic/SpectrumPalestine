@@ -1,0 +1,428 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Table1>
+    <Layer_1>Amateur</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Amateur-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Amateur-satellite</Layer_1>
+    <Layer_2>Amateur-satellite (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Amateur-satellite</Layer_1>
+    <Layer_2>Amateur-satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Broadcasting</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Broadcasting-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Earth exploration-satellite (active)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Earth exploration-satellite (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Earth exploration-satellite (Earth-to-space) (space-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Earth exploration-satellite (passive)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Earth exploration-satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Earth exploration-satellite (space-to-Earth) (space-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Meteorological-satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Meteorological-satellite</Layer_2>
+    <Layer_3>Meteorological-satellite (Earth-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Earth exploration-satellite</Layer_1>
+    <Layer_2>Meteorological-satellite</Layer_2>
+    <Layer_3>Meteorological-satellite (space-to-Earth)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Fixed</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Fixed-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Fixed-satellite</Layer_1>
+    <Layer_2>Fixed-satellite (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Fixed-satellite</Layer_1>
+    <Layer_2>Fixed-satellite (Earth-to-space) (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Fixed-satellite</Layer_1>
+    <Layer_2>Fixed-satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Fixed-satellite</Layer_1>
+    <Layer_2>Fixed-satellite (space-to-Earth) (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Inter-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Aeronautical mobile</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Aeronautical mobile</Layer_2>
+    <Layer_3>Aeronautical mobile (R)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Aeronautical mobile</Layer_2>
+    <Layer_3>Aeronautical mobile (OR)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Land mobile</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Maritime mobile</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Maritime mobile</Layer_2>
+    <Layer_3>Maritime mobile (distress and safety)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Maritime mobile</Layer_2>
+    <Layer_3>Maritime mobile (distress and calling)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Maritime mobile</Layer_2>
+    <Layer_3>Maritime mobile (distress, safety and calling)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Maritime mobile</Layer_2>
+    <Layer_3>Maritime mobile (distress and calling via DSC)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Mobile (distress and safety)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Mobile (distress and calling)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Mobile except aeronautical mobile</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Mobile except aeronautical mobile (R)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile</Layer_1>
+    <Layer_2>Mobile except land mobile</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Aeronautical mobile-satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Aeronautical mobile-satellite</Layer_2>
+    <Layer_3>Aeronautical mobile-satellite (R)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Aeronautical mobile-satellite</Layer_2>
+    <Layer_3>Aeronautical mobile-satellite (OR)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Land mobile-satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Land mobile-satellite</Layer_2>
+    <Layer_3>Land mobile-satellite (Earth-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Land mobile-satellite</Layer_2>
+    <Layer_3>Land mobile-satellite (space-to-Earth)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Maritime mobile-satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Maritime mobile-satellite</Layer_2>
+    <Layer_3>Maritime mobile-satellite (Earth-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Maritime mobile-satellite</Layer_2>
+    <Layer_3>Maritime mobile-satellite (space-to-Earth)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite except aeronautical mobile-satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite except aeronautical mobile-satellite (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite except aeronautical mobile-satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite except aeronautical mobile-satellite (R)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite except maritime mobile satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite except maritime mobile satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Mobile-satellite</Layer_1>
+    <Layer_2>Mobile-satellite (space-to-Earth) except maritime mobile satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Meteorological aids</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Radio astronomy</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination</Layer_1>
+    <Layer_2>Radionavigation</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination</Layer_1>
+    <Layer_2>Radionavigation</Layer_2>
+    <Layer_3>Aeronautical radionavigation</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination</Layer_1>
+    <Layer_2>Radionavigation</Layer_2>
+    <Layer_3>Maritime radionavigation</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination</Layer_1>
+    <Layer_2>Radionavigation</Layer_2>
+    <Layer_3>Maritime radionavigation (radiobeacons)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination</Layer_1>
+    <Layer_2>Radiolocation</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+    <Layer_3>Radionavigation-satellite (Earth-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+    <Layer_3>Radionavigation-satellite (Earth-to-space) (space-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+    <Layer_3>Radionavigation-satellite (space-to-Earth)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+    <Layer_3>Radionavigation-satellite (space-to-Earth) (space-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+    <Layer_3>Radionavigation-satellite (space-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+    <Layer_3>Aeronautical radionavigation-satellite</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radionavigation-satellite</Layer_2>
+    <Layer_3>Maritime radionavigation-satellite</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Radiodetermination-satellite</Layer_1>
+    <Layer_2>Radiolocation-satellite</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space operation</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_3>Space operation (satellite identification)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_3>Space operation (Earth-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_3>Space operation (Earth-to-space) (space-to-Earth)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_3>Space operation (Earth-to-space) (space-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_3>Space operation (space-to-Earth)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_3>Space operation (space-to-Earth) (space-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (active)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (deep space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (deep space)</Layer_2>
+    <Layer_3>Space research (deep space) (Earth-to-space)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (deep space)</Layer_2>
+    <Layer_3>Space research (deep space) (space-to-Earth)</Layer_3>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (passive)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (Earth-to-space) (space-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (space-to-Earth) (space-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (space-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Space research</Layer_1>
+    <Layer_2>Space research (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+    <Layer_2>Standard frequency and time signal (10 000 kHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+    <Layer_2>Standard frequency and time signal (15 000 kHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+    <Layer_2>Standard frequency and time signal (2 500 kHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+    <Layer_2>Standard frequency and time signal (20 000 kHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+    <Layer_2>Standard frequency and time signal (20 kHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+    <Layer_2>Standard frequency and time signal (25 000 kHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal</Layer_1>
+    <Layer_2>Standard frequency and time signal (5 000 kHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal-satellite</Layer_1>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal-satellite</Layer_1>
+    <Layer_2>Standard frequency and time signal-satellite (400.1 MHz)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal-satellite</Layer_1>
+    <Layer_2>Standard frequency and time signal-satellite (Earth-to-space)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Standard frequency and time signal-satellite</Layer_1>
+    <Layer_2>Standard frequency and time signal-satellite (space-to-Earth)</Layer_2>
+  </Table1>
+  <Table1>
+    <Layer_1>Not allocated</Layer_1>
+  </Table1>
+</NewDataSet>

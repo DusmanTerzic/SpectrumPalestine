@@ -1,0 +1,55 @@
+﻿@model FrekvencijeProject.JSON.Allocations.Root
+@{ Layout = "_Layout"; ViewBag.Title = "Get Reservation by Id";}
+
+<h2>Get Reservation by Id </h2>
+<h3>proba:@ViewBag.StatusCode</h3>
+
+
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Get Allocation" onclick="document.getElementById('allocation_form').submit();" style="cursor: pointer; width:200px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="GetAllocations" method="post" id="allocation_form"></form>
+</div>
+<br />
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Get Allocation new" onclick="document.getElementById('allocation_form2').submit();" style="cursor: pointer; width:200px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="GetAllocations2" method="post" id="allocation_form2"></form>
+</div>
+<br />
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Fill footnotes on empty allocation" onclick="document.getElementById('footnote_form').submit();" style="cursor: pointer; width:400px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="GetFootnotes" method="post" id="footnote_form"></form>
+</div>
+<br />
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Fill footnotes on empty allocation 2" onclick="document.getElementById('footnote_form2').submit();" style="cursor: pointer; width:400px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="GetFootnotes2" method="post" id="footnote_form2"></form>
+</div>
+<br />
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Fill application terms" onclick="document.getElementById('app_terms_form').submit();" style="cursor: pointer; width:400px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="GetApplicationTerms" method="post" id="app_terms_form"></form>
+</div>
+<br />
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Fill allocation terms" onclick="document.getElementById('all_terms_form').submit();" style="cursor: pointer; width:400px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="GetAllocationTerms" method="post" id="all_terms_form"></form>
+</div>
+<br />
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Fill application ranges" onclick="document.getElementById('application_form').submit();" style="cursor: pointer; width:400px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="GetApplication" method="post" id="application_form"></form>
+</div>
+<br />
+<div class="text-center panel-body">
+    <input type="button" class="btn btn-primary" value="Fill data of footnotes from file" onclick="document.getElementById('all_footnote').submit();" style="cursor: pointer; width:400px;height:80px;">
+    </input>
+    <form asp-controller="Api" asp-action="AddFootnoteDesc" method="post" id="all_footnote"></form>
+</div>
+

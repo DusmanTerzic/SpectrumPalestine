@@ -1,0 +1,1836 @@
+﻿
+@{
+}
+@{
+    bool showDiv = (Model != null); // Set this value based on your condition
+}
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject FrekvencijeProject.Controllers.ApplicationSearchController applicationService
+@*@model IEnumerable<FrekvencijeProject.Models.Json.FreqBandSearchNewDocStand>*@
+@model IEnumerable<FrekvencijeProject.Models.Ajax.ApplicationView>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+
+<head>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+@if (Model != null)
+{
+    @if (Model.Count() > 0)
+    {
+
+<script type="text/javascript">
+     //alert('test');
+
+    setTimeout(function () {
+        //your code here
+
+        //var value = ;
+        //alert('ucitao sam:' + value);
+        $('#frequencySize').val(@Model.ElementAt(0).FrequencySizeValue).change();
+    }, 500);
+</script>
+    }
+}
+<script type="text/javascript">
+    var DocString = "";
+    function LinkClick() {
+        //alert('Does this work?'+e);
+        var value = 'ADS    Automatic Dependant Surveillance (Aeronautical)<br/>';
+        value += 'AES	    Aircraft Earth Station<br/>';
+        value += 'AGA       Air-Ground-Air<br/>';
+        value += 'AIS	    Universal Shipborne Automatic Identification System<br/>';
+        value += 'ALS	    Assistive Listening Systems<br/>';
+        value += 'ALS	    Assistive Listening Systems<br/>';
+        value += 'AM	    Amplitude Modulation<br/>';
+        value += 'AMRD	    Autonomous Maritime Radio Device<br/>';
+        value += 'ALD	    Assistive Listening Devices<br/>';
+        value += 'ASDE	    Airport Surface Detection Equipment<br/>';
+        value += 'BBDR	    Broad Band Disaster Relief<br/>';
+        value += 'BFWA	    Broadband Fixed Wireless Access<br/>';
+        value += 'BWA	    Broadband Wireless Access<br/>';
+        value += 'CB	    Citizens Band<br/>';
+        value += 'CGC	    Complementary Ground Component<br/>';
+        value += 'CT	    Cordless Telephone<br/>';
+        value += 'DA2GC	    Direct Air-to-Ground Communications<br/>';
+        value += 'DECT	    Digital Enhanced Cordless Telecommunications<br/>';
+        value += 'D-GPS	    Differential Global Positioning System<br/>';
+        value += 'DME	    Distance Measuring Equipment<br/>';
+        value += 'DRM	    Digital Radio Mondiale<br/>';
+        value += 'DSC	    Digital Selective Calling<br/>';
+        value += 'DVB-T	    Digital Video Broadcasting – Terrestrial<br/>';
+        value += 'ELT	    Emergency locator transmitter<br/>';
+        value += 'ENG/OB	Electronic News Gathering / Outside Broadcasting<br/>';
+        value += 'EPIRBs	Emergency Position Indicating Radio Beacons<br/>';
+        value += 'ESIM	    Earth Stations In-Motion<br/>';
+        value += 'ESOMPs	Earth Stations On Mobile Platforms<br/>';
+        value += 'ESV	    Earth Stations on-board Vessels<br/>';
+        value += 'FM	    Frequency Modulation<br/>';
+        value += 'FRMCS	    Future Railway Mobile Communication System<br/>';
+        value += 'FSS	    Fixed-Satellite Service<br/>';
+        value += 'FWA	    Fixed Wireless Access<br/>';
+        value += 'GBAS	    Ground Based Augmentation System<br/>';
+        value += 'GBSAR	    Ground Based Synthetic Aperture Radar<br/>';
+        value += 'GLONASS	Globalnaya Navigatsionnaya Sputnikovaya Sistema<br/>';
+        value += 'GMDSS	    Global Maritime Distress and Safety System<br/>';
+        value += 'GNSS	    Global Navigation Satellite System<br/>';
+        value += 'GNSS      Pseudolites	Global Navigation Satellite System Pseudolites<br/>';
+        value += 'GPR	    Ground Probing Radar<br/>';
+        value += 'GPS	    Global Positioning System<br/>';
+        value += 'GSM	    Global System for Mobile Communications<br/>';
+        value += 'GSM-R	    Global System for Mobile Communications on Railways<br/>';
+        value += 'GSO	    GeoStationary Orbit<br/>';
+        value += 'HAPS	    High Altitude Platform Station<br/>';
+        value += 'HEST	    High e.i.r.p. Satellite Terminal<br/>';
+        value += 'IFF	    Identification Friend or Foe<br/>';
+        value += 'ILS	    Instrument Landing System<br/>';
+        value += 'IMT-2000	International Mobile Telecommunications-2000<br/>';
+        value += 'IMT-Advanced	Systems beyond IMT-2000<br/>';
+        value += 'IMT	    International Mobile Telecommunications (includes IMT-2000 and IMT-Advanced<br/>';
+        value += 'ISM	    Industrial, Scientific and Medical applications<br/>';
+        value += 'ITS	    Intelligent Transport Systems<br/>';
+        value += 'JTIDS	    Joint Tactical Information Distribution System<br/>';
+        value += 'LAES	    Location Application for Emergency Services<br/>';
+        value += 'LANs	    Local Area Networks<br/>';
+        value += 'LEST	    Low e.i.r.p. Satellite Terminal<br/>';
+        value += 'LP-AMI	Low Power Active Medical Implants<br/>';
+        value += 'LPD	    Low Power Device<br/>';
+        value += 'LPR	    Level Probing Radar<br/>';
+        value += 'LT2	    Location Tracking Type 2<br/>';
+        value += 'MBANS	    Medical Body Area Network System<br/>';
+        value += 'MBR	    Maritime Broadband Radio<br/>';
+        value += 'MCA	    Mobile Communications on Board Aircraft<br/>';
+        value += 'MCV	    Mobile Communication Services on Board Vessels<br/>';
+        value += 'MFCN	    Mobile/Fixed Communications Networks<br/>';
+        value += 'MLS	    Microwave Landing System<br/>';
+        value += 'MSI	    Maritime Safety Information<br/>';
+        value += 'MSS	    Mobile-Satellite Service<br/>';
+        value += 'MWS	    Multimedia Wireless System<br/>';
+        value += 'NAVTEX	Narrow-band direct-printing telegraphy system for transmission of navigational and meteorological warnings and urgent information to ships<br/>';
+        value += 'NGSO	    Non-GeoStationary Orbit<br/>';
+        value += 'NMR	    Nuclear Magnetic Resonance applications<br/>';
+        value += 'NP2M	    Narrowband Point to Multipoint system<br/>';
+        value += 'PAMR	    Public Access Mobile Radio<br/>';
+        value += 'PLB	    Personal Locator Beacon<br/>';
+        value += 'PMR	    Private (Professional) Mobile Radio<br/>';
+        value += 'PMSE	    Programme Making and Special Events<br/>';
+        value += 'POCSAG	Post Office Code Standards Advisory Group<br/>';
+        value += 'PPDR	    Public Protection & Disaster Relief<br/>';
+        value += 'RFID	    Radio Frequency Identification<br/>';
+        value += 'RLAN	    Radio Local Area Network<br/>';
+        value += 'RMR	    Railway Mobile Radio<br/>';
+        value += 'RTE	    Radar Target Enhancer<br/>';
+        value += 'SAB	    Service Ancillary to Broadcasting<br/>';
+        value += 'SAP	    Service Ancillary to Programme making<br/>';
+        value += 'SAR 	    Search and Rescue<br/>';
+        value += 'SATCOM	Satellite Communication<br/>';
+        value += 'SIT/SUT	Satellite Interactive Terminal / Satellite User Terminal<br/>';
+        value += 'SNG	    Satellite News Gathering<br/>';
+        value += 'S-PCS	    Satellite - Personal Communications System<br/>';
+        value += 'SRD	    Short Range Devices<br/>';
+        value += 'SRR	    Short Range Radars<br/>';
+        value += 'SSR	    Secondary Surveillance Radar<br/>';
+        value += 'TACAN	    Tactical Air Navigation<br/>';
+        value += 'T-DAB	    Terrestrial Digital Audio Broadcasting<br/>';
+        value += 'TETRA	    Terrestrial Trunked Radio<br/>';
+        value += 'TETRAPOL	Digital PMR technology<br/>';
+        value += 'TLPR	    Tank Level Probing Radar<br/>';
+        value += 'TRA-ECS	Terrestrial radio applications capable of providing electronic communications services<br/>';
+        value += 'TTT	    Transport and Traffic Telematics<br/>';
+        value += 'TV	    Television<br/>';
+        value += 'UAS	    Unmanned Aircraft System<br/>';
+        value += 'ULP-AMI	Ultra Low Power Active Medical Implants<br/>';
+        value += 'ULP-AID	Ultra Low Power Animal Implants Devices<br/>';
+        value += 'ULP-MMI	Ultra Low Power Medical Membrane Implants<br/>';
+        value += 'ULP-WMCE	Ultra-Low Power Wireless Medical Capsule Endoscopy<br/>';
+        value += 'VLBI	    Very Long Baseline Interferometry<br/>';
+        value += 'VOR	    VHF Omnidirectional Radio Range<br/>';
+        value += 'VSAT	    Very Small Aperture Terminal<br/>';
+        value += 'UWB	    Ultra Wideband<br/>';
+        value += 'WAIC	    Wireless Avionics Intra-Communications systems<br/>';
+        value += 'WIA	    Wireless Industrial Applications<br/>';
+        value += 'WPR	    Wall Probing Radar<br/>';
+        value += 'WPT	    Wireless Power Transmission<br/>';
+        //$('#btnfoot').trigger('click');
+        showModal("Application abbreviations", "<p>" + value + "</p>");
+
+    }
+
+    function NotesClick(env) {
+        showModal("Notes", "<p>" + env + "</p>");
+    }
+
+    //function DocStandClick(docNumber, env, docLink) {
+    //    showModal("Documents and standards", "<p><a href=\"" + docLink + "\">" + docNumber+" " + env + "</a></p>");
+    //}
+
+    function DocStandClick(docNumber, env, docLink) {
+        //alert(docNumber);
+
+        $('#docsHidden').append('<p><a href=\"' + docLink + '\">' + docNumber + ' ' + env + '</a></p>');
+        //element.append("<p><a href=\"" + docLink + "\">" + docNumber + " " + env + "</a></p >");
+
+    }
+
+    function ShowAllValues(element,standard, isThereDocs, isThereStand) {
+        //alert('value:' + isThereDocs + ',stand:' + isThereStand);
+
+        //alert('im here:');
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchDocsAndStandards")",
+
+                            data: {
+                                    docId: element,
+                                    StandId: standard ,
+                                    isThereDocs: isThereDocs,
+                                    isThereStands: isThereStand
+                            },
+
+                            success: function (response) {
+                                var DocText = "";
+
+                                if (Object.keys(response).length > 0) {
+
+                                    $.each(response, function (i, generalTemp) {
+
+                                        DocText += '<p><a href=\"' + generalTemp.Link + '\">' + generalTemp.CombineTitle + '</a></p>';
+
+                                    });
+                                    showModal("Documents and standards", DocText);
+
+                                }
+
+                            }
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (xhr, textStatus, exceptionThrown) {
+                                /*alert("greska");*/
+                                var errorData = $.parseJSON(xhr.responseText);
+                                var errorMessages = [];
+                                //this ugly loop is because List<> is serialized to an object instead of an array
+                                for (var key in errorData) {
+                                    errorMessages.push(errorData[key]);
+                                }
+                                $('#error_input').html(errorMessages.join("<br />"));
+                            }
+                        });
+
+    }
+
+    function ShowAllValuesInf(element,standard, isThereDocs, isThereStand) {
+        //alert('value:' + isThereDocs + ',stand:' + isThereStand);
+
+        //alert('im here:');
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchDocsAndStandardsInformative")",
+
+                            data: {
+                                    docId: element,
+                                    StandId: standard ,
+                                    isThereDocs: isThereDocs,
+                                    isThereStands: isThereStand
+                            },
+
+                            success: function (response) {
+                                var DocText = "";
+
+                                if (Object.keys(response).length > 0) {
+
+                                    $.each(response, function (i, generalTemp) {
+
+                                        DocText += '<p><a href=\"' + generalTemp.Link + '\">' + generalTemp.CombineTitle + '</a></p>';
+
+                                    });
+                                    showModal("Documents and standards", DocText);
+
+                                }
+
+                            }
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (xhr, textStatus, exceptionThrown) {
+                                /*alert("greska");*/
+                                var errorData = $.parseJSON(xhr.responseText);
+                                var errorMessages = [];
+                                //this ugly loop is because List<> is serialized to an object instead of an array
+                                for (var key in errorData) {
+                                    errorMessages.push(errorData[key]);
+                                }
+                                $('#error_input').html(errorMessages.join("<br />"));
+                            }
+                        });
+
+    }
+
+
+    function showModal(titleHtml, contentHtml) {
+        const modal = document.createElement("div");
+        //const modal = document.getElementById("tempModal");
+
+        modal.classList.add("modal_u_app");
+        modal.innerHTML = `
+        <div class="modal__inner">
+            <div class="modal__top">
+                <div class="modal__title">${titleHtml}</div>
+                <button class="modal__close" type="button">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal__content">${contentHtml}</div>
+            <div class="modal__bottom"></div>
+        </div>`;
+
+
+
+        modal.querySelector(".modal__close").addEventListener("click", () => {
+            document.body.removeChild(modal);
+        });
+
+        document.body.appendChild(modal);
+
+
+    }
+
+
+
+    function SearchNow() {
+        var div = document.getElementById("print_div");
+        div.style.display = "block";
+        var SearchByValues = false;
+        if ($('#application_first_value').val() != '1') {
+            SearchByValues = true;
+            //alert("Works");
+            if (SearchByValues == true) {
+                var number1 = parseInt($('#from').val());
+                var number2 = parseInt($('#to').val());
+                if (number1 > number2) {
+                    $('#error_input').html('Error! In From field, it is bigger than To field');
+                } else {
+
+                    if ($("#frequency_table option:selected").text() != '') {
+
+                        $('#error_input').html('');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchOnFirstLevel")",
+
+                            data: {
+                                FromVal: $('#from').val(),
+                                ToVal: $('#to').val(),
+                                FrequencySizeVal: $('#frequencySize').val(),
+                                FrequencyTableVal: $("#frequency_table option:selected").text(),
+                                ApplicatonVal: $('#application_first_value').val()
+
+                            },
+                            success: function (response) {
+
+                                if (Object.keys(response).length == 0) {
+                                    //alert('poruka' + Object.keys(response).length);
+                                    //$('#rData').load('Index.cshtml');
+                                    $('#rData').empty();
+                                    var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                    itemsO += "</table>";
+
+                                    $('#rData').append(itemsO).hide().fadeIn(2000);
+                                }
+                                if (Object.keys(response).length > 0) {
+                                    $('#rData').empty();
+
+
+                                    //var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region name</th><th>Region code</th></tr>";
+                                    //var pp = false;
+                                    //var DocText = "";
+                                    //$.each(response, function (i, generalTemp) {
+
+                                    //    items += "<tr><td>" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                                    //    //items += generalTemp.Application;
+                                    //    $.each(generalTemp.AppItemsList, function (i, member) {
+                                    //        items += member.Application;
+                                    //        //alert("tt:" + member.Doc_number);
+
+                                    //        DocText = "";
+                                    //        pp = false;
+                                    //        $.each(member.Documents, function (iv, tempDoc) {
+
+                                    //            if (Object.keys(tempDoc).length > 0) {
+
+                                    //                if (tempDoc.Doc_number != "") {
+                                    //                    pp = true;
+                                    //                    DocText += '<p><a href=' + tempDoc.Hyperlink + '>' + tempDoc.Doc_number + ' ' + tempDoc.Title_of_doc + '</a></p>';
+                                    //                }
+
+                                    //            }
+
+
+
+                                    //        });
+
+                                    //        $.each(member.Standards, function (iv, tempDoc) {
+                                    //            if (Object.keys(tempDoc).length > 0) {
+
+                                    //                if (tempDoc.StandardId > 0) {
+                                    //                    pp = true;
+
+                                    //                    DocText += '<p><a href=' + tempDoc.HyperlinkS + '>' + tempDoc.Etsi_standard + ' ' + tempDoc.Title_docS + '</a></p>';
+
+                                    //                }
+                                    //            }
+
+                                    //        });
+
+                                    //        if (pp == true) {
+
+                                    //            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + DocText + "'); return false;\">Regulatory docs</button>";
+                                    //            $('#docsHidden').text("");
+                                    //            p = false;
+                                    //        }
+                                    //        //if (member.Doc_number != null) {
+                                    //        //    items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onClick=\"DocStandClick('" + member.Doc_number + "','" + member.Title_of_doc + "','" + member.Hyperlink + "'); return false;\">Regulatory docs</button>";
+                                    //        //}
+                                    //        if (member.Comment != "") {
+                                    //            items += "&nbsp&nbsp<button style=\"width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onClick=\"NotesClick('" + member.Comment + "'); return false;\">notes</button>";
+                                    //        }
+                                    //        items += "<br/>";
+
+                                    //    });
+                                    //    items += "<br/>";
+
+
+                                    //    items +=
+                                    //        "</td>" +
+
+                                    //        "<td>" + generalTemp.regionName + "</td><td>" + generalTemp.regionCode + "</td></tr>";
+
+                                    //});
+                                    //items += "</table>";
+
+                                    //$('#rData').append(items).hide().fadeIn(2000);
+                                        var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                        var isThereDocs = false;
+                                        var isThereStands = false;
+                                        var Docs = "";
+                                        var Stand = "";
+                                        var isThereDocsInf = false;
+                                        var isThereStandsInf = false;
+                                        var DocsInf = "";
+                                        var StandInf = "";
+                                        var incResponse = 0;
+                                        $.each(response, function (i, generalTemp) {
+
+
+
+                                            items += "<tr><td>" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                                            if (incResponse == 0) {
+                                                incResponse++;
+
+                                                if (generalTemp.isAllValues) {
+
+                                                    setTimeout(function () {
+                                                        //alert();
+                                                        $('#frequencySize').val(generalTemp.sizeFrequency).change();
+                                                        $('#from').val(generalTemp.lowJson);
+                                                        $('#to').val(generalTemp.highJson);
+
+                                                    }, 200);
+
+                                                }
+
+                                            } else if (incResponse > 0) {
+
+                                            }
+                                            $.each(generalTemp.Application, function (i, member) {
+                                                if (!member.isDeletedApp) {
+                                                items += "<p>" + member.Application;
+                                                isThereDocs = false;
+                                                isThereStands = false;
+                                                Docs = "";
+                                                Stand = "";
+                                                isThereDocsInf = false;
+                                                isThereStandsInf = false;
+                                                DocsInf = "";
+                                                StandInf = "";
+                                                if (Object.keys(member.DocumentsAditional).length > 0) {
+
+                                                    for (var tt = 0; tt < member.DocumentsAditional.length; tt++) {
+                                                        if (tt == Object.keys(member.DocumentsAditional).length - 1) {
+                                                            if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                                Docs += member.DocumentsAditional[tt].DocumentId;
+                                                                isThereDocs = true;
+                                                            } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                                DocsInf += member.DocumentsAditional[tt].DocumentId;
+                                                                isThereDocsInf = true;
+                                                            }
+                                                        }
+                                                        else {
+                                                            if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                                Docs += member.DocumentsAditional[tt].DocumentId + ",";
+                                                                isThereDocs = true;
+                                                            } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                                DocsInf += member.DocumentsAditional[tt].DocumentId + ",";
+                                                                isThereDocsInf = true;
+                                                            }
+
+                                                        }
+                                                    }
+                                                } else {
+                                                    isThereDocs = false;
+                                                    isThereDocsInf = false;
+                                                }
+                                                if (Object.keys(member.StandardsAditional).length > 0) {
+
+                                                    for (var tt = 0; tt < member.StandardsAditional.length; tt++) {
+                                                        if (tt == Object.keys(member.StandardsAditional).length - 1) {
+                                                            if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                                Stand += member.StandardsAditional[tt].StandardId;
+                                                                isThereStands = true;
+                                                            } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                                StandInf += member.StandardsAditional[tt].StandardId;
+                                                                isThereStandsInf = true;
+                                                            }
+
+                                                        }
+                                                        else {
+                                                            if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                                Stand += member.StandardsAditional[tt].StandardId + ",";
+                                                                isThereStands = true;
+                                                            } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                                StandInf += member.StandardsAditional[tt].StandardId + ",";
+                                                                isThereStandsInf = true;
+                                                            }
+
+                                                        }
+                                                    }
+                                                } else {
+                                                    isThereStands = false;
+                                                    isThereStandsInf = false;
+                                                }
+                                                if (isThereDocs && !isThereStands) {
+                                                    items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+
+                                                }
+                                                else if (!isThereDocs && isThereStands) {
+                                                    items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                                }
+                                                else if (isThereDocs && isThereStands) {
+                                                    items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                                }
+
+                                                if (member.Comment != "") {
+                                                    items += "&nbsp&nbsp<button style=\"width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onClick=\"NotesClick('" + member.Comment + "'); return false;\">Notes</button>";
+                                                }
+                                                if (isThereDocsInf && !isThereStandsInf) {
+                                                    items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+
+                                                }
+                                                else if (!isThereDocsInf && isThereStandsInf) {
+                                                    items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                                }
+                                                else if (isThereDocsInf && isThereStandsInf) {
+                                                    items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                                }
+                                                Docs = "";
+                                                Stand = "";
+                                                DocsInf = "";
+                                                StandInf = "";
+                                                isThereDocsInf = false;
+                                                isThereStandsInf = false;
+                                                isThereDocs = false;
+                                                isThereStands = false;
+                                            }
+                                            });
+                                            items += "</p><br/>";
+
+
+                                            items += "</td>" + "<td>" + generalTemp.regionCode + "</td></tr>";
+                                        });
+
+                                        items += "</table>";
+
+                                        $('#rData').append(items).hide().fadeIn(2000);
+                                }
+
+                            }
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (xhr, textStatus, exceptionThrown) {
+                                /*alert("greska");*/
+                                var errorData = $.parseJSON(xhr.responseText);
+                                var errorMessages = [];
+                                //this ugly loop is because List<> is serialized to an object instead of an array
+                                for (var key in errorData) {
+                                    errorMessages.push(errorData[key]);
+                                }
+                                $('#error_input').html(errorMessages.join("<br />"));
+                            }
+                        });
+                    } else {
+                        $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                    }
+                }
+            }
+        }
+        if ($('#application_two_value').val() != '1') {
+
+            SearchByValues = true;
+            if (SearchByValues == true) {
+                //alert("execute condition");
+                var number1 = parseInt($('#from').val());
+                var number2 = parseInt($('#to').val());
+                if (number1 > number2) {
+                    $('#error_input').html('Error! In From field, it is bigger than To field');
+                } else {
+                    if ($("#frequency_table option:selected").text() != '') {
+                        //alert("Works" + $('#from').val() + "==" + $('#to').val() + "..." + $('#frequencySize').val() + "___" + $("#frequency_table option:selected").text() + ":::" + $('#application_two_value').val());
+                        $('#error_input').html('');
+                         $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("SearchOnSecondLevel")",
+
+                        data: {
+                            FromVal: $('#from').val(),
+                            ToVal: $('#to').val(),
+                            FrequencySizeVal: $('#frequencySize').val(),
+                            FrequencyTableVal: $("#frequency_table option:selected").text(),
+                            ApplicatonVal: $('#application_two_value').val()
+
+                        },
+                        success: function (response) {
+
+                            if (Object.keys(response).length == 0) {
+                                //alert('poruka' + Object.keys(response).length);
+                                //$('#rData').load('Index.cshtml');
+                                $('#rData').empty();
+                                var itemsO = "<table id='SearchAppTableId' class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                itemsO += "</table>";
+
+                                $('#rData').append(itemsO).hide().fadeIn(2000);
+                            }
+                            if (Object.keys(response).length > 0) {
+                                $('#rData').empty();
+
+                                var items = "<table  id='SearchAppTableId' class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                var isThereDocs = false;
+                                var isThereStands = false;
+                                var Docs = "";
+                                var Stand = "";
+                                var isThereDocsInf = false;
+                                var isThereStandsInf = false;
+                                var DocsInf = "";
+                                var StandInf = "";
+                                var noApps = false;
+                                var incResponse = 0;
+                                $.each(response, function (i, generalTemp) {
+                                    items += "<tr><td>" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                                    if (incResponse == 0) {
+                                        incResponse++;
+
+                                        if (generalTemp.isAllValues) {
+
+                                            setTimeout(function () {
+                                                //alert();
+                                                $('#frequencySize').val(generalTemp.sizeFrequency).change();
+                                                $('#from').val(generalTemp.lowJson);
+                                                $('#to').val(generalTemp.highJson);
+
+                                            }, 200);
+
+                                        }
+
+                                    } else if (incResponse > 0) {
+
+                                    }
+                                    noApps = false;
+                                    $.each(generalTemp.Application, function (i, member) {
+                                        if (!member.isDeletedApp) {
+                                        items += "<p>" + member.Application;
+                                        isThereDocs = false;
+                                        isThereStands = false;
+                                        Docs = "";
+                                        Stand = "";
+                                        isThereDocsInf = false;
+                                        isThereStandsInf = false;
+                                        DocsInf = "";
+                                        StandInf = "";
+                                        if (Object.keys(member.DocumentsAditional).length > 0) {
+
+                                            for (var tt = 0; tt < member.DocumentsAditional.length; tt++) {
+                                                if (tt == Object.keys(member.DocumentsAditional).length - 1) {
+                                                    if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                        Docs += member.DocumentsAditional[tt].DocumentId;
+                                                        isThereDocs = true;
+                                                    } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                        DocsInf += member.DocumentsAditional[tt].DocumentId;
+                                                        isThereDocsInf = true;
+                                                    }
+                                                }
+                                                else {
+                                                    if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                        Docs += member.DocumentsAditional[tt].DocumentId + ",";
+                                                        isThereDocs = true;
+                                                    } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                        DocsInf += member.DocumentsAditional[tt].DocumentId + ",";
+                                                        isThereDocsInf = true;
+                                                    }
+
+                                                }
+                                            }
+                                        } else {
+                                            isThereDocs = false;
+                                            isThereDocsInf = false;
+                                        }
+                                        if (Object.keys(member.StandardsAditional).length > 0) {
+
+                                            for (var tt = 0; tt < member.StandardsAditional.length; tt++) {
+                                                if (tt == Object.keys(member.StandardsAditional).length - 1) {
+                                                    if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                        Stand += member.StandardsAditional[tt].StandardId;
+                                                        isThereStands = true;
+                                                    } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                        StandInf += member.StandardsAditional[tt].StandardId;
+                                                        isThereStandsInf = true;
+                                                    }
+
+                                                }
+                                                else {
+                                                    if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                        Stand += member.StandardsAditional[tt].StandardId + ",";
+                                                        isThereStands = true;
+                                                    } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                        StandInf += member.StandardsAditional[tt].StandardId + ",";
+                                                        isThereStandsInf = true;
+                                                    }
+
+                                                }
+                                            }
+                                        } else {
+                                            isThereStands = false;
+                                            isThereStandsInf = false;
+                                        }
+                                        if (isThereDocs && !isThereStands) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+
+                                        }
+                                        else if (!isThereDocs && isThereStands) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                        }
+                                        else if (isThereDocs && isThereStands) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                        }
+
+                                        if (member.Comment != "") {
+                                            items += "&nbsp&nbsp<button style=\"width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onClick=\"NotesClick('" + member.Comment + "'); return false;\">Notes</button>";
+                                        }
+
+                                        if (isThereDocsInf && !isThereStandsInf) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+
+                                        }
+                                        else if (!isThereDocsInf && isThereStandsInf) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                        }
+                                        else if (isThereDocsInf && isThereStandsInf) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                        }
+                                        Docs = "";
+                                        Stand = "";
+                                        DocsInf = "";
+                                        StandInf = "";
+                                        isThereDocsInf = false;
+                                        isThereStandsInf = false;
+                                        isThereDocs = false;
+                                        isThereStands = false;
+                                    }
+                                    });
+                                    
+                                       items += "</p><br/>";
+
+                                       items += "</td>" + "<td>" + generalTemp.regionCode + "</td></tr>";
+                                   
+
+                                });
+
+                                items += "</table>";
+
+                                $('#rData').append(items).hide().fadeIn(2000);
+                            }
+
+                        }
+                        ,
+                        failure: function (response) {
+                            alert("faliure");
+                        },
+                        error: function (xhr, textStatus, exceptionThrown) {
+                            //alert("error calls");
+                            var errorData = $.parseJSON(xhr.responseText);
+                            var errorMessages = [];
+                            //this ugly loop is because List<> is serialized to an object instead of an array
+                            for (var key in errorData) {
+                                errorMessages.push(errorData[key]);
+                            }
+                            $('#error_input').html(errorMessages.join("<br />"));
+                        }
+                    });
+                    } else {
+                        $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                    }
+                }
+            }
+        }
+        if ($('#application_third_value').val() != '1') {
+            SearchByValues = true;
+            //alert("Works");
+            if (SearchByValues == true) {
+                var number1 = parseInt($('#from').val());
+                var number2 = parseInt($('#to').val());
+                if (number1 > number2) {
+                    $('#error_input').html('Error! In From field, it is bigger than To field');
+                } else {
+
+                    if ($("#frequency_table option:selected").text() != '') {
+
+                        $('#error_input').html('');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("SearchOnThirdLevel")",
+
+                            data: {
+                                FromVal: $('#from').val(),
+                                ToVal: $('#to').val(),
+                                FrequencySizeVal: $('#frequencySize').val(),
+                                FrequencyTableVal: $("#frequency_table option:selected").text(),
+                                ApplicatonVal: $('#application_third_value').val()
+
+                            },
+                            success: function (response) {
+
+                                if (Object.keys(response).length == 0) {
+                                    //alert('poruka' + Object.keys(response).length);
+                                    //$('#rData').load('Index.cshtml');
+                                    $('#rData').empty();
+                                    var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                    itemsO += "</table>";
+
+                                    $('#rData').append(itemsO).hide().fadeIn(2000);
+                                }
+                                if (Object.keys(response).length > 0) {
+                                    $('#rData').empty();
+
+
+                                    var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                    var isThereDocs = false;
+                                    var isThereStands = false;
+                                    var Docs = "";
+                                    var Stand = "";
+                                    var isThereDocsInf = false;
+                                    var isThereStandsInf = false;
+                                    var DocsInf = "";
+                                    var StandInf = "";
+                                    var incResponse = 0;
+                                    $.each(response, function (i, generalTemp) {
+                                        items += "<tr><td>" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td> ";
+                                        if (incResponse == 0) {
+                                            incResponse++;
+
+                                            if (generalTemp.isAllValues) {
+
+                                                setTimeout(function () {
+                                                    //alert();
+                                                    $('#frequencySize').val(generalTemp.sizeFrequency).change();
+                                                    $('#from').val(generalTemp.lowJson);
+                                                    $('#to').val(generalTemp.highJson);
+
+                                                }, 200);
+
+                                            }
+
+                                        } else if (incResponse > 0) {
+
+                                        }
+                                        $.each(generalTemp.Application, function (i, member) {
+                                            if (!member.isDeletedApp) {
+                                            items += "<p>" + member.Application;
+                                            isThereDocs = false;
+                                            isThereStands = false;
+                                            Docs = "";
+                                            Stand = "";
+                                            isThereDocsInf = false;
+                                            isThereStandsInf = false;
+                                            DocsInf = "";
+                                            StandInf = "";
+                                            if (Object.keys(member.DocumentsAditional).length > 0) {
+
+                                                for (var tt = 0; tt < member.DocumentsAditional.length; tt++) {
+                                                    if (tt == Object.keys(member.DocumentsAditional).length - 1) {
+                                                        if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                            Docs += member.DocumentsAditional[tt].DocumentId;
+                                                            isThereDocs = true;
+                                                        } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                            DocsInf += member.DocumentsAditional[tt].DocumentId;
+                                                            isThereDocsInf = true;
+                                                        }
+                                                    }
+                                                    else {
+                                                        if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                            Docs += member.DocumentsAditional[tt].DocumentId + ",";
+                                                            isThereDocs = true;
+                                                        } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                            DocsInf += member.DocumentsAditional[tt].DocumentId + ",";
+                                                            isThereDocsInf = true;
+                                                        }
+
+                                                    }
+                                                }
+                                            } else {
+                                                isThereDocs = false;
+                                                isThereDocsInf = false;
+                                            }
+                                            if (Object.keys(member.StandardsAditional).length > 0) {
+
+                                                for (var tt = 0; tt < member.StandardsAditional.length; tt++) {
+                                                    if (tt == Object.keys(member.StandardsAditional).length - 1) {
+                                                        if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                            Stand += member.StandardsAditional[tt].StandardId;
+                                                            isThereStands = true;
+                                                        } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                            StandInf += member.StandardsAditional[tt].StandardId;
+                                                            isThereStandsInf = true;
+                                                        }
+
+                                                    }
+                                                    else {
+                                                        if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                            Stand += member.StandardsAditional[tt].StandardId + ",";
+                                                            isThereStands = true;
+                                                        } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                            StandInf += member.StandardsAditional[tt].StandardId + ",";
+                                                            isThereStandsInf = true;
+                                                        }
+
+                                                    }
+                                                }
+                                            } else {
+                                                isThereStands = false;
+                                                isThereStandsInf = false;
+                                            }
+                                            if (isThereDocs && !isThereStands) {
+                                                items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+
+                                            }
+                                            else if (!isThereDocs && isThereStands) {
+                                                items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                            }
+                                            else if (isThereDocs && isThereStands) {
+                                                items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                            }
+
+                                            if (member.Comment != "") {
+                                                items += "&nbsp&nbsp<button style=\"width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onClick=\"NotesClick('" + member.Comment + "'); return false;\">Notes</button>";
+                                            }
+                                            if (isThereDocsInf && !isThereStandsInf) {
+                                                items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+
+                                            }
+                                            else if (!isThereDocsInf && isThereStandsInf) {
+                                                items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                            }
+                                            else if (isThereDocsInf && isThereStandsInf) {
+                                                items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                            }
+                                            //
+
+
+                                            Docs = "";
+                                            Stand = "";
+                                            DocsInf = "";
+                                            StandInf = "";
+                                            isThereDocsInf = false;
+                                            isThereStandsInf = false;
+                                            isThereDocs = false;
+                                            isThereStands = false;
+                                        }
+                                        });
+                                        items += "</p><br/>";
+
+
+                                        items += "</td>" + "<td>" + generalTemp.regionCode + "</td></tr>";
+                                    });
+
+                                    items += "</table>";
+
+                                    $('#rData').append(items).hide().fadeIn(2000);
+                                }
+
+                            }
+                            ,
+                            failure: function (response) {
+                                alert("faliure");
+                            },
+                            error: function (xhr, textStatus, exceptionThrown) {
+                                /*alert("greska");*/
+                                var errorData = $.parseJSON(xhr.responseText);
+                                var errorMessages = [];
+                                //this ugly loop is because List<> is serialized to an object instead of an array
+                                for (var key in errorData) {
+                                    errorMessages.push(errorData[key]);
+                                }
+                                $('#error_input').html(errorMessages.join("<br />"));
+                            }
+                        });
+                    } else {
+                        $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                    }
+                }
+            }
+        }
+        if (SearchByValues == false) {
+           // alert("Work vvvv" + $("#frequency_table option:selected").text());
+            var number1 = parseInt($('#from').val());
+            var number2 = parseInt($('#to').val());
+            if (number1 > number2) {
+                $('#error_input').html('Error! In From field, it is bigger than To field');
+            } else {
+                if ($("#frequency_table option:selected").text() != '') {
+                    $('#error_input').html('');
+                    //alert("Work vvvv");
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("GeneralSearch")",
+
+                        data: {
+                            FromVal: $('#from').val(),
+                            ToVal: $('#to').val(),
+                            FrequencySizeVal: $('#frequencySize').val(),
+                            FrequencyTableVal: $("#frequency_table option:selected").text()
+
+                        },
+                        success: function (response) {
+
+                            if (Object.keys(response).length == 0) {
+                                alert('poruka' + Object.keys(response).length);
+                                //$('#rData').load('Index.cshtml');
+                                $('#rData').empty();
+                                var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                itemsO += "</table>";
+
+                                $('#rData').append(itemsO).hide().fadeIn(2000);
+                            }
+                            if (Object.keys(response).length > 0) {
+                                $('#rData').empty();
+
+                                //alert("Work vvvv");  --
+                                var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Application</th><th>Region code</th></tr>";
+                                var isThereDocs = false;
+                                var isThereStands = false;
+                                var Docs = "";
+                                var Stand = "";
+                                var isThereDocsInf = false;
+                                var isThereStandsInf = false;
+                                var DocsInf = "";
+                                var StandInf = "";
+                                var incResponse = 0;
+                                $.each(response, function (i, generalTemp) {
+                                    if (incResponse == 0) {
+                                        incResponse++;
+
+                                        if (generalTemp.isAllValues) {
+
+                                            setTimeout(function () {
+                                                //alert();
+                                                $('#frequencySize').val(generalTemp.sizeFrequency).change();
+                                                $('#from').val(generalTemp.lowJson);
+                                                $('#to').val(generalTemp.highJson);
+
+                                            }, 200);
+
+                                        }
+
+                                    } else if (incResponse > 0) {
+
+                                    }
+                                        items += "<tr><td>" + generalTemp.LowView + "-" + generalTemp.HighView + "</td><td>";
+
+                                    $.each(generalTemp.Application, function (i, member) {
+                                        if (!member.isDeletedApp) {
+                                        items += "<p>" + member.Application;
+                                        isThereDocs = false;
+                                        isThereStands = false;
+                                        Docs = "";
+                                        Stand = "";
+                                        isThereDocsInf = false;
+                                        isThereStandsInf = false;
+                                        DocsInf = "";
+                                        StandInf = "";
+                                        if (Object.keys(member.DocumentsAditional).length > 0) {
+
+                                            for (var tt = 0; tt < member.DocumentsAditional.length; tt++) {
+                                                if (tt == Object.keys(member.DocumentsAditional).length - 1) {
+                                                    if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                        Docs += member.DocumentsAditional[tt].DocumentId;
+                                                        isThereDocs = true;
+                                                    } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                        DocsInf += member.DocumentsAditional[tt].DocumentId;
+                                                        isThereDocsInf = true;
+                                                    }
+                                                }
+                                                else {
+                                                    if (member.DocumentsAditional[tt].isRegulatory == true) {
+                                                        Docs += member.DocumentsAditional[tt].DocumentId + ",";
+                                                        isThereDocs = true;
+                                                    } else if (member.DocumentsAditional[tt].isRegulatory == false) {
+                                                        DocsInf += member.DocumentsAditional[tt].DocumentId + ",";
+                                                        isThereDocsInf = true;
+                                                    }
+
+                                                }
+                                            }
+                                        } else {
+                                            isThereDocs = false;
+                                            isThereDocsInf = false;
+                                        }
+                                        if (Object.keys(member.StandardsAditional).length > 0) {
+
+                                            for (var tt = 0; tt < member.StandardsAditional.length; tt++) {
+                                                if (tt == Object.keys(member.StandardsAditional).length - 1) {
+                                                    if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                        Stand += member.StandardsAditional[tt].StandardId;
+                                                        isThereStands = true;
+                                                    } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                        StandInf += member.StandardsAditional[tt].StandardId;
+                                                        isThereStandsInf = true;
+                                                    }
+
+                                                }
+                                                else {
+                                                    if (member.StandardsAditional[tt].isRegulatory == true) {
+                                                        Stand += member.StandardsAditional[tt].StandardId + ",";
+                                                        isThereStands = true;
+                                                    } else if (member.StandardsAditional[tt].isRegulatory == false) {
+                                                        StandInf += member.StandardsAditional[tt].StandardId + ",";
+                                                        isThereStandsInf = true;
+                                                    }
+
+                                                }
+                                            }
+                                        } else {
+                                            isThereStands = false;
+                                            isThereStandsInf = false;
+                                        }
+                                        if (isThereDocs && !isThereStands) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+
+                                        }
+                                        else if (!isThereDocs && isThereStands) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                        }
+                                        else if (isThereDocs && isThereStands) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValues('" + Docs + "','" + Stand + "','" + isThereDocs + "','" + isThereStands + "'); return false; \">Regulatory docs</button>";
+                                        }
+
+                                        if (member.Comment != "") {
+                                            items += "&nbsp&nbsp<button style=\"width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onClick=\"NotesClick('" + member.Comment + "'); return false;\">Notes</button>";
+                                        }
+                                        if (isThereDocsInf && !isThereStandsInf) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+
+                                        }
+                                        else if (!isThereDocsInf && isThereStandsInf) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                        }
+                                        else if (isThereDocsInf && isThereStandsInf) {
+                                            items += "&nbsp&nbsp<button style=\"width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;\" onclick=\"ShowAllValuesInf('" + DocsInf + "','" + StandInf + "','" + isThereDocsInf + "','" + isThereStandsInf + "'); return false; \">Informative docs</button>";
+                                        }
+                                        //
+
+
+                                        Docs = "";
+                                        Stand = "";
+                                        DocsInf = "";
+                                        StandInf = "";
+                                        isThereDocsInf = false;
+                                        isThereStandsInf = false;
+                                        isThereDocs = false;
+                                        isThereStands = false;
+                                    }
+                                                });
+                                                items += "</p><br/>";
+
+
+                                                items +="</td>" +"<td>" + generalTemp.regionCode + "</td></tr>";
+                                            });
+
+                                            items += "</table>";
+
+                                            $('#rData').append(items).hide().fadeIn(2000);
+
+                            }
+                        }
+                        ,
+                        failure: function (response) {
+                            alert("faliure");
+                        },
+                        error: function (xhr, textStatus, exceptionThrown) {
+                            /*alert("greska");*/
+                            var errorData = $.parseJSON(xhr.responseText);
+                            var errorMessages = [];
+                            //this ugly loop is because List<> is serialized to an object instead of an array
+                            for (var key in errorData) {
+                                errorMessages.push(errorData[key]);
+                            }
+                            $('#error_input').html(errorMessages.join("<br />"));
+                        }
+                    });
+                } else {
+                    $('#error_input').html('Error! You didn\'t select any value from field frequency table');
+                }
+            }
+        }
+    }
+    function InputAction(e) {
+        //alert("You pressed a key inside the input field");
+        var evt = (e) ? e : window.event;
+        var charCode = (evt.keyCode) ? evt.keyCode : evt.which;
+        if (charCode == 144 || charCode == 12 || charCode == 8) {
+            return true;
+        }
+        if ((charCode >= 96 && charCode <= 105) || (charCode >= 48 && charCode <= 57)) {
+            return true;
+        } else {
+            return false;
+            //alert("You pressed a key inside the input field");
+        }
+    }
+    function FirstChange() {
+        //alert("Works");
+        if ($('#application_first_value').val() != '1') {
+            $('#application_two_value').val('1').change();
+            $('#application_third_value').val('1').change();
+            $('#allocation_fourth_value').val('1').change();
+        }
+    }
+
+    function SecondChange() {
+        //alert("Works");
+        if ($('#application_two_value').val() != '1') {
+            $('#application_first_value').val('1').change();
+            $('#application_third_value').val('1').change();
+            $('#allocation_fourth_value').val('1').change();
+        }
+    }
+
+    function ThirdChange() {
+        //alert("Works");
+        if ($('#application_third_value').val() != '1') {
+            $('#application_first_value').val('1').change();
+            $('#application_two_value').val('1').change();
+            $('#allocation_fourth_value').val('1').change();
+        }
+    }
+    var modal = document.getElementById("myModal");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    function dialogue_box() {
+        modal.style.display = "block";
+    }
+
+    $(function(){
+        $('#download_pdf').click(function () {
+
+            var selected = $("#frequency_table :selected").map((_, e) => e.value).get();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DownloadPDF", "AllocationSearch")",
+                data: {
+                    AllVal1: $('#allocation_first_value').val(),
+                    AllVal2: $('#allocation_two_value').val(),
+                    AllVal3: $('#allocation_third_value').val(),
+                    AllVal4: $("#allocation_fourth_value option:selected").text(),
+                    FromVal: $('#from').val(),
+                    ToVal: $('#to').val(),
+                    FrequencySizeVal: $('#frequencySize').val(),
+                    FreqTable: $("#frequency_table option:selected").text(),
+                    FreqTableVal: selected
+                },
+                responseType: 'arraybuffer',
+                success: function (response) {
+
+                    var binaryString = atob(response);
+
+                    // Convert the binary string to an ArrayBuffer
+                    var arrayBuffer = new ArrayBuffer(binaryString.length);
+                    var uint8Array = new Uint8Array(arrayBuffer);
+                    for (var i = 0; i < binaryString.length; i++) {
+                        uint8Array[i] = binaryString.charCodeAt(i);
+                    }
+
+                    // Create a Blob from the ArrayBuffer
+                    var blob = new Blob([arrayBuffer], { type: 'pdf' });
+
+                    // Create a temporary link element
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+
+                    // Set the file name for the downloaded Excel file
+                    link.download = 'freq_band.pdf';
+
+                    // Programmatically trigger the download
+                    link.click();
+
+
+                },
+                failure: function (response) {
+                    alert("Failure: An error occurred while making the AJAX request.");
+                },
+                error: function (response) {
+                    alert("Error: An error occurred while making the AJAX request.");
+                }
+            });
+        });
+
+        $('#download_excel').click(function () {
+            var selected = $("#frequency_table :selected").map((_, e) => e.value).get();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DownloadExcel", "AllocationSearch")",
+                data: {
+                    AllVal1: $('#allocation_first_value').val(),
+                    AllVal2: $('#allocation_two_value').val(),
+                    AllVal3: $('#allocation_third_value').val(),
+                    AllVal4: $("#allocation_fourth_value option:selected").text(),
+                    FromVal: $('#from').val(),
+                    ToVal: $('#to').val(),
+                    FrequencySizeVal: $('#frequencySize').val(),
+                    FreqTable: $("#frequency_table option:selected").text(),
+                    FreqTableVal: selected
+                },
+                responseType: 'arraybuffer',
+                success: function (response) {
+                    // Create a Blob from the response data
+                    var binaryString = atob(response);
+
+                    // Convert the binary string to an ArrayBuffer
+                    var arrayBuffer = new ArrayBuffer(binaryString.length);
+                    var uint8Array = new Uint8Array(arrayBuffer);
+                    for (var i = 0; i < binaryString.length; i++) {
+                        uint8Array[i] = binaryString.charCodeAt(i);
+                    }
+
+                    // Create a Blob from the ArrayBuffer
+                    var blob = new Blob([arrayBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+                    // Create a temporary link element
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+
+                    // Set the file name for the downloaded Excel file
+                    link.download = 'freq_band.xlsx';
+
+                    // Programmatically trigger the download
+                    link.click();
+                },
+                failure: function (response) {
+                    alert("Failure: An error occurred while making the AJAX request.");
+                },
+                error: function (response) {
+                    alert("Error: An error occurred while making the AJAX request.");
+                }
+            });
+        });
+    });
+
+</script>
+<body id="content_container_body">
+    <div class="centerpanel">
+        <div class="left>Application</div>
+    </div>
+    <div class="right">
+        <img src="~/images/Palestina.png" width="80px" height="50px" />
+    </div>
+    </div>
+
+    <br />
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        <br />
+        <div class="form-group center_top_menu" style="width: 90%; height:100%">
+            <label id="search_by" style="width:150px; font-weight: bold; font-family: Roboto; font-size: 13px; height: 35px" asp-for="@applicationService.Frequency"></label>
+            <p> &nbsp &nbsp</p>
+            <input id="from" aria-label="From" class="form-control text-box single-line"
+                   data-val-maxlength-max="30" asp-for="@applicationService.From" value="@TempData["fromTempValue"]"
+                   style="width: 30%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border: solid;" placeholder="From" type="number" onkeydown="return  InputAction(event)" />
+            <p> &nbsp &nbsp</p>
+            <input id="to" aria-label="To" class="form-control text-box single-line"
+                   data-val-maxlength-max="30" asp-for="@applicationService.To" value="@TempData["toTempValue"]"
+                   style="width: 30%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border: solid;" placeholder="To" type="number" onkeydown="return  InputAction(event)" />
+            <p> &nbsp &nbsp</p>
+
+            @if (Model != null)
+            {
+                @if (Model.Count() > 0)
+                {
+
+                    <select id="frequencySize" style="width: 30%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;"
+                            asp-for="@applicationService.FrequencySizeValue" asp-items="@applicationService.FrequencySizesList" class="form-control">
+                    </select>
+                }
+
+
+            }
+            else
+            {
+                <select id="frequencySize" style="width: 30%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;" asp-for="@applicationService.FrequencySizeValue" asp-items="@applicationService.FrequencySizesList">
+                </select>
+
+            }
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px; height: 35px; width:150px" asp-for="@applicationService.ApplicationTable"></label>
+            <p> &nbsp &nbsp</p>
+            <select id="application_first_value" onchange="FirstChange()" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;"
+                    asp-for="@applicationService.ApplicationFirstValue" asp-items="@applicationService.ApplicationFirstList">
+            </select>
+        </div>
+
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p> &nbsp &nbsp</p>
+            <select id="application_two_value" onchange="SecondChange()" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;"
+                    asp-for="@applicationService.ApplicationSecondValue" asp-items="@applicationService.ApplicationSecondList">
+            </select>
+        </div>
+
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px;"></label>
+            <p> &nbsp &nbsp</p>
+            <select id="application_third_value" onchange="ThirdChange()" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;"
+                    asp-for="@applicationService.ApplicationThirdValue" asp-items="@applicationService.ApplicationThirdList">
+            </select>
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+
+            <label id="search_by" style="font-weight:bold; font-family:Roboto; font-size:13px;  width:150px;"></label>
+            <p>&nbsp &nbsp</p>
+            <input type="checkbox" id="selectedLevel" name="selectedLevel">
+            <label for="selectedLevel" style="font-weight: bold; font-family: Roboto; font-size: 13px; color: black; padding-top:5px;"> Search only in the selected level</label>
+        </div>
+
+        <div class="center_top_menu" style="width: 50%; height:100%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p> &nbsp &nbsp</p>
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px; width:80%; height: 35px; text-align: center;">-or-</label>
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p> &nbsp &nbsp</p>
+            <fieldset id="group1">
+                <label class="radio_control">
+                    <input type="radio" value="Hierarchical" name="group1" />
+                    Hierarchical
+                </label>
+                <label class="radio_control">
+                    <input type="radio" value="Alphabetical" name="group1" />
+                    Alphabetical
+                </label>
+            </fieldset>
+            <p> &nbsp &nbsp</p>
+            <div id="abbr"><a href="#" onClick="LinkClick(); return false;">Abbreviations</a></div>
+
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
+            <p> &nbsp &nbsp</p>
+            <select id="app_all" style="width: 80%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid; border-width: 3px; "
+                    asp-for="@applicationService.ApplicationAllValue" asp-items="@applicationService.ApplicationAllList">
+            </select>
+        </div>
+        <div class="center_top_menu" style="width: 50%; height:100%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px; width:150px" name="FrequencytableValue" asp-for="@applicationService.FrequencyTable"></label>
+            <p> &nbsp &nbsp</p>
+            @if (Model != null)
+            {
+                @if (Model.Count() > 0)
+                {
+                    <select id="frequency_table" style="width: 80%; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 13px; border-style: solid; border-width: 3px;"
+                            asp-for="@applicationService.FrequencytableValue" asp-items="Model.ElementAt(0).FrequencyTablesList" class="form-control" multiple>
+                    </select>
+                }
+            }
+            else
+            {
+
+                <select id="frequency_table" style="width: 80%; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 13px; border-style: solid; border-width: 3px;"
+                        asp-for="@applicationService.FrequencytableValue" asp-items="@applicationService.FrequencyTablesList" class="form-control" multiple>
+                </select>
+            }
+
+        </div>
+        <br />
+        <br />
+        <p> &nbsp &nbsp</p>
+
+        <div class="center_top_menu" style="width: 50%; height:100%">
+            <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px; width:150px;"></label>
+
+            <button type="submit" id="searh_now" class="btn btn-primary" style="width: 40%; background-color: darkseagreen;" onclick="SearchNow()">Search</button>
+        </div>
+        <br />
+        <p> &nbsp &nbsp</p>
+
+    </div>
+    <br />
+    <br />
+    <div id="print_div" class="center" style="@(showDiv ? "display: block;" : "display: none;")">
+        <div class="center_top_menu center" style="width: 40%; height:100%">
+            <button type="submit" id="download_excel" class="btn btn-secondary center" style="width: 50%; background-color: limegreen; margin: 5px;">
+                <i class="fas fa-file-excel"></i>Download Excel
+            </button>
+            <button type="submit" id="download_pdf" class="btn btn-secondary center" style="width: 50%; background-color: red; margin: 5px;">
+                <i class="fas fa-file-pdf"></i> Download PDF
+            </button>
+        </div>
+    </div>
+    <br />
+
+    <p id="docsHidden" style="visibility:hidden;"></p>
+    <div id="rData" class="center">
+        @if (Model != null)
+        {
+            @if (Model.Count() > 0)
+            {
+                <table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'>
+                    <tr><th width="200px" style="text-align:center">Frequency</th><th>Application</th><th>ITU</th></tr>
+
+
+                    @* previous view
+                        @foreach (FrekvencijeProject.Models.Json.FreqBandSearchNewDocStand i in Model)
+                        {
+                            <tr>
+                                <td>@i.LowView-@i.HighView</td>
+
+                                <td>
+                                    @i.Application
+                                    @{var list = @i.AppItemsList.ToList().OrderBy(x => x.Application);
+                                        var pp = false;
+                                        var DocText = "";
+                                    }
+
+                                    @foreach (var tt in list)
+                                    {
+
+                                        @tt.Application
+
+                                        if (@tt.Documents.Count > 0)
+                                        {
+                                            pp = false;
+                                            DocText = "";
+                                            @foreach (var tempDoc in tt.Documents)
+                                            {
+
+                                                if (tempDoc.Doc_number != "")
+                                                {
+                                                    pp = true;
+
+                                                    DocText += "<p><a href=\"" + @tempDoc.Hyperlink + "\">" + @tempDoc.Doc_number + " " + @tempDoc.Title_of_doc + "</a></p>";
+
+                                                }
+                                            }
+
+                                        }
+                                        if (@tt.Standards.Count > 0)
+                                        {
+                                            @foreach (var tempStand in tt.Standards)
+                                            {
+
+                                                if (tempStand.StandardId > 0)
+                                                {
+
+                                                    pp = true;
+
+                                                    DocText += "<p><a href=\"" + tempStand.HyperlinkS + "\">" + tempStand.Etsi_standard + " " + @tempStand.Title_docS + "</a></p>";
+
+                                                }
+                                            }
+
+                                        }
+
+                                        if (pp == true)
+                                        {
+
+
+                                            <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValues('@DocText'); return false;">Regulatory docs</button>
+                                            <script type="text/javascript">
+                                                $('#docsHidden').text("");
+                                            </script>
+                                            pp = false;
+                                        }
+
+                                        if (@tt.Comment != "")
+                                        {
+                                            <button style="width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onClick="NotesClick('  @tt.Comment  '); return false;">notes</button>
+                                        }
+                                        <br />
+                                    }
+                                    </td>
+
+                                    <td>@i.regionName</td>
+                                    <td>@i.regionCode</td>
+                                    </tr>
+                                }
+                    *@
+
+                    @foreach (FrekvencijeProject.Models.Ajax.ApplicationView i in Model)
+                    {
+                        <tr>
+                            <td>@i.LowView-@i.HighView</td>
+
+                            <td>
+
+                                @{
+                                    var listOfApps = new List<string>();
+                                    var isThereDocs = false;
+                                    var isThereStands = false;
+                                    var Docs = "";
+                                    var Stand = "";
+                                    var isThereDocsInf = false;
+                                    var isThereStandsInf = false;
+                                    var DocsInf = "";
+                                    var StandInf = "";
+                                }
+
+                                @foreach (var tempDoc in @i.Application)
+                                {
+
+                                    @if (!tempDoc.isDeletedApp)
+                                    {
+                                        <p>
+                                            @tempDoc.Application
+                                            @*if (!listOfApps.Contains(@tempDoc.Application))
+                    {
+
+                        listOfApps.Add(@tempDoc.Application);
+
+                        @tempDoc.Application
+                     }
+                     else
+                    {
+
+                    }*@
+
+                                            @if (@tempDoc.DocumentsAditional.Count > 0)
+                                            {
+
+                                                for (var tt = 0; tt < tempDoc.DocumentsAditional.Count; tt++)
+                                                {
+                                                    if (tt == tempDoc.DocumentsAditional.Count - 1)
+                                                    {
+                                                        if (tempDoc.DocumentsAditional[tt].isRegulatory == true)
+                                                        {
+                                                            Docs += tempDoc.DocumentsAditional[tt].DocumentId;
+                                                            isThereDocs = true;
+                                                        }
+                                                        else if (tempDoc.DocumentsAditional[tt].isRegulatory == false)
+                                                        {
+                                                            DocsInf += tempDoc.DocumentsAditional[tt].DocumentId;
+                                                            isThereDocsInf = true;
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+
+                                                        //Docs += tempDoc.DocumentId[tt] + ",";
+                                                        if (tempDoc.DocumentsAditional[tt].isRegulatory == true)
+                                                        {
+                                                            Docs += tempDoc.DocumentsAditional[tt].DocumentId + ",";
+                                                            isThereDocs = true;
+                                                        }
+                                                        else if (tempDoc.DocumentsAditional[tt].isRegulatory == false)
+                                                        {
+                                                            DocsInf += tempDoc.DocumentsAditional[tt].DocumentId + ",";
+                                                            isThereDocsInf = true;
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                isThereDocs = false;
+                                                isThereDocsInf = false;
+                                            }
+
+                                            @if (@tempDoc.StandardsAditional.Count > 0)
+                                            {
+
+                                                for (var tt = 0; tt < tempDoc.StandardsAditional.Count; tt++)
+                                                {
+                                                    if (tt == tempDoc.StandardsAditional.Count - 1)
+                                                    {
+                                                        if (tempDoc.StandardsAditional[tt].isRegulatoryStand == true)
+                                                        {
+                                                            Stand += tempDoc.StandardsAditional[tt].StandardId;
+                                                            isThereStands = true;
+                                                        }
+                                                        else if (tempDoc.StandardsAditional[tt].isRegulatoryStand == false)
+                                                        {
+                                                            StandInf += tempDoc.StandardsAditional[tt].StandardId;
+                                                            isThereStandsInf = true;
+
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        if (tempDoc.StandardsAditional[tt].isRegulatoryStand == true)
+                                                        {
+                                                            Stand += tempDoc.StandardsAditional[tt].StandardId + ",";
+                                                            isThereStands = true;
+                                                        }
+                                                        else if (tempDoc.StandardsAditional[tt].isRegulatoryStand == false)
+                                                        {
+
+                                                            StandInf += tempDoc.StandardsAditional[tt].StandardId + ",";
+                                                            isThereStandsInf = true;
+
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                isThereStands = false;
+                                                isThereStandsInf = false;
+                                            }
+                                            @if (isThereDocs && !isThereStands)
+                                            {
+
+                                                <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValues('@Docs' ,'@Stand' ,'@isThereDocs','@isThereStands'); return false;">Regulatory docs</button>
+                                            }
+                                            else if (!isThereDocs && isThereStands)
+                                            {
+
+                                                <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValues('@Docs', '@Stand','@isThereDocs','@isThereStands'); return false;">Regulatory docs</button>
+                                            }
+                                            else if (isThereDocs && isThereStands)
+                                            {
+                                                <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValues('@Docs', '@Stand','@isThereDocs','@isThereStands'); return false;">Regulatory docs</button>
+                                            }
+
+
+                                            @if (@tempDoc.Comment != "")
+                                            {
+                                                <button style="width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onClick="NotesClick('  @tempDoc.Comment  '); return false;">Notes</button>
+                                            }
+                                            @if (isThereDocsInf && !isThereStandsInf)
+                                            {
+
+                                                <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValuesInf('@DocsInf' ,'@StandInf' ,'@isThereDocsInf','@isThereStandsInf'); return false;">Informative docs</button>
+                                            }
+                                            else if (!isThereDocsInf && isThereStandsInf)
+                                            {
+
+                                                <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValuesInf('@DocsInf', '@StandInf','@isThereDocsInf','@isThereStandsInf'); return false;">Informative docs</button>
+                                            }
+                                            else if (isThereDocsInf && isThereStandsInf)
+                                            {
+
+                                                <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValuesInf('@DocsInf', '@StandInf','@isThereDocsInf','@isThereStandsInf'); return false;">Informative docs</button>
+                                            }
+                                            @{
+                                                Docs = "";
+                                                Stand = "";
+                                                DocsInf = "";
+                                                StandInf = "";
+                                                isThereDocsInf = false;
+                                                isThereStandsInf = false;
+                                                isThereDocs = false;
+                                                isThereStands = false;
+                                            }
+
+                                            <br />
+                                        </p>
+                                    }
+                                }
+                                @*@if (@i.DocumentId.Count > 0)
+        {
+
+        @foreach (var tempDoc in i.DocumentId)
+        {
+            listOfDoc.Add(tempDoc);
+        }
+
+        }
+        if (@i.StandardId.Count > 0)
+        {
+        @foreach (var tempStand in i.StandardId)
+        {
+            listOfStand.Add(tempStand);
+
+        }
+
+        }
+
+        @listOfStand.Count,@listOfDoc.Count*@
+
+                                @*if (pp == true)
+        {
+
+
+            <button style="width: 150px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onclick="ShowAllValues('@DocText'); return false;">Regulatory docs</button>
+            <script type="text/javascript">
+                $('#docsHidden').text("");
+            </script>
+            pp = false;
+        }*@
+
+                                @*@if (@i.Comment != "")
+        {
+        <button style="width: 100px; background-color: #008CBA; margin-top:5px; margin-bottom:5px;" onClick="NotesClick('  @i.Comment  '); return false;">notes</button>
+        }
+        <br />*@
+
+                            </td>
+
+                            @*<td>@i.regionName</td>*@
+                            <td>@i.regionCode</td>
+                        </tr>
+                    }
+
+
+                </table>
+
+            }
+        }
+
+    </div>
+    <div>
+        <h4 id="error_input" style="color: red; text-align: center; font-weight: bold; font-family: Roboto; font-size: 33px; "></h4>
+    </div>
+</body>

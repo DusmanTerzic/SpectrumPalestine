@@ -1,0 +1,102 @@
+﻿@model List<FrekvencijeProject.Models.Ajax.ApplicationView>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div>
+        <div>
+            <p class="label label-info graph-title">Palestine</p>
+            <div class="double-scroll flowhide" style="overflow: scroll;">
+                <div class="cell_container" name="graph_container" id="graph_containerID">
+                    @{
+                        string temp;
+                        var maxCountHeight = 100;
+                        @foreach (var item in Model)
+                        {
+                            string height;
+                            string dynamicClass;
+                            int width = 100;
+                            temp = Model[0].orientation;
+                            @if (temp == "horizontal")
+                            {
+                                dynamicClass = "cell-content-horizontal";
+                                if (item.Application.Count() == 0)
+                                {
+                                    height = maxCountHeight.ToString() + "%";
+                                }
+                                else
+                                {
+                                    height = (maxCountHeight / ((decimal)item.Application.Count())).ToString() + "%";
+                                }
+                            }
+                            else
+                            {
+                                dynamicClass = "cell-content-vertical";
+                                height = maxCountHeight.ToString() + "%";
+                                if (item.Application.Count() > 1)
+                                {
+                                    width = 100 / item.Application.Count();
+                                }
+                                else
+                                {
+                                    width = 100;
+                                }
+                            }
+
+                            <div style="width:0.8130081300813008%" class="cell_container_content_wrap">
+                                <div class="cell_header" data-toggle="popover"
+                                     footnotes="" onclick="itemSelected(this)"
+                                     onmouseover="itemHover(this)" range="@item.LowView - @item.HighView" term="Frequency range">
+                                    <p style="float: left;" name="low">@item.LowView</p>
+                                    <p style="float: right;" name="high">@item.HighView</p>
+                                    <div style="clear: both;"></div>
+
+                                </div>
+                                @if (item.Application.Count > 0)
+                                {
+                                    <div class="cell_content" style="height:100%">
+                                        @foreach (var i in item.Application)
+                                        {
+                                            int Id;
+                                            if (i.Documents != null)
+                                            {
+                                                Id = i.DocumentsAditional[0].DocumentId;
+                                            }
+                                            else
+                                            {
+                                                Id = 0;
+                                            }
+                                            
+                                            <div class="cell-content @dynamicClass" data-toggle="popover" name="cell-content-item" termid="@i.TermId"
+                                                 parenttermid="26"  range="@item.LowView - @item.HighView" term="@i.Application"
+                                                 comment="@i.Comment" lowrange="@item.LowView" highrange="@item.HighView" footnotes=""
+                                                 id="@Id" index="0" onclick="itemSelected(this)"
+                                                 onmouseover="itemHover(this)" style="background-color: @i.colorCode;width:@width%;height:@height;">
+                                                <div class="allocationTitle" style="font-size:9px">@i.Application</div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://monsido-consent.com/v1/mcm.js"></script>
+    <script type="text/javascript" async src="https://app-script.monsido.com/v2/monsido-script.js"></script>
+
+    <script type="text/javascript" src="~/Graphical/assets/js/jquery-autocomplete-min.js"></script>
+    <script type="text/javascript" src="~/Graphical/assets/js/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="~/Graphical/assets/js/jquery.doubleScroll.js"></script>
+    <script type="text/javascript" src="~/Graphical/assets/js/overlib.js"></script>
+    <script type="text/javascript" src="~/Graphical/assets/js/showPopup.js"></script>
+    <script type="text/javascript" src="~/Graphical/assets/js/typeahead.bundle.min.js"></script>
+@*    <script type="text/javascript" src="~/Graphical/assets/js/graphtool.js"></script>*@
+
+
+    <br />
+    <br />
+}

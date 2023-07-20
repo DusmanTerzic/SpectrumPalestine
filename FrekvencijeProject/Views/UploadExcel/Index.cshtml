@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<head>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body id="content_container_body">
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        @using (Html.BeginForm("UploadFileCustomDocuments", "UploadExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label for="file_doc">Upload Custom Documents:</label>
+            <input type="file" name="file" id="file_doc" /><br /><br />
+            <input type="submit" value="Upload" style="margin-left: 100px; width=600px; height =650px;" class="btn btn-primary" />
+        }
+    </div>
+    <br />
+    <br />
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        @using (Html.BeginForm("UploadFile", "UploadExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label for="file_doc">Upload All Documents:</label>
+            <input type="file" name="file" id="file_doc" /><br /><br />
+            <input type="submit" value="Upload" style="margin-left: 100px; width=600px; height =650px;" class="btn btn-primary" />
+        }
+    </div>
+    <br />
+    <br />
+
+
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        @using (Html.BeginForm("UploadFileAllData", "UploadExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label for="file_doc">Upload all data from excel:</label>
+            <input type="file" name="file" id="file_doc" /><br /><br />
+            <input type="submit" value="Upload" style="margin-left: 100px; width=600px; height =650px;" class="btn btn-primary" />
+        }
+    </div>
+
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        @using (Html.BeginForm("UploadFileServices", "UploadExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label for="file_doc">Upload services:</label>
+            <input type="file" name="file" id="file_doc" /><br /><br />
+            <input type="submit" value="Upload" style="margin-left: 100px; width=600px; height =650px;" class="btn btn-primary" />
+        }
+    </div>
+
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        @using (Html.BeginForm("UploadInterfacesData", "UploadExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label for="file_doc">Upload interfaces:</label>
+            <input type="file" name="file" id="file_doc" /><br /><br />
+            <input type="submit" value="Upload" style="margin-left: 100px; width=600px; height =650px;" class="btn btn-primary" />
+        }
+    </div>
+
+    <div style="background-color: white; width: 70%; margin-top: 30px; padding-top:30px;" class="center">
+        @using (Html.BeginForm("UploadRightOfUseData", "UploadExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label for="file_doc">Upload Right of use:</label>
+            <input type="file" name="file" id="file_doc" /><br/><br/>
+            <input type="submit" value="Upload" style="margin-left: 100px; width=600px; height =650px;" class="btn btn-primary"/>
+        }
+    </div>
+
+
+</body>
