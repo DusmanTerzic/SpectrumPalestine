@@ -17,19 +17,15 @@ namespace FrekvencijeProject.Models.Json
 
         public string HighView { get; set; }
 
-        public string Application { get; set; }
-
         public string Allocation { get; set; }
 
         public bool isPrimary { get; set; }
 
         public List<FootnoteJsonConvert> Footnote { get; set; }
 
-        public string Doc_number { get; set; }
-        public string Title_of_doc { get; set; }
-        public string Hyperlink { get; set; }
-
         public List<FootnoteJsonConvert> BandFootnote { get; set; }
+
+        public List<AllocationConvert> AllocationList { get; set; }
 
         public string Comment { get; set; }
 

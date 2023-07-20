@@ -23,5 +23,6 @@ namespace FrekvencijeProject.Models.Application
 
 
         public int? Number { get; set; }
+        public string ColorCode { get; set; }
     }
 }

@@ -2545,7 +2545,7 @@ namespace FrekvencijeProject.Controllers.Actions
                             high = all.high,
                             Allocation = alTerm.name,
                             TermId = e.TermId,
-                            colorCode = e.colorCode,
+                            colorCode = alTerm.ColorCode,
                             Footnote = ct.name,
                             FootnoteDesc = foot_desc.text_desc,
                             isBand = ct.isBand,
@@ -2725,7 +2725,6 @@ namespace FrekvencijeProject.Controllers.Actions
                 ge.LowView = d.MostRecent.LowView;
                 ge.HighView = d.MostRecent.HighView;
                 ge.Application = d.MostRecent.Application;
-
                 ge.Allocation = d.MostRecent.Allocation;
                 ge.colorCode = d.MostRecent.colorCode;
                 ge.TermId = d.MostRecent.TermId;
@@ -2904,6 +2903,7 @@ namespace FrekvencijeProject.Controllers.Actions
                                         te.FootnoteDesc += ww.FootnoteDesc;
                                         te.isBand = ww.isBand;
                                         te.isPrimary = ww.isPrimary;
+                                        te.colorCode = ww.colorCode;
                                         ge.Footnote.Add(te);
                                     }
                                 }

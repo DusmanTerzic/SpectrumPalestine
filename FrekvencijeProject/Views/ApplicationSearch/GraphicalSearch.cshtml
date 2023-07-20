@@ -16,7 +16,7 @@
     <button class="btn btn-default" data-toggle="modal" data-target="#HelpModal">Help</button>
     <a href="javascript:void(0)" id="expanderSearchHead" class="btn btn-default">
         Toggle
-        search options <span class="glyphicon glyphicon-collapse-down" id="expanderSearchSign"></span>
+        search options <span id="expanderSearchSign"><i class="fa-sharp fa-solid fa-caret-down"></i></span>
     </a>
     <form class="well col-sm-12" method="get" id="form">
         <input type="hidden" name="lowRange" id="lowRange" value="3000 kHz">
@@ -25,10 +25,10 @@
         <div class="form-group col-sm-4">
             <label class="control-label">Frequency bands</label>
             <select class="form-control" size="8" id="bands" name="bands">
-                <option low="3000 Hz" high="30 kHz">3 - 30 kHz</option>
+                <option selected low="3 kHz" high="30 kHz">3 - 30 kHz</option>
                 <option low="30 kHz" high="300 kHz">30 - 300 kHz</option>
                 <option low="300 kHz" high="3000 kHz">300 kHz - 3 MHz</option>
-                <option selected low="3000 kHz" high="30 MHz">3 - 30 MHz</option>
+                <option low="3000 kHz" high="30 MHz">3 - 30 MHz</option>
                 <option low="30 MHz" high="300 MHz">30 MHz - 300 MHz</option>
                 <option low="300 MHz" high="3000 MHz">300 MHz - 3 GHz</option>
                 <option low="3000 MHz" high="30 GHz">3 - 30 GHz</option>
@@ -36,8 +36,7 @@
             </select>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="specifyRange" value="1" id="specifyRangeCheckbox"
-                           checked='checked'>
+                    <input type="checkbox" name="specifyRange" value="1" id="specifyRangeCheckbox">
                     Specific range
                 </label>
             </div>
@@ -47,12 +46,13 @@
                         <input class="form-control" placeholder="from" onkeypress="return FormValidFrequency(event)"
                                name="low" value='3000' id="from">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 my-3 my-lg-0">
                         <input class="form-control" placeholder="to" onkeypress="return FormValidFrequency(event)"
                                name="high" value='30000' id="to">
                     </div>
                     <div class="col-md-4">
-                        <select class="form-control" name="unit" id="frequencySize">
+                        <select class="form-control" name="unit" id="frequencySize" style="appearance: auto">
+
                             <option value="1">
                                 Hz
                             </option>
@@ -74,7 +74,7 @@
             <label class="control-label">Frequency table</label>
             <select class="form-control" size="10" name="user" id="frequency_table">
                 <option value="1">- ITU (Region 1) -</option>
-                <option value="2">--Palestine (PSE)--</option>
+                <option value="2" selected>--Palestine (PSE)--</option>
                 <option value="3">Algeria</option>
                 <option value="4">Bahrain</option>
                 <option value="5">Comoros</option>
@@ -142,7 +142,7 @@
             </div>
         </div>
         <div class="form-group col-sm-1">
-            <button type="submit" class="btn btn-default" onclick="SearchNow()">Search</button>
+            <button type="submit" class="btn btn-default" onclick="GraphicalSearchNow()">Search</button>
         </div>
     </form>
     <div class="alert alert-info col-sm-12" style="display: none;" id="renderTableMessage">
@@ -160,40 +160,45 @@
         <div class="form-group col-sm-12"></div>
         <div class="form-group col-sm-offset-2 col-sm-10">
             <input type="hidden" id="action" name="action" value="render" />
-            <button id="submitRenderButton" type="button" class="btn btn-default" style="display: inline-block;" onclick="createRender(); return false;">
+            <button id="submitRenderButton" type="button" class="btn btn-default" style="display: inline-block;" onclick="CreateImage_Render(); return false;">
                 Create
                 image
             </button>
-            @*<button class="btn btn-default col-sm-4" onclick="toggleRenderImage()" id="showRenderOptionsButton">Create Image/Export table</button>*@
-            <form action="https://efis.cept.org/export/graphCSV.jsp" id="export">
+
+            <form id="export">
                 <input type="hidden" name="exportLow" id="exportLow" value="">
                 <input type="hidden" name="exportHigh" id="exportHigh" value="">
                 <input type="hidden" name="exportUsers" id="exportUsers" value="">
                 <input type="hidden" name="exportSearchOption" value="Allocation">
                 <input type="hidden" name="languages" value="English">
-                <input type="submit" value="Export search results to CSV" class="btn btn-default" onclick="ExportToExcel()">
+                <input type="hidden" name="SearchType" id="SearchType" value="@ViewBag.GraphicalSearch " />
             </form>
             <button class="btn btn-danger" onclick="toggleRenderImage(); return false;">Cancel</button>
         </div>
     </div>
     <div class="graphs-container">
         <div class="row">
-            <button class="btn btn-default col-sm-4" onclick="toggleRenderImage()" id="showRenderOptionsButton" style="display: block;">Create Image/Export table</button>
             <div class="col-sm-4">
-                <div class="panel panel-default">
+                <button class="btn btn-default" onclick="toggleRenderImage()" id="showRenderOptionsButton" style="display: block;width:100%">Create Image/Export table</button>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default mt-3 mt-lg-0">
                     <div class="panel-heading">
                         <label class="control-label">Highlight term</label>
                     </div>
+
                     <div class="panel-body">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="highlight">
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-danger btn-s" onclick="resetHighLight()">
-                                <span>
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </span>
-                            </button>
+                        <div class="row">
+                            <div class="col-sm-10 col-10">
+                                <input type="text" class="form-control" id="highlight">
+                            </div>
+                            <div class="col-sm-2 col-2 p-0">
+                                <button type="button" class="btn btn-danger btn-s" onclick="resetHighLight()">
+                                    <span>
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -206,16 +211,20 @@
 
 
 
-        <h1 id="NoData"></h1>
+        @*<h1 id="NoData"></h1>*@
         <div id="DynamicGrid"></div>
-        <h1 id="error_input"></h1>
+        @*<h1 id="error_input"></h1>*@
+
+
+        <br />
+
 
         <div class="row">
-            <div class="col-sm-3">
-                <p>Use this HTML for embedding the graph</p>
+            <div class="col-sm-4">
+                <p style="font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;">Use this HTML for embedding the graph</p>
             </div>
             <div class="col-sm-5">
-                <input readonly="" class="form-control" value="https://efis.cept.org/include2/graphTool.jsp?lowRange=30+kHz&amp;highRange=300+kHz&amp;action=search&amp;bands=30+-+300+kHz&amp;unit=kHz&amp;user=1&amp;languages=English&amp;searchOption=Application&amp;orientation=horizontal">
+                <input readonly="" id="Embaded" class="form-control" value="">
             </div>
         </div>
 
@@ -223,6 +232,12 @@
     <script>(function () { var js = "window['__CF$cv$params']={r:'7d584cb81fce04c6',m:'bsOSL3zfZFKd4FJyW9r9qg9JSkTQHuh.caalPrDHAu4-1686470210-0-AU47b20+9No1Ni/CeJnrPBm/EWxOPdFEJYtab2e4fBj2'};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/invisible.js',document.getElementsByTagName('head')[0].appendChild(_cpo);"; var _0xh = document.createElement('iframe'); _0xh.height = 1; _0xh.width = 1; _0xh.style.position = 'absolute'; _0xh.style.top = 0; _0xh.style.left = 0; _0xh.style.border = 'none'; _0xh.style.visibility = 'hidden'; document.body.appendChild(_0xh); function handler() { var _0xi = _0xh.contentDocument || _0xh.contentWindow.document; if (_0xi) { var _0xj = _0xi.createElement('script'); _0xj.nonce = ''; _0xj.innerHTML = js; _0xi.getElementsByTagName('head')[0].appendChild(_0xj); } } if (document.readyState !== 'loading') { handler(); } else if (window.addEventListener) { document.addEventListener('DOMContentLoaded', handler); } else { var prev = document.onreadystatechange || function () { }; document.onreadystatechange = function (e) { prev(e); if (document.readyState !== 'loading') { document.onreadystatechange = prev; handler(); } }; } })();</script>
 
 </div>
+
+<div id="html-content-holder" style="display: none" ;> </div>
+<input type="button" value="Preview & Convert" id="btnConvert" style="display: none" ;>
+@*
+<div id="html-content-holder"> </div>
+<input type="button" value="Preview & Convert" id="btnConvert">*@
 
 <div class="modal fade" id="HelpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -234,7 +249,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>
+                <p style="font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;">
                     Please select a frequency range and table and the language (allocation term will be translated into this language). You can in principle see all tables in all available languages. You can scroll and zoom in to the information you like to find/see. You can export the result by either rendering a picture (select first the lower and upper frequency sub-range) in png-format or you can use/embed the HTML link in e.g. external documents or external webpages
                     (i.e. you can use the tool on your own webpages if you want).
                 </p>
@@ -255,19 +270,249 @@
     <script type="text/javascript" src="~/Graphical/assets/js/overlib.js"></script>
     <script type="text/javascript" src="~/Graphical/assets/js/showPopup.js"></script>
     <script type="text/javascript" src="~/Graphical/assets/js/typeahead.bundle.min.js"></script>
-
     <script type="text/javascript" src="~/Graphical/assets/js/myscript.js"></script>
 
 
 
+
+
     <script type="text/javascript">
+        $(document).ready(function () {
+            if (window.location.search == '') {
+                $("#optionsRadios2").click();
+                GraphicalSearchNow()
+            }
+
+            if (window.location.search != '') {
+                var data = window.location.search.substring(1).split('&');
+
+                $("#frequency_table").val(data[3].split('=')[1]);
+                $("#languages1").val('English');
+
+                $("input[name=orientation][value=" + data[4].split('=')[1] + "]").attr('checked', 'checked');
+
+                $("input[name=searchOption][value=" + data[5].split('=')[1] + "]").attr('checked', 'checked');
+                var rangecheck;
+                if ((data[6].split('=')[1]) == 'true') {
+                    $("#specifyRangeCheckbox").click();
+                    $("#specifyRangeCheckbox").click();
+                }
+                else
+                    $("#specifyRangeCheckbox").click();
+
+                toggleFrequencySelectors();
+
+                var compare = data[3].split('=')[1];
+
+
+                if ($('#bands').prop('disabled')) {
+                    // by textbox
+                    $("#from").val(data[0].split('=')[1]);
+                    $("#to").val(data[1].split('=')[1]);
+                    $("#frequencySize").val(data[2].split('=')[1]);
+
+                    if (compare.length >= 3 == true) {
+                        result = compare.split(',')
+                        $("#compareCheckBox").click();
+                        $("#frequency_table").val([result[0], result[1]])
+                    }
+                }
+                else {
+                    var lowrangedata = data[7].split('=')[1].trim().replaceAll('%20', '');
+                    var number = parseInt(lowrangedata);
+                    var text = lowrangedata.replace(number, '');
+                    var Lowresult = number + " " + text;
+
+                    $("#lowRange").val(Lowresult);
+
+                    var highrangedata = data[8].split('=')[1].trim().replaceAll('%20', '');
+                    var number = parseInt(highrangedata);
+                    var text = highrangedata.replace(number, '');
+                    var Highresult = number + " " + text;
+
+                    $("#highRange").val(Highresult);
+
+                    if (compare.length >= 3 == true) {
+                        result = compare.split(',')
+                        $("#compareCheckBox").click();
+                        $("#frequency_table").val([result[0], result[1]])
+                    }
+                }
+                GraphicalSearchNow();
+            }
+        });
+
+        function CreateImage_Render() {
+            var low = "";
+            var high = "";
+            var lowvalue = Math.round($("#lowRange").val().replace(" ", "").match(/[\d.]+/)[0]);
+            var highvalue = Math.round($("#highRange").val().replace(" ", "").match(/[\d.]+/)[0]);
+
+            if ((parseInt($("#lowRange").val().replace(/[^\d\s]/g, '').replace(/\s/g, ''))) == 0) {
+                //low = (parseInt($("#lowRange").val().replace(/[^\d\s]/g, '').replace(/\s/g, ''))).toString();
+                //high = (parseInt($("#highRange").val().replace(/[^\d\s]/g, '').replace(/\s/g, ''))).toString();
+                low = lowvalue.toString();
+                high = highvalue.toString();
+            }
+            else {
+                //low = (parseInt($("#lowRange").val().replace(/[^\d\s]/g, '').replace(/\s/g, '')) + 100).toString();
+                //high = (parseInt($("#highRange").val().replace(/[^\d\s]/g, '').replace(/\s/g, '')) - 100).toString();
+                low = (lowvalue + 1).toString();
+                high = (highvalue - 1).toString();
+
+            }
+
+            var graph_containerSize = $("#graph_containerID").width();
+            var FrequencySize = $("#highRange").val().replace(/[0-9\s]/g, '')
+            var FrequencySizeVal;
+            if (FrequencySize == 'Hz') {
+                FrequencySizeVal = 1;
+            }
+            else if (FrequencySize == 'kHz') {
+                FrequencySizeVal = 2;
+            }
+            else if (FrequencySize == 'MHz') {
+                FrequencySizeVal = 3;
+            }
+            else if (FrequencySize == 'GHz') {
+                FrequencySizeVal = 4;
+            }
+            FrequencyTable = $("#frequency_table option:selected").text();
+            var orientation = $("input[name='orientation']:checked").val();
+            var radioValue = $("input[name='searchOption']:checked").val();
+            var action;
+            if (radioValue == "Allocation") {
+                var host = window.location.href;
+                if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                    action = "https://localhost:44305/ApplicationSearch/GraphicalAllowCationSearchGrid";
+                } else {
+                    action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalAllowCationSearchGrid";
+                }
+                if ($("#compareCheckBox").is(":checked")) {
+                    FrequencyTable = $("#frequency_table :selected").map((_, e) => e.value).get();
+                    if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                        action = "https://localhost:44305/AllocationSearch/CompareSearch";
+                    } else {
+                        action = "https://nfta.northeurope.cloudapp.azure.com/AllocationSearch/CompareSearch";
+                    }
+
+                }
+            }
+            else {
+                var host = window.location.href;
+                if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                    action = "https://localhost:44305/ApplicationSearch/GraphicalApplicationSearchGrid";
+                } else {
+                    action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalApplicationSearchGrid";
+                }
+            }
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: {
+                    FromVal: low,
+                    ToVal: high,
+                    FrequencySizeVal: FrequencySizeVal,
+                    FrequencyTableVal: FrequencyTable,
+                    orientation: orientation,
+                },
+                success: function (response) {
+                    $("#html-content-holder").html('');
+                    $("#html-content-holder").html(response);
+                    $("#html-content-holder").show();
+                    //jQuery('[name="graph_container"]').css("width", "1928.5px");
+                    dynamicSearchData();
+
+                    //if (document.querySelectorAll('#graph_containerID').length == 4) {
+                    //    var totalService = $("[id=graph_containerID]:eq(2)").find(".cell_container_content_wrap").length;
+                    //    var maxWid = 21630;
+                    //    var width = maxWid / totalService;
+                    //    $("[id=graph_containerID]:eq(2)").css("width", width + "rem")
+
+                    //    var totalService = $("[id=graph_containerID]:eq(3)").find(".cell_container_content_wrap").length;
+                    //    var maxWid = 21630;
+                    //    var width = maxWid / totalService;
+                    //    $("[id=graph_containerID]:eq(3)").css("width", width + "rem")
+                    //}
+                    //else {
+                    //    var totalService = $("[id=graph_containerID]:eq(1)").find(".cell_container_content_wrap").length;
+                    //    var maxWid = 21630;
+                    //    var width = maxWid / totalService;
+                    //    $("[id=graph_containerID]:eq(1)").css("width", width + "rem")
+                    //}
+                    $("div[name='graph_container']").each(function () {
+                        $(this).css("width", +graph_containerSize + "px");
+                    });
+
+                    //setTimeout(
+                    //    function () {
+                    //        // Wait
+                    //    }, 5000);
+
+
+
+                    $("#NoData").text('');
+                    if (response.width() == 0) {
+                        $("#NoData").text("No Data Found")
+                    }
+                    var divContent = $("[id=html-content-holder]").html();
+
+                    var newTab = window.open();
+                    newTab.document.open();
+                    newTab.document.write(divContent);
+
+
+                    var cssFileUrl = "/Graphical/assets/css/graphTool.css";
+                    var cssLink = newTab.document.createElement("link");
+                    cssLink.href = cssFileUrl;
+                    cssLink.rel = "stylesheet";
+                    newTab.document.head.appendChild(cssLink);
+
+                    var bootstrapFileUrl = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css";
+                    var bootstrapLink = newTab.document.createElement("link");
+                    bootstrapLink.href = bootstrapFileUrl;
+                    bootstrapLink.rel = "stylesheet";
+                    newTab.document.head.appendChild(bootstrapLink);
+
+                    $("#btnConvert").click();
+
+                    $("#html-content-holder").hide();
+
+                    var list = newTab.document.getElementById("Temp");
+                    if (list != null && list.hasChildNodes()) {
+                        var elements = newTab.document.getElementsByClassName("suwala-doubleScroll-scroll-wrapper");
+                        list.removeChild(elements[0]);
+                    }
+
+                    var newdata = newTab.document.querySelectorAll('.suwala-doubleScroll-scroll-wrapper')
+                    if (newdata.length != 0) {
+                        newdata[0].remove();
+                        newdata[1].remove();
+                    }
+                },
+                failure: function (response) {
+                    alert("faliure");
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    var errorData = $.parseJSON(xhr.responseText); rData
+                    var errorMessages = [];
+                    for (var key in errorData) {
+                        errorMessages.push(errorData[key]);
+                    }
+                    $('#error_input').html(errorMessages.join("<br />"));
+                }
+            });
+
+        }
+
         $("#compareCheckBox").click(function () {
             if ($(this).is(":checked"))
                 $('#frequency_table').attr('multiple', 'multiple');
             else
                 $('#frequency_table').removeAttr('multiple');
         });
-        function SearchNow() {
+
+        function GraphicalSearchNow() {
             event.preventDefault();
             var FrequencyTable;
             var orientation = $("input[name='orientation']:checked").val();
@@ -285,7 +530,6 @@
                 FrequencyTable = $("#frequency_table :selected").text();
                 if (radioValue == "Allocation") {
                     var host = window.location.href;
-                    //alert('values:' + host);
                     if (host.includes('localhost') || host.includes('127.0.0.1')) {
                         action = "https://localhost:44305/ApplicationSearch/GraphicalAllowCationSearchGrid";
                     } else {
@@ -300,21 +544,26 @@
                         } else {
                             action = "https://nfta.northeurope.cloudapp.azure.com/AllocationSearch/CompareSearch";
                         }
-
                     }
                 }
                 else {
                     var host = window.location.href;
-                    //alert('values:' + host);
-                    //action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalApplicationSearchGrid";
                     if (host.includes('localhost') || host.includes('127.0.0.1')) {
                         action = "https://localhost:44305/ApplicationSearch/GraphicalApplicationSearchGrid";
                     } else {
                         action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalApplicationSearchGrid";
                     }
                     FrequencySizeVal = ($('#frequencySize option:selected').val()).replace(/\s/g, '');
-                }
 
+                    if ($("#compareCheckBox").is(":checked")) {
+                        FrequencyTable = $("#frequency_table :selected").map((_, e) => e.value).get();
+                        if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                            action = "https://localhost:44305/AllocationSearch/CompareSearch";
+                        } else {
+                            action = "https://nfta.northeurope.cloudapp.azure.com/AllocationSearch/CompareSearch";
+                        }
+                    }
+                }
             }
             else {
                 var band = $('#bands option:selected').val();
@@ -326,8 +575,6 @@
 
                 if (radioValue == "Allocation") {
                     var host = window.location.href;
-                    //alert('values:' + host);
-                    //action = "https://localhost:44305/ApplicationSearch/GraphicalAllowCationSearchGrid";
                     if (host.includes('localhost') || host.includes('127.0.0.1')) {
                         action = "https://localhost:44305/ApplicationSearch/GraphicalAllowCationSearchGrid";
                     } else {
@@ -336,7 +583,6 @@
                     FrequencyTable = $("#frequency_table option:selected").text();
                     if ($("#compareCheckBox").is(":checked")) {
                         FrequencyTable = $("#frequency_table :selected").map((_, e) => e.value).get();
-                        //action = "https://localhost:44305/AllocationSearch/CompareSearch";
                         if (host.includes('localhost') || host.includes('127.0.0.1')) {
                             action = "https://localhost:44305/AllocationSearch/CompareSearch";
                         } else {
@@ -347,8 +593,6 @@
                 }
                 else {
                     var host = window.location.href;
-                    //alert('values:' + host);
-                    //action = "https://localhost:44305/ApplicationSearch/GraphicalApplicationSearchGrid";
                     if (host.includes('localhost') || host.includes('127.0.0.1')) {
                         action = "https://localhost:44305/ApplicationSearch/GraphicalApplicationSearchGrid";
                     } else {
@@ -392,13 +636,34 @@
                         success: function (response) {
                             $("#DynamicGrid").html('');
                             $("#DynamicGrid").html(response);
-                            jQuery('[name="graph_container"]').css("width", "1928.5px");
+                            //jQuery('[name="graph_container"]').css("width", "1928.5px");
+
                             $("#NoData").text('');
                             if (response.width() == 0) {
                                 $("#NoData").text("No Data Found")
                             }
                             dynamicSearchData();
-                            //jQuery('[name="graph_container"]').css("width", "34222px");
+                            var host = window.location.href;
+                            var FromVal = "FromVal=" + from;
+                            var ToVal = "&ToVal=" + to;
+                            var FrequencySize = "&FreqSize=" + FrequencySizeVal;
+
+                            if ($("#frequency_table").val().length == 2) {
+                                var FrequencyTableVal = "&FreqTab=" + $("#frequency_table").val();
+                            }
+                            else {
+                                var FrequencyTableVal = "&FreqTab=" + $('#frequency_table').val();
+                            }
+
+                            $("#Embaded").val("");
+                            var orien = "&orientation=" + orientation;
+                            var radioValue = "&SearchType=" + $("input[name='searchOption']:checked").val();
+                            var specifyRangechk = "&Range=" + $("#specifyRangeCheckbox").is(":checked");
+
+                            var lowView = "&LowView = " + $("#lowRange").val();
+                            var highView = "&HighView = " + $("#highRange").val();
+                            $("#Embaded").val(host + "?" + FromVal + ToVal + FrequencySize + FrequencyTableVal + orien + radioValue + specifyRangechk + lowView + highView);
+
                         },
                         failure: function (response) {
                             alert("faliure");
@@ -415,12 +680,14 @@
                 }
 
             }
-            
+
         }
+
         function dismissModel() {
             document.getElementById("DiscriptionModel").style.opacity = "0";
             $("#DiscriptionModel").css("display", "none");
         }
+
         function DiscriptionPopup(title, discription) {
             $("#DiscriptionTitle").text(title);
             $("#DiscriptionBody").text(discription);
@@ -463,12 +730,192 @@
                 iconShape: "circle",
                 position: "bottom-right",
             },
-            links: {
-                cookiePolicyUrl: "https://cept.org/eco/eco-in-brief/data-protection-policies-gdpr",
-                optOutUrl: "",
-            },
+            //links: {
+            //    cookiePolicyUrl: "https://cept.org/eco/eco-in-brief/data-protection-policies-gdpr",
+            //    optOutUrl: "",
+            //},
         };
 
+        function GraphicalSearchNow() {
+            event.preventDefault();
+            var FrequencyTable;
+            var orientation = $("input[name='orientation']:checked").val();
+            var from;
+            var to;
+            var radioValue = $("input[name='searchOption']:checked").val();
+            var action;
+            var FrequencySize;
+            var isDisabled = $('#bands').prop('disabled');
+            if (isDisabled) // get data from txtbox
+            {
+                from = $('#from').val();
+                to = $('#to').val();
+
+                FrequencyTable = $("#frequency_table :selected").text();
+                if (radioValue == "Allocation") {
+                    var host = window.location.href;
+                    if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                        action = "https://localhost:44305/ApplicationSearch/GraphicalAllowCationSearchGrid";
+                    } else {
+                        action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalAllowCationSearchGrid";
+                    }
+                    FrequencySizeVal = ($('#frequencySize option:selected').text()).replace(/\s/g, '');
+
+                    if ($("#compareCheckBox").is(":checked")) {
+                        FrequencyTable = $("#frequency_table :selected").map((_, e) => e.value).get();
+                        if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                            action = "https://localhost:44305/AllocationSearch/CompareSearch";
+                        } else {
+                            action = "https://nfta.northeurope.cloudapp.azure.com/AllocationSearch/CompareSearch";
+                        }
+                    }
+                }
+                else {
+                    var host = window.location.href;
+                    if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                        action = "https://localhost:44305/ApplicationSearch/GraphicalApplicationSearchGrid";
+                    } else {
+                        action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalApplicationSearchGrid";
+                    }
+                    FrequencySizeVal = ($('#frequencySize option:selected').val()).replace(/\s/g, '');
+
+                    if ($("#compareCheckBox").is(":checked")) {
+                        FrequencyTable = $("#frequency_table :selected").map((_, e) => e.value).get();
+                        if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                            action = "https://localhost:44305/AllocationSearch/CompareSearch";
+                        } else {
+                            action = "https://nfta.northeurope.cloudapp.azure.com/AllocationSearch/CompareSearch";
+                        }
+                    }
+                }
+            }
+            else {
+                var band = $('#bands option:selected').val();
+                var low = $("#lowRange").val();
+                var high = $("#highRange").val();
+                from = low.split(/(?<=^\S+)\s/)[0];
+                to = high.split(/(?<=^\S+)\s/)[0];
+                FrequencySizeVal = low.split(/(?<=^\S+)\s/)[1]
+
+                if (radioValue == "Allocation") {
+                    var host = window.location.href;
+                    if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                        action = "https://localhost:44305/ApplicationSearch/GraphicalAllowCationSearchGrid";
+                    } else {
+                        action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalAllowCationSearchGrid";
+                    }
+                    FrequencyTable = $("#frequency_table option:selected").text();
+                    if ($("#compareCheckBox").is(":checked")) {
+                        FrequencyTable = $("#frequency_table :selected").map((_, e) => e.value).get();
+                        if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                            action = "https://localhost:44305/AllocationSearch/CompareSearch";
+                        } else {
+                            action = "https://nfta.northeurope.cloudapp.azure.com/AllocationSearch/CompareSearch";
+                        }
+                    }
+
+                }
+                else {
+                    var host = window.location.href;
+                    if (host.includes('localhost') || host.includes('127.0.0.1')) {
+                        action = "https://localhost:44305/ApplicationSearch/GraphicalApplicationSearchGrid";
+                    } else {
+                        action = "https://nfta.northeurope.cloudapp.azure.com/ApplicationSearch/GraphicalApplicationSearchGrid";
+                    }
+                    FrequencyTable = $("#frequency_table option:selected").text();
+                }
+            }
+
+            if (FrequencySizeVal == 'Hz') {
+                FrequencySizeVal = 1;
+            }
+            else if (FrequencySizeVal == 'kHz') {
+                FrequencySizeVal = 2;
+            }
+            else if (FrequencySizeVal == 'MHz') {
+                FrequencySizeVal = 3;
+            }
+            else if (FrequencySizeVal == 'GHz') {
+                FrequencySizeVal = 4;
+            }
+
+            var number1 = parseInt($('#from').val());
+            var number2 = parseInt($('#to').val());
+            if (number1 > number2) {
+                $('#error_input').html('Error! In From field, it is bigger than To field');
+            }
+            else {
+                if ($("#frequency_table option:selected").text() != '') {
+                    $('#error_input').html('');
+                    $.ajax({
+                        type: "POST",
+                        url: action,
+                        data: {
+                            FromVal: from,
+                            ToVal: to,
+                            FrequencySizeVal: FrequencySizeVal,
+                            FrequencyTableVal: FrequencyTable,
+                            orientation: orientation,
+                        },
+                        success: function (response) {
+                            $("#DynamicGrid").html('');
+                            $("#DynamicGrid").html(response);
+                            //jQuery('[name="graph_container"]').css("width", "1928.5px");
+                            dynamicSearchData();
+                            $("#NoData").text('');
+                            if (response.width() == 0) {
+                                $("#NoData").text("No Data Found")
+                            }
+
+                            // Create Dynamic URL Start
+                            var host = window.location.href;
+                            var FromVal = "FromVal=" + from;
+                            var ToVal = "&ToVal=" + to;
+                            var FrequencySize = "&FreqSize=" + FrequencySizeVal;
+
+                            if ($("#frequency_table").val().length == 2) {
+                                var FrequencyTableVal = "&FreqTab=" + $("#frequency_table").val();
+                            }
+                            else {
+                                var FrequencyTableVal = "&FreqTab=" + $('#frequency_table').val();
+                            }
+
+                            $("#Embaded").val("");
+                            var orien = "&orientation=" + orientation;
+                            var radioValue = "&SearchType=" + $("input[name='searchOption']:checked").val();
+                            var specifyRangechk = "&Range=" + $("#specifyRangeCheckbox").is(":checked");
+
+                            var lowView = "&LowView = " + $("#lowRange").val();
+                            var highView = "&HighView = " + $("#highRange").val();
+                            $("#Embaded").val(host + "?" + FromVal + ToVal + FrequencySize + FrequencyTableVal + orien + radioValue + specifyRangechk + lowView + highView);
+                            // End
+                        },
+                        failure: function (response) {
+                            alert("faliure");
+                        },
+                        error: function (xhr, textStatus, exceptionThrown) {
+                            var errorData = $.parseJSON(xhr.responseText); rData
+                            var errorMessages = [];
+                            for (var key in errorData) {
+                                errorMessages.push(errorData[key]);
+                            }
+                            $('#error_input').html(errorMessages.join("<br />"));
+                        }
+                    });
+                }
+            }
+        }
+
+        document.getElementById("btnConvert").addEventListener("click", function () {
+            html2canvas(document.getElementById("html-content-holder")).then(function (canvas) {
+                var anchorTag = document.createElement("a");
+                document.body.appendChild(anchorTag);
+                anchorTag.download = "filename.jpg";
+                anchorTag.href = canvas.toDataURL();
+                anchorTag.target = '_blank';
+                anchorTag.click();
+            });
+        });
         function dynamicSearchData() {
             if (!render) {
                 initSlider();
@@ -494,9 +941,12 @@
             setChangeListenerForFrequencyRange();
             if (!render) {
                 $(slider).slider("value", maxZoom / 2);
+                //var service = $("#ServiceCount").val();
+                //var test = parseInt(maxZoom) * parseInt(service);
                 changeTableWidth(maxZoom / 2);
             }
         }
     </script>
-}
+    }
+
 @*<script type="text/javascript" src="~/Graphical/assets/js/graphtool.js"></script>*@

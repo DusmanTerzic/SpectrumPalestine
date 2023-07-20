@@ -5,12 +5,12 @@
 @inject FrekvencijeProject.Controllers.AllocationSearchController allocationService
 @{
 }
-
+@model Tuple<List<FrekvencijeProject.Models.Json.AsiaPacific>, List<FrekvencijeProject.Models.Json.AsiaPacificSingleTable>>
 @{
     bool showDiv = (Model != null); // Set this value based on your condition
 }
 
-@model IEnumerable<FrekvencijeProject.Models.Json.FreqBandSearchNew>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
 </script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -30,18 +30,18 @@
 </head>
 @if (Model != null)
 {
-    @if (Model.Count() > 0)
+    @if (Model.Item1.Count > 0)
     {
 
         <script type="text/javascript">
      //alert('test');
-    
-    setTimeout(function () {
+
+        setTimeout(function () {
         //your code here
         //alert('ucitao sam');
-        var value = @Model.ElementAt(0).FrequencySizeValue;
-        $('#frequencySize').val(value).change();
-    }, 500);
+            var value = @Model.Item1.ElementAt(0).FrequencySizeValue;
+            $('#frequencySize').val(value).change();
+        }, 500);
         </script>
     }
 }
@@ -175,10 +175,10 @@
                     $('#error_input').html('Error! In From field, it is bigger than To field');
                 } else {
                     //var length = $('#frequency_table > option').length;
-                   
+
                     var selected = $("#frequency_table :selected").map((_, e) => e.value).get();
                     //alert(selected);
-                   
+
                     //alert("Works:" + $("#frequency_table option:selected").text());
                     if ($("#frequency_table option:selected").text() != '') {
                         $('#rData').empty();
@@ -210,13 +210,13 @@
                                 if (Object.keys(response).length > 1) {
                                     $('#rData').empty();
                                     var items = "<div style='margin-left:-5px; margin-right:-5px;'>";
-                                    
+
                                     $.each(response, function (i, generalTemp) {
                                         items += "<div style='float: left; width: 40%;padding: 5px;'>";
-                                        
+
                                         items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
                                         $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
-                                            
+
                                                 var values = ListOfFreqBand.Footnote.sort(function (x, y) {
                                                     return y.isPrimary - x.isPrimary;
                                                 });
@@ -261,7 +261,7 @@
                                                         }
                                                     }
                                                 });
-                                                
+
                                                 items +=
                                                     "</td>" +
 
@@ -269,7 +269,7 @@
                                             });
                                         items += "</table>";
                                         items += "</div>";
-                                       
+
                                     });
                                     items += "</div>";
                                     $('#rData').append(items).hide().fadeIn(2000);
@@ -279,7 +279,7 @@
                                     $('#rData').empty();
                                     items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
                                     $.each(response, function (i, generalTemp) {
-                                       
+
                                         $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
 
                                             var values = ListOfFreqBand.Footnote.sort(function (x, y) {
@@ -821,56 +821,63 @@
 
 
                             if (Object.keys(response).length == 0) {
-                               
+
                                 $('#rData').empty();
                                 var itemsO = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency</th><th>Allocation</th><th>Region name</th><th>Region code</th></tr>";
                                 itemsO += "</table>";
 
                                 $('#rData').append(itemsO).hide().fadeIn(2000);
                             }
+
                             if (Object.keys(response).length > 1) {
                                 $('#rData').empty();
-                                var items = "<div style='margin-left:-5px; margin-right:-5px;'>";
+
+
+                                var items = "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th>Frequency band</th>";
                                 var incResponse = 0;
-                                
-                                //alert('var:' + response[0].sizeFrequency);
+                                var incHeader = 0;
+                                $.each(response, function (i, generalTemp) {
+                                    if (incHeader == 0) {
+                                        incHeader++;
+                                        $.each(generalTemp.AllocationList, function (i, varAllocations) {
+                                            items += "<th>" + varAllocations.regionName + "</th>";
 
-                                if (incResponse == 0) {
-                                    incResponse++;
+                                        });
+                                    }
+                                });
+                                items += "</tr>";
+                                $.each(response, function (i, generalTemp) {
+                                    if (incResponse == 0) {
+                                        incResponse++;
 
-                                    if (response[0].isAllValues) {
+                                        if (generalTemp.isAllValues) {
 
-                                        setTimeout(function () {
+                                            setTimeout(function () {
+                                                //alert();
+                                                $('#frequencySize').val(generalTemp[0].sizeFrequency).change();
+                                                $('#from').val(generalTemp[0].lowJson);
+                                                $('#to').val(generalTemp[0].highJson);
 
-                                            $('#frequencySize').val(response[0].sizeFrequency).change();
-                                            $('#from').val(response[0].lowJson);
-                                            $('#to').val(response[0].highJson);
+                                            }, 200);
 
-                                        }, 200);
+                                        }
+
+                                    } else if (incResponse > 0) {
 
                                     }
+                                    items += "<tr><td style=\"width: 220px; align-content:center\">" + generalTemp.LowView + "-" + generalTemp.HighView + "</td>";
+                                    $.each(generalTemp.AllocationList, function (i, varAllocations) {
+                                        var values = varAllocations.Footnote.sort(function (x, y) {
 
-                                } else if (incResponse > 0) {
-
-                                }
-
-
-                                $.each(response, function (i, generalTemp) {
-                                    
-                                    items += "<div style='float: left; width: 40%;padding: 5px;'>";
-
-                                    items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
-                                    $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
-
-                                        var values = ListOfFreqBand.Footnote.sort(function (x, y) {
                                             return y.isPrimary - x.isPrimary;
+
                                         });
-                                        items += "<tr><td style=\"width: 220px; align-content:center\">" + ListOfFreqBand.LowView + "-" + ListOfFreqBand.HighView + "</td><td> ";
+
+                                        items += "<td>";
+
                                         var isFirst = false;
                                         var isSecond = false;
                                         $.each(values, function (i, member) {
-                                            /*alert(member);*/
-                                            //<strong><a href="#" id="foot">' + member + '</a></strong>
 
                                             if (member.Footnote == '') {
                                                 //alert(member.isBand);
@@ -885,16 +892,16 @@
                                                 items += member.Allocation;
                                                 isFirst = true;
                                             } else {
-                                                //alert('suprotno'+member.isBand);
+
                                                 items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
                                                 isSecond = true;
+
                                             }
 
                                         });
-                                        $.each(ListOfFreqBand.BandFootnote, function (i, member) {
-                                            /*alert(member);*/
-                                            //<strong><a href="#" id="foot">' + member + '</a></strong>
-                                            var isLastElement = i == ListOfFreqBand.BandFootnote.length - 1;
+
+                                        $.each(varAllocations.BandFootnote, function (i, member) {
+                                            var isLastElement = i == varAllocations.BandFootnote.length - 1;
                                             if (member.Footnote == '') {
                                                 items += "<br/>";
                                             }
@@ -904,21 +911,109 @@
                                                 } else {
                                                     items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
                                                 }
+
                                             }
                                         });
-                                        //Object.keys(generalTemp.Footnote).length
-                                        items +=
-                                            "</td>" +
+                                        items += "</td>";
 
-                                            "<td>" + ListOfFreqBand.regionName + "</td><td>" + ListOfFreqBand.regionCode + "</td></tr>";
                                     });
-                                    items += "</table>";
-                                    items += "</div>";
+                                    items += "</tr>";
 
                                 });
-                                items += "</div>";
+                                items += "</table>";
+                                //$('#rData').html(items)
                                 $('#rData').append(items).hide().fadeIn(2000);
                             }
+
+
+                            //two separate tables
+                            //if (Object.keys(response).length > 1) {
+                            //    $('#rData').empty();
+                            //    var items = "<div style='margin-left:-5px; margin-right:-5px;'>";
+                            //    var incResponse = 0;
+
+                            //    if (incResponse == 0) {
+                            //        incResponse++;
+
+                            //        if (response[0].isAllValues) {
+
+                            //            setTimeout(function () {
+
+                            //                $('#frequencySize').val(response[0].sizeFrequency).change();
+                            //                $('#from').val(response[0].lowJson);
+                            //                $('#to').val(response[0].highJson);
+
+                            //            }, 200);
+
+                            //        }
+
+                            //    } else if (incResponse > 0) {
+
+                            //    }
+
+
+                            //    $.each(response, function (i, generalTemp) {
+
+                            //        items += "<div style='float: left; width: 40%;padding: 5px;'>";
+
+                            //        items += "<table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'><tr><th style='width:30%;'>Frequency</th><th style='width: 40%;'>Allocation</th><th>Region name</th><th>Region code</th></tr>";
+                            //        $.each(generalTemp.ListOfFreqBand, function (val, ListOfFreqBand) {
+
+                            //            var values = ListOfFreqBand.Footnote.sort(function (x, y) {
+                            //                return y.isPrimary - x.isPrimary;
+                            //            });
+                            //            items += "<tr><td style=\"width: 220px; align-content:center\">" + ListOfFreqBand.LowView + "-" + ListOfFreqBand.HighView + "</td><td> ";
+                            //            var isFirst = false;
+                            //            var isSecond = false;
+                            //            $.each(values, function (i, member) {
+
+                            //                if (member.Footnote == '') {
+                            //                    //alert(member.isBand);
+                            //                    if (isFirst) {
+                            //                        items += "<br/>";
+                            //                        isFirst = false;
+                            //                    }
+                            //                    if (isSecond) {
+                            //                        //items += "<br/>";
+                            //                        isSecond = false;
+                            //                    }
+                            //                    items += member.Allocation;
+                            //                    isFirst = true;
+                            //                } else {
+                            //                    //alert('suprotno'+member.isBand);
+                            //                    items += " &#40; <a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a> &#41;";
+                            //                    isSecond = true;
+                            //                }
+
+                            //            });
+                            //            $.each(ListOfFreqBand.BandFootnote, function (i, member) {
+                            //                /*alert(member);*/
+                            //                //<strong><a href="#" id="foot">' + member + '</a></strong>
+                            //                var isLastElement = i == ListOfFreqBand.BandFootnote.length - 1;
+                            //                if (member.Footnote == '') {
+                            //                    items += "<br/>";
+                            //                }
+                            //                if (member.Footnote != '') {
+                            //                    if (isLastElement) {
+                            //                        items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>";
+                            //                    } else {
+                            //                        items += "<a href=\"#\" id=\"foot\" onClick=\"LinkClick('" + member.Footnote + "','" + member.FootnoteDesc + "'); return false;\">" + member.Footnote + "</a>, ";
+                            //                    }
+                            //                }
+                            //            });
+                            //            //Object.keys(generalTemp.Footnote).length
+                            //            items +=
+                            //                "</td>" +
+
+                            //                "<td>" + ListOfFreqBand.regionName + "</td><td>" + ListOfFreqBand.regionCode + "</td></tr>";
+                            //        });
+                            //        items += "</table>";
+                            //        items += "</div>";
+
+                            //    });
+                            //    items += "</div>";
+                            //    $('#rData').append(items).hide().fadeIn(2000);
+                            //}
                             if (Object.keys(response).length == 1) {
                                 $('#rData').empty();
                                 var items = "";
@@ -1024,13 +1119,13 @@
                     $('#error_input').html('Error! You didn\'t select any value from field frequency table');
                 }
             }
-            
+
         }
-        
+
     }
 
     $(function(){
-        
+
 
         $('#download_pdf').click(function () {
 
@@ -1162,7 +1257,14 @@
             <p> &nbsp &nbsp</p>
             @if (Model != null)
             {
-                @if (Model.Count() > 0)
+                @if (Model.Item1.Count() > 0)
+                {
+
+                    <select id="frequencySize" style="width: 20%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;" asp-for="@allocationService.FrequencySizeValue" asp-items="@allocationService.FrequencySizesList" class="form-control">
+                    </select>
+
+                }
+                @if (Model.Item2.Count() > 0)
                 {
 
                     <select id="frequencySize" style="width: 20%; height: 35px; font-weight: bold; font-family: Roboto; font-size: 13px; border-style: solid;" asp-for="@allocationService.FrequencySizeValue" asp-items="@allocationService.FrequencySizesList" class="form-control">
@@ -1362,11 +1464,19 @@
             <p> &nbsp &nbsp</p>
             @if (Model != null)
             {
-                @if (Model.Count() > 0)
+                @if (Model.Item1.Count() > 0)
                 {
-        
+
                     <select id="frequency_table" style="width: 80%; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 13px; border-style: solid; border-width: 3px;"
-                            asp-for="@Model.ElementAt(0).FrequencyTableValue" asp-items="@Model.ElementAt(0).FrequencyTablesList" class="form-control" multiple>
+                            asp-for="@Model.Item1.ElementAt(0).FrequencyTableValue" asp-items="@Model.Item1.ElementAt(0).FrequencyTablesList" class="form-control" multiple>
+                    </select>
+                }
+
+                @if (Model.Item2.Count() > 0)
+                {
+
+                    <select id="frequency_table" style="width: 80%; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 13px; border-style: solid; border-width: 3px;"
+                            asp-for="@Model.Item2.ElementAt(0).FrequencyTableValue" asp-items="@Model.Item2.ElementAt(0).FrequencyTablesList" class="form-control" multiple>
                     </select>
                 }
             }
@@ -1376,13 +1486,13 @@
                         asp-for="@allocationService.FrequencytableValue" asp-items="@allocationService.FrequencyTablesList" class="form-control" multiple>
                 </select>
             }
-            
+
         </div>
         <br />
         <p> &nbsp &nbsp</p>
         <div class="center_top_menu" style="width: 50%; height:100%">
             <label id="search_by" style="font-weight: bold; font-family: Roboto; font-size: 13px;  width:150px"></label>
-            
+
             <button type="submit" id="searh_now" class="btn btn-primary" style="width: 40%; background-color: darkseagreen;" onclick="SearchNow()">Search</button>
         </div>
         <br />
@@ -1401,100 +1511,9 @@
         </div>
     </div>
     <br />
-
     <div id="rData" class="center">
-        @if (Model != null)
-        {
-            @if (Model.Count() > 0)
-            {
-                <table class='table table-sm table-striped table-hover border-bottom' style='width:80%; background-color: white;'>
-                    <tr><th width="200px" style="text-align:center">Frequency</th><th>Allocations</th><th>Region name</th><th>ITU</th></tr>
-                    @foreach (FrekvencijeProject.Models.Json.FreqBandSearchNew i in Model)
-                    {
-                        <tr>
-                            <td style="width: 220px; align-content: center">@i.LowView-@i.HighView</td>
-
-                            <td>
-                                @*@i.Allocation
-                                    <br />*@
-                                @{var list = @i.Footnote.OrderByDescending(e => e.isPrimary == true).ToList();
-                                    bool isFirst = false;
-                                    bool isSecond = false;
-
-                                }
-                                @foreach (var tt in list)
-                                {
-                                    @if (!@tt.isBand)
-                                    {
-                                        if (isFirst)
-                                        {
-                                            <br />
-                                        }
-                                        if (isSecond)
-                                        {
-                                            <br />
-                                            isSecond = false;
-                                        }
-                                        @tt.Allocation
-                                        isFirst = true;
-
-                                    }
-                                    else
-                                    {
-                                        isFirst = false;
-                                        @if (@tt.Footnote != "")
-                                        {
-                                            @:(  @Html.ActionLink(@tt.Footnote, null, null,
-       null, htmlAttributes: new { @id = "foot", @href = "#", onclick = "LinkClick('" + @tt.Footnote + "','" + @tt.FootnoteDesc + "'); return false;" })
-                                            @:)
-                                            isSecond = true;
-
-                                        }
-                                    }
-
-                                }
-
-                                <br />
-
-                                @{int interation = 0;
-                                    int tempCount = @i.BandFootnote.Count;
-                                }
-                                @foreach (var tt in @i.BandFootnote)
-                                {
-                                    interation++;
-                                    @if (interation < tempCount)
-                                    {
-
-                                        @if (@tt.Footnote != "")
-                                        {
-                                            @Html.ActionLink(@tt.Footnote, null, null,
-                                           null, htmlAttributes: new { @id = "foot", @href = "#", onclick = "LinkClick('" + @tt.Footnote + "','" + @tt.FootnoteDesc + "'); return false;" })@:,&nbsp;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        @if (@tt.Footnote != "")
-                                        {
-                                            @Html.ActionLink(@tt.Footnote, null, null,
-                                           null, htmlAttributes: new { @id = "foot", @href = "#", onclick = "LinkClick('" + @tt.Footnote + "','" + @tt.FootnoteDesc + "'); return false;" })
-
-                                        }
-                                    }
-
-                                }
-
-                            </td>
-
-                            <td>@i.regionName</td>
-                            <td>@i.regionCode</td>
-                        </tr>
-                    }
-                </table>
-
-            }
-        }
-
     </div>
+
     <div>
         <h4 id="error_input" style="color: red; text-align: center; font-weight: bold; font-family: Roboto; font-size: 33px; "></h4>
     </div>

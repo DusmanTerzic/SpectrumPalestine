@@ -94,7 +94,7 @@
     <link href="~/css/home/style.css" rel="stylesheet">
     <link href="~/css/home/responsive.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/graphical/assets/css/efis.css" rel="stylesheet" />
+    <link href="~/graphical/assets/css/pfis.css" rel="stylesheet" />
    
 </head>
 <script type="text/javascript">
@@ -107,8 +107,14 @@
             if ($('#navbar_first_value').val() == '2') {
                 $("#AllocationSearchId")[0].click();
             }
+            if ($('#navbar_first_value').val() == '3') {
+                $("#AllocationGraphicalSearchId")[0].click();
+            }
             if ($('#navbar_first_value').val() == '4') {
                 $("#ApplicationSearchId")[0].click();
+            }
+            if ($('#navbar_first_value').val() == '5') {
+                $("#ApplicationGraphicalSearchId")[0].click();
             }
             if ($('#navbar_first_value').val() == '6') {
                 $("#DocumentId")[0].click();
@@ -150,7 +156,7 @@
             <!-- header-top -->
             <div class="header-top">
                 <div class="auto-container">
-                    <div class="top-inner clearfix">
+                    <div class="top-inner clearfix d-flex align-items-center">
                         <div class="left-column pull-left clearfix">
                             <div class="weathre-box"><i class="flaticon-lan"></i><a asp-controller="Home" asp-action="Index">Home Page</a></div>
                             <div class="weathre-box"><i class="flaticon-lan"></i><a asp-controller="ArabHome" asp-action="Index">Arab States</a></div>
@@ -206,7 +212,7 @@
 
             <div class="header-lower">
                 <div class="auto-container">
-                    <div class="outer-box clearfix">
+                    <div class="outer-box clearfix d-flex align-items-center">
                         <div class="logo-box pull-left">
                             <figure class="logo"><a asp-controller="Home" asp-action="Index"><img src="/images/home/logo.svg" width=170px alt=""></a></figure>
                         </div>
@@ -247,13 +253,13 @@
                                             <option value="11">Information</option>
                                         </select>
                                     </div>
-                                    <div class="menu-right-content clearfix">
+                                    @*<div class="menu-right-content clearfix">
                                         <ul class="other-option clearfix">
                                             <li class="search-btn">
                                                 <button type="button" class="search-toggler"><i class="far fa-search"></i></button>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                             <nav class="main-menu navbar-expand-md navbar-light">
@@ -267,14 +273,14 @@
                                                 <a asp-controller="ApplicationSearch" asp-action="Index">Allocation</a>
                                                 <ul>
                                                     <li><a id="AllocationSearchId" asp-controller="AllocationSearch" asp-action="Index">Search</a></li>
-                                                    <li><a id="GraphicalSearchId" asp-controller="ApplicationSearch" asp-action="GraphicalSearch">Graphical Search</a></li>
+                                                    <li><a id="AllocationGraphicalSearchId" asp-controller="AllocationSearch" asp-action="GraphicalSearch">Graphical Search</a></li>
                                                 </ul>
                                             </li>
                                             <li class="dropdown">
                                                 <a asp-controller="ApplicationSearch" asp-action="Index">Application</a>
                                                 <ul>
                                                     <li><a id="ApplicationSearchId" asp-controller="ApplicationSearch" asp-action="Index">Search</a></li>
-                                                    <li><a id="GraphicalSearchId" asp-controller="ApplicationSearch" asp-action="GraphicalSearch">Graphical Search</a></li>
+                                                    <li><a id="ApplicationGraphicalSearchId" asp-controller="ApplicationSearch" asp-action="GraphicalSearch">Graphical Search</a></li>
                                                 </ul>
                                             </li>
                                             <li><a id="DocumentId" asp-controller="Document" asp-action="Index">Documents</a></li>
@@ -289,13 +295,13 @@
                                             <li><a href="contact.html">Information</a></li>
                                         </ul>
                                     </div>
-                                    <div class="menu-right-content clearfix">
+                                    @*<div class="menu-right-content clearfix">
                                         <ul class="other-option clearfix">
                                             <li class="search-btn">
                                                 <button type="button" class="search-toggler"><i class="far fa-search"></i></button>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </nav>
                         </div>
@@ -405,6 +411,12 @@
             </div>
         </footer>
     </div>
+
+   @* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>*@
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" ></script>
+  
+
+
     <script type="text/javascript" src="https://monsido-consent.com/v1/mcm.js"></script>
     <script type="text/javascript" async src="https://app-script.monsido.com/v2/monsido-script.js"></script>
 

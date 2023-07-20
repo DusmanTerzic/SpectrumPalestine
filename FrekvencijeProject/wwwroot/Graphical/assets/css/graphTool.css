@@ -26,13 +26,13 @@
     white-space: nowrap;
     background-color: #fff;
     margin-bottom: 35px;
-    height: 350px;
+    height: 150px;
 }
 
 .cell_container_content_wrap {
     display: inline-block;
     height: 100%;
-    position:relative;
+    position: relative;
     margin-bottom: 7px;
 }
 
@@ -48,6 +48,7 @@
     border-color: #bce8f1;
     border: 1px solid transparent;
     border-radius: 2px;
+    font-size:9px;
 }
 
     .cell_header p {
@@ -64,10 +65,10 @@
     width: 100%;
     white-space: nowrap;
     border-left: 1px solid #fff;
- /*   height:100%;*/
+    /*   height:100%;*/
     word-break: break-all;
 }
- 
+
 
 .allocationTitle:active {
     background-color: #e3e3e3;
@@ -88,11 +89,13 @@
     height: 100%;
     text-align: center;
     display: table-cell;
-    font-size: small;
+    /*font-size: small;*/
     overflow: hidden;
     white-space: pre-wrap;
     padding: 10px;
-/*    border:1px solid #000;*/
+    font-size:x-small;
+    padding:0px;
+    /*    border:1px solid #000;*/
 }
 
 
@@ -106,6 +109,7 @@
     position: absolute;
     width: 100%;
 }
+
 .cell-content-horizontal .tooltip:after {
     border-left: solid transparent 10px;
     border-right: solid transparent 10px;
@@ -128,10 +132,12 @@
     -o-transform: translateY(0px);
     transform: translateY(0px);
 }
+
 .popover-content {
     padding: 9px 14px;
     background: #fff;
 }
+
 .cell-content-horizontal .tooltip {
     display: none;
     max-width: 276px;
@@ -152,6 +158,7 @@
 .cell-content-horizontal:hover .tooltip {
     display: block;
 }
+
 .popover-title {
     margin: 0;
     font-size: 13px;
@@ -200,6 +207,7 @@
     padding: 9px 14px;
     background: #fff;
 }
+
 .cell_header .tooltip {
     display: none;
     max-width: 150px;
@@ -232,7 +240,7 @@
 }
 
 /* */
-.flowhide{
-    overflow-x:scroll !important;
-    overflow-y:hidden !important;
+.flowhide {
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
 }

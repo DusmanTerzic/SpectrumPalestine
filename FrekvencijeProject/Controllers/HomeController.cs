@@ -183,13 +183,14 @@ namespace FrekvencijeProject.Controllers
 
         [HttpPost]
         //using the jquey of search on first level.
-        public IActionResult GeneralSearchNew(string GeneralValue, string From, string To, int FrequencySizeValue, int FrequencytableValue)
+        public IActionResult GeneralSearchNew(string GeneralValue, string From, string To, int FrequencySizeValue, string[] FrequencytableValue)
         {
-            if(FrequencytableValue == 0 && GeneralValue == "1")
+
+            if(FrequencytableValue.Length == 0 && GeneralValue == "1")
             {
                 return View("Index");
             }
-            //Debug.WriteLine("pozvao:"+ GeneralValue + ","+ From+","+ To+","+ FrequencySizeValue+","+ FrequencytableValue);
+            Debug.WriteLine("pozvao:"+ GeneralValue + ","+ From+","+ To+","+ FrequencySizeValue+","+ FrequencytableValue.Length);
             this.GeneralValue = "" + GeneralValue;
 
             string tempValue = GeneralsList.Where(p => p.Value.Equals(this.GeneralValue)).First().Text;
@@ -336,7 +337,7 @@ namespace FrekvencijeProject.Controllers
                         TempData["general"] = true;
                         TempData["tempFrom"] = ""+tempFrom;
                         TempData["tempTo"] = ""+tempTo;
-                        TempData["FrequencytableValue"] = this.FrequencytableValue;
+                        TempData["FrequencytableValue"] = FrequencytableValue[0];
                         TempData["FrequencySize"] = this.FrequencySizeValue;
                    
                     return Redirect("~/FreqBand/Index");
@@ -386,10 +387,14 @@ namespace FrekvencijeProject.Controllers
                         {
                             FrequencySizeValue = 1;
                         }
+                        
+
 
                         TempData["tempFrom"] = ""+tempFrom;
                         TempData["tempTo"] =""+ tempTo;
-                        TempData["FrequencytableValue"] = this.FrequencytableValue;
+                        IEnumerable<string> values = FrequencytableValue.ToList();
+                        TempData["FrequencytableValue"] = values;
+                        //Debug.WriteLine("test:" + (IEnumerable<string>)TempData["FrequencytableValue"]);
                         TempData["FrequencySize"] = "" + FrequencySizeValue;
                         return Redirect("~/AllocationSearch/Index");
                         
@@ -399,7 +404,8 @@ namespace FrekvencijeProject.Controllers
 
                         TempData["tempFrom"] = "" + tempFrom;
                         TempData["tempTo"] = "" + tempTo;
-                        TempData["FrequencytableValue"] = this.FrequencytableValue;
+                        IEnumerable<string> values = FrequencytableValue.ToList();
+                        TempData["FrequencytableValue"] = values;
                         TempData["FrequencySize"] = "" +FrequencySizeValue;
                         return Redirect("~/AllocationSearch/Index");
                     }
@@ -408,7 +414,8 @@ namespace FrekvencijeProject.Controllers
                         //Debug.WriteLine("pp");
                         TempData["tempFrom"] = "" + tempFrom;
                         TempData["tempTo"] = "" + tempTo;
-                        TempData["FrequencytableValue"] = this.FrequencytableValue;
+                        IEnumerable<string> values = FrequencytableValue.ToList();
+                        TempData["FrequencytableValue"] = values;
                         TempData["FrequencySize"] = "" + FrequencySizeValue;
                         return Redirect("~/AllocationSearch/Index");
                         
@@ -466,7 +473,7 @@ namespace FrekvencijeProject.Controllers
                             TempData["app"] = true;
                             TempData["tempFrom"] = "" + tempFrom;
                             TempData["tempTo"] = "" + tempTo;
-                            TempData["FrequencytableValue"] = this.FrequencytableValue;
+                            TempData["FrequencytableValue"] = FrequencytableValue[0];
                             TempData["FrequencySize"] = "" + FrequencySizeValue;
                             return Redirect("~/ApplicationSearch/Index");
                             
@@ -523,7 +530,7 @@ namespace FrekvencijeProject.Controllers
                             TempData["doc"] = true;
                             TempData["tempFrom"] = "" + tempFrom;
                             TempData["tempTo"] = "" + tempTo;
-                            TempData["FrequencytableValue"] = this.FrequencytableValue;
+                            TempData["FrequencytableValue"] = FrequencytableValue[0];
                             TempData["FrequencySize"] = "" + FrequencySizeValue;
                             return Redirect("~/Document/Index");
 
@@ -579,7 +586,7 @@ namespace FrekvencijeProject.Controllers
                             TempData["inter"] = true;
                             TempData["tempFrom"] = "" + tempFrom;
                             TempData["tempTo"] = "" + tempTo;
-                            TempData["FrequencytableValue"] = this.FrequencytableValue;
+                            TempData["FrequencytableValue"] = FrequencytableValue[0];
                             TempData["FrequencySize"] = "" + FrequencySizeValue;
                             return Redirect("~/Interfaces/Index");
 
@@ -635,7 +642,7 @@ namespace FrekvencijeProject.Controllers
                             TempData["rightOfUse"] = true;
                             TempData["tempFrom"] = "" + tempFrom;
                             TempData["tempTo"] = "" + tempTo;
-                            TempData["FrequencytableValue"] = this.FrequencytableValue;
+                            TempData["FrequencytableValue"] = FrequencytableValue[0];
                             TempData["FrequencySize"] = "" + FrequencySizeValue;
                             return Redirect("~/RightOfUse/Index");
 

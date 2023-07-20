@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,10 @@ namespace FrekvencijeProject.Models.Json
     public class AsiaPacific
     {
         public List<FreqBandSearchNew> ListOfFreqBand { get; set; }
+
+        public List<SelectListItem> FrequencyTablesList { get; set; }
+
+        public List<SelectListItem> FrequencySizesList { get; set; }
 
         public string FrequencySizeValue { get; set; }
 

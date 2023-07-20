@@ -1,4 +1,4 @@
-var isGettingPopoverContent = false;
+﻿var isGettingPopoverContent = false;
 var graphContainerWidth = -1;
 var minWidth = -1;
 var graphContainers;
@@ -20,7 +20,14 @@ var ranges = {
 var timer;
 
 function changeTableWidth(value) {
-    var zoom = graphContainerWidth * (1 + (parseInt(value) / 100));
+    var service = 4;
+    if ($("#ServiceCount").val() != undefined) {
+        service = $("#ServiceCount").val();
+    }
+    
+    var test = parseInt(value) * parseInt(service);
+    //var zoom = graphContainerWidth * (1 + (parseInt(value) / 100));
+    var zoom = graphContainerWidth * (1 + (parseInt(test) / 100));
     jQuery(graphContainers).width(zoom + "px");
     jQuery(".suwala-doubleScroll-scroll").width(zoom + "px");
 }
@@ -63,6 +70,8 @@ jQuery(document).ready(function () {
     setChangeListenerForFrequencyRange();
     if (!render) {
         $(slider).slider("value", maxZoom / 2);
+        //var service = $("#ServiceCount").val();
+        //var test = parseInt(maxZoom) * parseInt(service);
         changeTableWidth(maxZoom / 2);
     }
 });
@@ -137,7 +146,6 @@ function setChangeListenerForCompare() {
 }
 
 function handleSetRangeForRender(popover) {
-    debugger;
     if (ranges["low"] == null) {
         ranges["low"] = jQuery(popover).attr("lowRange");
         var group = jQuery("#lowRangeForRender");
@@ -371,7 +379,6 @@ function resetHighLight() {
 }
 
 function createRender() {
-    debugger;
     if (isIE() && isIE() < 9 && isBrowserWarningEnabled()) {
         alert("Your browser is not supported. Please update your browser");
     } else {
@@ -448,8 +455,3 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
         return "\\" + c;
     }), "g" + (ignore ? "i" : "")), str2);
 };
-
-$(document).ready(function () {
-    // Enable popovers everywhere
-    $('[data-bs-toggle="popover"]').popover();
-});

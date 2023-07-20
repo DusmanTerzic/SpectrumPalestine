@@ -3,136 +3,141 @@
 
 @if (Model != null && Model.Count > 0)
 {
-    <div>
-        <div>
-            <p class="label label-info graph-title">@Model.First().regionName</p>
-            <div class="double-scroll flowhide" style="overflow: scroll;">
-                <div class="cell_container" name="graph_container" id="graph_containerID">
-                    @{
-                        string temp;
-                        var maxCountHeight = 100;
-                        @foreach (var item in Model)
+    <div id="Temp">
+        <input type="text" value="@Model.Count" id="ServiceCount" style="display:none">
+        <p class="label label-info graph-title">@Model.First().regionName</p>
+        <div class="double-scroll flowhide" style="overflow: scroll;">
+            <div class="cell_container" name="graph_container" id="graph_containerID">
+                @{
+                    string temp;
+                    var maxCountHeight = 100;
+                    @foreach (var item in Model)
+                    {
+                        var tot = Model.Count;
+                        var Divwidth = Math.Round(Convert.ToDecimal(100) / Convert.ToDecimal(Model.Count), 2);
+
+                        string height;
+                        string dynamicClass;
+                        temp = Model[0].orientation;
+                        @if (temp == "horizontal")
                         {
-                            string height;
-                            string dynamicClass;
-                            temp = Model[0].orientation;
-                            @if (temp == "horizontal")
+                            dynamicClass = "cell-content-horizontal";
+                            if (item.count == null)
                             {
-                                dynamicClass = "cell-content-horizontal";
-                                if (item.count == null)
-                                {
-                                    height = maxCountHeight.ToString() + "%";
-                                }
-                                else
-                                {
-                                    height = (maxCountHeight / ((decimal)item.count)).ToString() + "%";
-                                }
+                                height = maxCountHeight.ToString() + "%";
                             }
                             else
                             {
-                                height = maxCountHeight.ToString() + "%";
-                                dynamicClass = "cell-content-vertical";
+                                height = (maxCountHeight / ((decimal)item.count)).ToString() + "%";
                             }
-                            string footnoteData = string.Empty;
-                            @foreach (var custom in item.Footnote.OrderByDescending(x => x.Footnote))
+                        }
+                        else
+                        {
+                            height = maxCountHeight.ToString() + "%";
+                            dynamicClass = "cell-content-vertical";
+                        }
+                        string footnoteData = string.Empty;
+                        @foreach (var custom in item.Footnote)
+                        // @foreach (var custom in item.Footnote.OrderByDescending(x => x.Footnote))
+                        {
+                            if (!string.IsNullOrEmpty(custom.Footnote))
                             {
-                                if (!string.IsNullOrEmpty(custom.Footnote))
-                                {
-                                    var test = custom.Footnote + "??" + custom.FootnoteDesc + "@";
-                                    footnoteData += test;
-                                }
-
+                                var test = custom.Footnote + "??" + custom.FootnoteDesc + "@";
+                                footnoteData += test;
                             }
-                            <div style="width:0.8130081300813008%" class="cell_container_content_wrap">
-                                <div class="cell_header" footnotes="@footnoteData" onclick="itemSelected(this)"
-                                     data-toggle="popover"
-                                     onmouseover="itemHover(this)" range="@item.LowView - @item.HighView" term="Frequency range">
-                                    <p style="float: left;" name="low">@item.LowView</p>
-                                    <p style="float: right;" name="high">@item.HighView</p>
-                                    <div style="clear: both;"></div>
-                                </div>
-                                @{
-                                    List<string> listOfAllocation = new List<string>();
-                                    int width = 100;
-                                    var newlist = item.Footnote.OrderByDescending(x => x.Footnote);
-                                    var colorlist = newlist.OrderByDescending(x => x.colorCode);
-                                    <div class="cell_content" style="height:100%">
-                                        @foreach (var foot in newlist)
+
+                        }
+                        <div style="width:@Divwidth%" class="cell_container_content_wrap">
+                            <div class="cell_header" footnotes="@footnoteData" onclick="itemSelected(this)"
+                                 data-toggle="popover"
+                                 onmouseover="itemHover(this)" range="@item.LowView - @item.HighView" term="Frequency range">
+                                <p style="float: left;" name="low">@item.LowView</p>
+                                <p style="float: right;" name="high">@item.HighView</p>
+                                <div style="clear: both;"></div>
+                            </div>
+                            @{
+                                List<string> listOfAllocation = new List<string>();
+                                int width = 100;
+                                var newlist = item.Footnote;
+                                //var newlist = item.Footnote.OrderByDescending(x => x.Footnote);
+                                var colorlist = newlist.OrderByDescending(x => x.colorCode);
+                                <div class="cell_content" style="height:100%">
+                                    @foreach (var foot in newlist)
+                                    {
+                                        var footnotedata = foot.Footnote;
+                                        foreach (var coloritem in colorlist)
                                         {
-                                            var footnotedata = foot.Footnote;
-                                            foreach (var coloritem in colorlist)
+                                            if (foot.Allocation == coloritem.Allocation)
                                             {
-                                                if (foot.Allocation == coloritem.Allocation)
-                                                {
-                                                    foot.colorCode = coloritem.colorCode;
-                                                }
-
+                                                foot.colorCode = coloritem.colorCode;
                                             }
-                                            @if (!listOfAllocation.Contains(@foot.Allocation))
-                                            {
-                                                listOfAllocation.Add(@foot.Allocation);
 
-                                                @if (temp == "vertical")
+                                        }
+                                        @if (!listOfAllocation.Contains(@foot.Allocation))
+                                        {
+                                            listOfAllocation.Add(@foot.Allocation);
+
+                                            @if (temp == "vertical")
+                                            {
+                                                if (item.Footnote.Select(x => x.Allocation).Distinct().Count() > 1)
                                                 {
-                                                    if (item.Footnote.Select(x => x.Allocation).Distinct().Count() > 1)
-                                                    {
-                                                        width = 100 / item.Footnote.Select(x => x.Allocation).Distinct().Count();
-                                                    }
-                                                    else
-                                                    {
-                                                        width = 100;
-                                                    }
-                                                }
-                                                string status = "";
-                                                if (@foot.isPrimary)
-                                                {
-                                                    status = "PRIMARY";
+                                                    width = 100 / item.Footnote.Select(x => x.Allocation).Distinct().Count();
                                                 }
                                                 else
                                                 {
-                                                    status = "Secondary";
+                                                    width = 100;
                                                 }
-                                                var FootNotesData = "";
-                                                if (!string.IsNullOrEmpty(foot.Footnote))
-                                                {
-                                                    FootNotesData = foot.Footnote + "??" + foot.FootnoteDesc + "@";
-                                                }
-                                                    
-                                                <div class="cell-content  @dynamicClass"
-                                                     data-toggle="popover"
-                                                     name="cell-content-item" termid="@foot.TermId"
-                                                     parenttermid="26" status="@status"
-                                                     footnotes="@FootNotesData"
-                                                     range="@item.LowView - @item.HighView" term="@foot.Allocation" comment="@item.Comment"
-                                                     lowrange="@item.LowView" highrange="@item.HighView"
-                                                     id="@item.Doc_number" index="0" onclick="itemSelected(this)" onmouseover="itemHover(this)"
-                                                     style="background-color:@foot.colorCode;width:@width%;height:@height;">
-                                                    <div class="allocationTitle">@foot.Allocation</div>
-                                                </div>
                                             }
+                                            string status = "";
+                                            if (@foot.isPrimary)
+                                            {
+                                                status = "PRIMARY";
+                                            }
+                                            else
+                                            {
+                                                status = "Secondary";
+                                            }
+                                            var FootNotesData = "";
+                                            if (!string.IsNullOrEmpty(foot.Footnote))
+                                            {
+                                                FootNotesData = foot.Footnote + "??" + foot.FootnoteDesc + "@";
+                                            }
+
+                                            <div class="cell-content  @dynamicClass"
+                                                 data-toggle="popover"
+                                                 name="cell-content-item" termid="@foot.TermId"
+                                                 parenttermid="26" status="@status"
+                                                 footnotes="@FootNotesData"
+                                                 range="@item.LowView - @item.HighView" term="@foot.Allocation" comment="@item.Comment"
+                                                 lowrange="@item.LowView" highrange="@item.HighView"
+                                                 id="@item.Doc_number" index="0" onclick="itemSelected(this)" onmouseover="itemHover(this)"
+                                                 style="background-color:@foot.colorCode;width:@width%;height:@height;">
+                                                <div class="allocationTitle">@foot.Allocation</div>
+                                            </div>
                                         }
-                                    </div>
-                                }
-                            </div>
-                        }
+                                    }
+                                </div>
+                            }
+                        </div>
                     }
-                </div>
+                }
             </div>
         </div>
-        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="footnote-modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="footnote-modal-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="footnote-modal-body"></p>
-                    </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="footnote-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="footnote-modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <p id="footnote-modal-body"></p>
                 </div>
             </div>
         </div>
     </div>
+       
 
 
 

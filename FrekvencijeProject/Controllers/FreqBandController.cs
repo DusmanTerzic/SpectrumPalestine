@@ -25,7 +25,8 @@ namespace FrekvencijeProject.Controllers
 {
     public class FreqBandController : Controller
     {
-       
+        //testing spiral code
+        //testing nikola
         object user;
         private readonly ApplicationDBContext _conApp;
         private readonly AllocationDBContext _conAll;

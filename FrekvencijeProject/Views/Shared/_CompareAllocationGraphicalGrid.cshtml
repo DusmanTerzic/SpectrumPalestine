@@ -10,11 +10,14 @@
                 <p class="label label-info graph-title">@allocationmodel.ListOfFreqBand.First().regionName</p>
                 <div class="double-scroll flowhide" style="overflow: scroll;">
                     <div class="cell_container" name="graph_container" id="graph_containerID">
+                        
                         @{
                             string temp;
                             var maxCountHeight = 100;
+                            var Divwidth = Math.Round(Convert.ToDecimal(100) / Convert.ToDecimal(allocationmodel.ListOfFreqBand.Count), 2);
                             @foreach (var item in allocationmodel.ListOfFreqBand)
                             {
+                                <input type="text" value="@allocationmodel.ListOfFreqBand.Count" id="ServiceCount" style="display:none">
                                 string height;
                                 string dynamicClass;
                                 temp = allocationmodel.ListOfFreqBand[0].orientation;
@@ -45,7 +48,7 @@
                                     }
 
                                 }
-                                <div style="width:0.8130081300813008%" class="cell_container_content_wrap">
+                                <div style="width:@Divwidth%" class="cell_container_content_wrap">
                                     <div class="cell_header" footnotes="@footnoteData" onclick="itemSelected(this)"
                                          data-toggle="popover"
                                          onmouseover="itemHover(this)" range="@item.LowView - @item.HighView" term="Frequency range">

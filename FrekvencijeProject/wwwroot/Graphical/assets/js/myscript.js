@@ -65,17 +65,18 @@ window._monsidoConsentManagerConfig = window._monsidoConsentManagerConfig || {
         iconShape: "circle",
         position: "bottom-right",
     },
-    links: {
-        cookiePolicyUrl: "https://cept.org/eco/eco-in-brief/data-protection-policies-gdpr",
-        optOutUrl: "",
-    },
+    //links: {
+    //    cookiePolicyUrl: "https://cept.org/eco/eco-in-brief/data-protection-policies-gdpr",
+    //    optOutUrl: "",
+    //},
 };
 
 var languages = { Allocation: ["Albanian", "Bosnian", "Bulgarian", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Finnish", "French", "Georgian", "German", "Greek", "Hungarian", "Icelandic", "Italian", "Latvian", "Lithuanian", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Serbian", "Slovak", "Slovenian", "Spanish", "Swedish", "Turkish"], Application: ["Albanian", "Czech", "Danish", "English", "Estonian", "Finnish", "French", "German", "Greek", "Hungarian", "Portuguese", "Russian", "Slovak", "Slovenian", "Spanish"] };
 var topLevelWidthInPercent = 0.746268656716418 / 100;
 var selectedLanguage = "English";
 var users = 1
-var maxZoom = 3350.0;
+//var maxZoom = 3350.0;
+var maxZoom = 20.0;
 var terms = [
     {
         value: "Amateur",

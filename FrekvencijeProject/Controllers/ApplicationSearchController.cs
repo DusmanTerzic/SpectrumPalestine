@@ -1820,7 +1820,20 @@ namespace FrekvencijeProject.Controllers
         }
         public List<FreqBandSearchNew> GetAllocationData(string FromVal, string ToVal, int FrequencySizeVal, string FrequencyTableVal, string orientation)
         {
-            List<FreqBandSearchNew> Generalsearch = new List<FreqBandSearchNew>();
+            if (FromVal == "3000" && ToVal == "30" && FrequencySizeVal == 3)
+            {
+                FromVal = "3";
+                ToVal = "30";
+                FrequencySizeVal = 4;
+            }
+            if (FromVal == "3000" && ToVal == "30" && FrequencySizeVal == 2)
+            {
+                FromVal = "3";
+                ToVal = "30";
+                FrequencySizeVal = 3;
+            }
+
+                List<FreqBandSearchNew> Generalsearch = new List<FreqBandSearchNew>();
             try
             {
                 var tempFreq = FrequencyTablesList.Where(p => p.Text.Equals(FrequencyTableVal)).First().Value;
@@ -1970,6 +1983,20 @@ namespace FrekvencijeProject.Controllers
         }
         public List<ApplicationView> GetApplicationData(string FromVal, string ToVal, int FrequencySizeVal, string FrequencyTableVal, string orientation)
         {
+            if (FromVal == "3000" && ToVal == "30" && FrequencySizeVal == 3)
+            {
+                FromVal = "3";
+                ToVal = "30";
+                FrequencySizeVal = 4;
+            }
+            if (FromVal == "3000" && ToVal == "30" && FrequencySizeVal == 2)
+            {
+                FromVal = "3";
+                ToVal = "30";
+                FrequencySizeVal = 3;
+            }
+
+
             List<ApplicationView> Generalsearch = new List<ApplicationView>();
             try
             {
@@ -2106,7 +2133,8 @@ namespace FrekvencijeProject.Controllers
                 else if (tempFrom == 0 && tempTo != 0)
                 {
                     ApplicationSearchActions asa = new ApplicationSearchActions();
-                    listGeneral = asa.SearchAppAllZeroToNewPerfomance(_conApp, tempFrom, tempTo, "" + tempFreq);
+                    //listGeneral = asa.SearchAppAllZeroToNewPerfomance(_conApp, tempFrom, tempTo, "" + tempFreq);
+                    listGeneral = asa.SearchAppAllFromToNewPerfomance(_conApp, tempFrom, tempTo, "" + tempFreq);
                 }
                 else if (tempFrom != 0 && tempTo != 0)
                 {
@@ -2147,6 +2175,7 @@ namespace FrekvencijeProject.Controllers
 
         public IActionResult GraphicalSearch()
         {
+            ViewBag.GraphicalSearch = "Application";
             return View();
         }
     }

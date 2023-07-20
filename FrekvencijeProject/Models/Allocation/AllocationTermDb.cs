@@ -19,5 +19,6 @@ namespace FrekvencijeProject.JSON.Allocations
         public bool _PRIMARY { get; set; }
 
         public int? Number { get; set; }
+        public string ColorCode { get; set; }
     }
 }
